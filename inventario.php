@@ -18,6 +18,15 @@ else
     }
 }
 
+if(isset($_POST["equipo"])){
+    $equipo = $_POST["equipo"];
+    $departamento = $_POST["departamento"];
+    $categoria = $_POST["categoria"];
+    $descripcion = $_POST["descripcion"];
+    $marca = $_POST["marca"];
+    $modelo = $_POST["modelo"];
+}
+
 ?>
 
 <head>
@@ -35,14 +44,74 @@ else
 <form role="form" id="form-buscar">
 <div class="form-group">
 <div class="input-group">
-<input id="1" class="form-control" type="text" name="search" placeholder="Search..." required/>
+<input id="1" class="form-control" type="text" name="search" placeholder="Buscar..." required/>
 <span class="input-group-btn">
 <button class="btn btn-success" type="submit">
-<i class="glyphicon glyphicon-search" aria-hidden="true"></i> Search
+<i class="glyphicon glyphicon-search" aria-hidden="true"></i> Buscar
 </button>
 </span>
 </div>
 </div>
+</form>
+<button class="btn btn-warning" style="margin: 20px;" onclick="document.getElementById('formadd').style.display = 'block'" >Añadir</button>
+<form method="post" id="formadd" style="display: none;">
+  <div class="form-group row">
+    <label for="equipo" class="col-2 col-form-label">Equipo</label> 
+    <div class="col-10">
+      <input id="equipo" name="equipo" type="text" class="form-control" required="required">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-2 col-form-label" for="departamento">Departamento</label> 
+    <div class="col-10">
+      <input id="departamento" name="departamento" type="text" class="form-control" required="required">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="categoria" class="col-2 col-form-label">Categoría</label> 
+    <div class="col-10">
+      <input id="categoria" name="categoria" type="text" class="form-control" required="required">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="descripcion" class="col-2 col-form-label">Descripción</label> 
+    <div class="col-10">
+      <textarea id="descripcion" name="descripcion" cols="40" rows="5" class="form-control" required="required"></textarea>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="marca" class="col-2 col-form-label">Marca</label> 
+    <div class="col-10">
+      <input id="marca" name="marca" type="text" class="form-control" required="required">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="modelo" class="col-2 col-form-label">Modelo</label> 
+    <div class="col-10">
+      <input id="modelo" name="modelo" type="text" class="form-control" required="required">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="serial" class="col-2 col-form-label">Serial</label> 
+    <div class="col-10">
+      <input id="serial" name="serial" type="text" class="form-control">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="estado" class="col-2 col-form-label">Estado</label> 
+    <div class="col-10">
+      <select id="estado" name="estado" class="custom-select" required="required">
+        <option value="nuevo">Nuevo</option>
+        <option value="bien">Bien</option>
+        <option value="mal">Mal</option>
+      </select>
+    </div>
+  </div> 
+  <div class="form-group row">
+    <div class="offset-2 col-10">
+      <button name="submit" type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+  </div>
 </form>
     <div class="row row-cols-2">
         <?php
