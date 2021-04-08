@@ -141,15 +141,16 @@ if(isset($_POST["equipo"])){
             echo '<div class="col">
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
-                    <div class="col-md-4 align-self-center">';
+                    <div class="col-md-4 align-self-center" >
+                    <div class="text-center justify-content-center">';
                     if($row["Marca"]!= "" && $row["Modelo"] != ""){
                         $image = googleimage($row["Marca"] . ' ' . $row["Modelo"]);
-                        echo '<img loading="lazy" '.$image.' style="margin: 10px; max-width: 180px; max-height:180px" width="auto" >';
+                        echo '<img loading="lazy" '.$image.' style="margin-left: 10px; max-width: 180px; max-height:180px" width="auto" >';
                     }else{
                         echo '<img loading="lazy" data-lazysrc="img/inventario.png" style="margin: 10px;" height="180px" width="auto" >';
                     }
                     echo'
-                        
+                       </div> 
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
