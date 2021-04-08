@@ -126,6 +126,7 @@ if (isset($_POST["equipo"])) {
     <div class="form-group row">
       <div class="offset-2 col-10">
         <button name="submit" type="submit" class="btn btn-primary">Guardar</button>
+        <button  type="button" class="btn btn-primary" onclick="document.getElementById('formadd').style.display = 'none'">Cerrar</button>
       </div>
     </div>
   </form>
