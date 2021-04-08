@@ -1,6 +1,7 @@
 <?php
 include('database.php');
 session_start();
+include('googleimage.php');
 if(!isset($_SESSION["user_id"]))
 {
     header("location: login.php");
@@ -25,6 +26,17 @@ if(isset($_POST["equipo"])){
     $descripcion = $_POST["descripcion"];
     $marca = $_POST["marca"];
     $modelo = $_POST["modelo"];
+    $estado = $_POST["estado"];
+    if(isset($_POST["serial"])){
+      $serial = $_POST["serial"];
+    }else{
+      $serial = "N/A";
+    }
+      $imagen = "";
+    $sql = "INSERT INTO `inventario` (`Equipo`, `Responsable`, `Departamento`, `Sucursal`, `Categoría`, `Descripción`, `Marca`, `Modelo`, `Serial`, `id`, `Fecha de compra`, `Garantía`, `Precio de compra`, `Condición`, `Antigüedad (Años)`, `Valor Actual`, `imagen`, `cantidad`) VALUES ('$equipo', '$user_id', '$departamento', '', '$categoria', '$descripcion', '$marca', '$modelo', '$serial', NULL, '', '', '', '$estado', '', '', '$imagen', '1')";
+    if(!mysqli_query($link, $sql)){
+      echo 'Error en la base de datos. <br>'.mysqli_error($link);
+    }
 }
 
 ?>
@@ -130,10 +142,11 @@ if(isset($_POST["equipo"])){
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-md-4">';
-                    if($row["imagen"]!= null){
-                        echo '<img src="'.$row["imagen"].'" style="margin: 10px; max-width: 180px; height:180px" width="auto" >';
+                    if($row["Marca"]!= "" && $row["Modelo"] != ""){
+                        $image = googleimage($row["Marca"] . ' ' . $row["Modelo"]);
+                        echo '<img loading="lazy" '.$image.' style="margin: 10px; max-width: 180px; height:180px" width="auto" >';
                     }else{
-                        echo '<img src="img/inventario.png" style="margin: 10px;" height="180px" width="auto" >';
+                        echo '<img loading="lazy" data-lazysrc="img/inventario.png" style="margin: 10px;" height="180px" width="auto" >';
                     }
                     echo'
                         
@@ -174,3 +187,25 @@ if(isset($_POST["equipo"])){
 <!-- Page level custom scripts -->
 <script src="js/demo/chart-area-demo.js"></script>
 <script src="js/demo/chart-pie-demo.js"></script>
+
+<script>  
+function ReLoadImages(){
+    $('img[data-lazysrc]').each( function(){
+        //* set the img src from data-src
+        $( this ).attr( 'src', $( this ).attr( 'data-lazysrc' ) );
+        }
+    );
+}
+
+document.addEventListener('readystatechange', event => {
+    if (event.target.readyState === "interactive") {  //or at "complete" if you want it to execute in the most last state of window.
+        ReLoadImages();
+    }
+});
+</script>
+
+<script>
+if (window.history.replaceState) { // verificamos disponibilidad
+    window.history.replaceState(null, null, window.location.href);
+}
+</script>

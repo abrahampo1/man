@@ -1,7 +1,7 @@
 <?php
+ini_set("pcre.jit", "0");
+include_once "simple_html_dom.php";
 function googleimage($image){
-    ini_set("pcre.jit", "0");
-    include "simple_html_dom.php";
     $search_query = $image;
     $search_query = urlencode( $search_query );
     $html = file_get_html( "https://www.google.com/search?q=$search_query&tbm=isch" );
@@ -10,13 +10,11 @@ function googleimage($image){
     $i = 1;
     foreach($images as $image){
         if($i == $image_count) break;
-        return $images[$i];
-        $i++;
-        // DO with the image whatever you want here (the image element is '$image'):
+        preg_match( '@src="([^"]+)"@' , $images[$i], $match );
+        $final = substr($match[0], 3);
+        return 'data-lazysrc' . $final;
         
     }
+
 }
-
-    
-
     ?>
