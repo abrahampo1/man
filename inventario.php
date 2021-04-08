@@ -50,7 +50,7 @@ if(isset($_POST["equipo"])){
 
 <html>
 <div class="d-flex justify-content-center">
-    <img style="text-align: center; margin: 20px; border-radius: 10px" class="center" width="auto" height="100px" src="./img/logo.png" alt="">
+    <a href="./inventario"><img style="text-align: center; margin: 20px; border-radius: 10px" class="center" width="auto" height="100px" src="./img/logo.png" alt=""></a>
 </div>
 <div class="container">
 <form role="form" id="form-buscar">
@@ -129,9 +129,9 @@ if(isset($_POST["equipo"])){
         <?php
         if(isset($_GET["search"])){
             $busqueda = $_GET["search"];
-            $sql = "SELECT * FROM inventario WHERE Marca LIKE '%$busqueda%' or Modelo LIKE '%$busqueda%' or Equipo LIKE '%$busqueda%' or Departamento LIKE '%$busqueda%' LIMIT 15";
+            $sql = "SELECT * FROM inventario WHERE Marca LIKE '%$busqueda%' or Modelo LIKE '%$busqueda%' or Equipo LIKE '%$busqueda%' or Departamento LIKE '%$busqueda%' LIMIT 16";
         }else{
-            $sql = "SELECT * FROM inventario LIMIT 15";
+            $sql = "SELECT * FROM inventario LIMIT 16";
         }
         if(!$do = mysqli_query($link, $sql)){
             echo mysqli_error($link);
@@ -141,10 +141,10 @@ if(isset($_POST["equipo"])){
             echo '<div class="col">
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
-                    <div class="col-md-4">';
+                    <div class="col-md-4 align-self-center">';
                     if($row["Marca"]!= "" && $row["Modelo"] != ""){
                         $image = googleimage($row["Marca"] . ' ' . $row["Modelo"]);
-                        echo '<img loading="lazy" '.$image.' style="margin: 10px; max-width: 180px; height:180px" width="auto" >';
+                        echo '<img loading="lazy" '.$image.' style="margin: 10px; max-width: 180px; max-height:180px" width="auto" >';
                     }else{
                         echo '<img loading="lazy" data-lazysrc="img/inventario.png" style="margin: 10px;" height="180px" width="auto" >';
                     }
