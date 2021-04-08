@@ -1,0 +1,3 @@
+([('conectarcentral',
+   '/Applications/XAMPP/xamppfiles/htdocs/man/API PYTHON/dist/conectarcentral',
+   'EXECUTABLE')],)
