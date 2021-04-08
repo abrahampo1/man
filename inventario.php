@@ -49,8 +49,8 @@ if(isset($_POST["equipo"])){
 </head>
 
 <html>
-<div>
-    <h1 style="margin: 30px; text-align: center; font-family: 'Montserrat', sans-serif;">I+D+I+O+T+A+S<br>Inventario</h1>
+<div class="d-flex justify-content-center">
+    <img style="text-align: center; margin: 20px; border-radius: 10px" class="center" width="auto" height="100px" src="./img/logo.png" alt="">
 </div>
 <div class="container">
 <form role="form" id="form-buscar">
