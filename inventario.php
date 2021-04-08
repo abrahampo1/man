@@ -36,14 +36,22 @@ if (isset($_POST["equipo"])) {
 
 ?>
 
+
+
 <head>
   <title>I+D+I+O+T+A+S Inventario</title>
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
 </head>
-
+<style>
+a, a:hover, a:focus, a:active {
+text-decoration: none;
+color: inherit;
+}
+</style>
 <html>
+
 <div class="d-flex justify-content-center">
   <a href="./inventario"><img style="text-align: center; margin: 20px; border-radius: 10px" class="center" width="auto" height="100px" src="./img/logo.png" alt=""></a>
 </div>
@@ -126,7 +134,7 @@ if (isset($_POST["equipo"])) {
     <div class="form-group row">
       <div class="offset-2 col-10">
         <button name="submit" type="submit" class="btn btn-primary">Guardar</button>
-        <button  type="button" class="btn btn-primary" onclick="document.getElementById('formadd').style.display = 'none'">Cerrar</button>
+        <button  type="button" class="btn btn-danger" onclick="document.getElementById('formadd').style.display = 'none'">Cerrar</button>
       </div>
     </div>
   </form>
@@ -146,7 +154,7 @@ if (isset($_POST["equipo"])) {
 
 
 
-      echo '<div class="col">
+      echo '<a style="text-decoration: none" href="./item?i='.$row["id"].'"><div class="col">
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row g-0">
                     <div class="col-md-4 align-self-center" >
@@ -170,7 +178,7 @@ if (isset($_POST["equipo"])) {
                     </div>
                 </div>
             </div>
-        </div>';
+        </div></a>';
     }
     ?>
   </div>
