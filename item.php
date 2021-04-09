@@ -85,7 +85,7 @@ if (isset($_POST["equipo"])) {
     <div class="form-group row">
       <label class="col-2 col-form-label" for="departamento">Departamento</label>
       <div class="col-10">
-        <select id="departamento" name="departamento" class="custom-select" value="<?php echo $row["Departamento"]; ?>" required="required">
+        <select id="departamento" name="departamento" class="custom-select" required="required">
           <?php
           $sql = "SELECT * FROM departamentos";
           $do = mysqli_query($link, $sql);
