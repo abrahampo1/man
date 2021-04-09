@@ -20,6 +20,13 @@ if(isset($_GET["i"])){
     $row = mysqli_fetch_assoc($do);
 }
 
+if(isset($_GET["e"])){
+    $sql = "DELETE FROM `inventario` WHERE `id` = $item";
+    if(mysqli_query($link, $sql)){
+        header("location: ./inventario");
+    }
+}
+
 if (isset($_POST["equipo"])) {
     $equipo = $_POST["equipo"];
     $departamento = $_POST["departamento"];
@@ -145,6 +152,10 @@ if (isset($_POST["equipo"])) {
     <div class="form-group row">
       <div class="offset-2 col-10">
         <button name="submit" type="submit" class="btn btn-primary">Guardar</button>
+        <button class="btn btn-danger" type="button" onclick="document.getElementById('seguro').style.display = 'block'">Borrar articulo</button>
+        <button class="btn btn-danger" id="seguro" style="display: none;" type="button" onclick="document.getElementById('segurodeverdad').style.display = 'block'">Estas seguro?</button>
+        <button class="btn btn-danger" id="segurodeverdad" style="display: none;" type="button" onclick="document.getElementById('linkdeverdad').style.display = 'block'">pero estas seguro de verdad?</button>
+        <a href="item?i=<?php echo $item ?>&e=1" id="linkdeverdad" style="display: none;" class="btn btn-danger">Pues clickea aqui</a>
       </div>
     </div>
   </form></div>
