@@ -23,10 +23,10 @@ function googleimage($id){
     }
     $img = "img/inventario/$id.png";
     file_put_contents($img, file_get_contents($dato));
-    $bdoimg = 'lazy-datasrc="'.$img.'"';
+    $bdoimg = 'src="'.$img.'"';
     $sql = "UPDATE `inventario` SET `imagen` = '$bdoimg' WHERE id = $id";
     if(mysqli_query($link, $sql)){
-        return 'lazy-datasrc="'.$img.'"';
+        return 'src="'.$img.'"';
     }
     
 }
