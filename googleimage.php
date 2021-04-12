@@ -7,7 +7,7 @@ function googleimage($id){
     $sql = "SELECT * FROM inventario WHERE id = $id";
     $do = mysqli_query($link, $sql);
     $row = mysqli_fetch_assoc($do);
-    $image = $row["marca"]." ".$row["modelo"];
+    $image = $row["Marca"]." ".$row["Modelo"];
     $search_query = $image;
     $search_query = urlencode( $search_query );
     $html = file_get_html( "https://www.google.com/search?q=$search_query&tbm=isch" );
@@ -27,5 +27,5 @@ function googleimage($id){
     }
     
 }
-echo googleimage(52);
+//echo googleimage(52); //Testing if the script works great :)
     ?>
