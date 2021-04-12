@@ -25,6 +25,7 @@ function googleimage($id){
     if(mysqli_query($link, $sql)){
         return $dato;
     }
-    echo googleimage(52);
+    
 }
+echo googleimage(52);
     ?>
