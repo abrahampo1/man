@@ -13,6 +13,12 @@
   justify-content: center;
   flex-direction: row;
     }
+    input{
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 20px;
+        border: 0px solid black;
+        padding: 20px;
+    }
 </style>
 
 <html>
@@ -30,10 +36,17 @@
 </head>
 
 <div class="card">
+    <div style="text-align: center; ">
+    <img src="img/logo i+d.png" alt="" style="border-radius: 10px;margin-bottom: 60px" width="300px" height="auto">
     <div>
-    <h1>Hola!</h1>
+    <h1>¡Hola!</h1>
     <h2>Está a punto de comenzar una nueva instalación</h2>
+    <div style="margin-top: 40px;">
+    <input type="text" placeholder="Escribe aqui tu nombre...">
     </div>
+    </div>
+    </div>
+    
 </div>
 
 </html>
