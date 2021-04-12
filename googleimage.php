@@ -19,10 +19,12 @@ function googleimage($id){
         preg_match( '@src="([^"]+)"@' , $images[$i], $match );
         $final = substr($match[0], 3);
         $dato =  'data-lazysrc' . $final;
+        echo $final;
     }
     $sql = "UPDATE `inventario` SET `imagen` = '$dato' WHERE id = $id";
     if(mysqli_query($link, $sql)){
         return $dato;
     }
+    echo googleimage(52);
 }
     ?>
