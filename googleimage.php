@@ -25,7 +25,7 @@ function googleimage($id){
     file_put_contents($img, file_get_contents($dato));
     $sql = "UPDATE `inventario` SET `imagen` = '$dato' WHERE id = $id";
     if(mysqli_query($link, $sql)){
-        return $img;
+        return 'lazy-datasrc="'.$img.'"';
     }
     
 }
