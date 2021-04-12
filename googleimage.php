@@ -17,13 +17,15 @@ function googleimage($id){
     foreach($images as $image){
         if($i == $image_count) break;
         preg_match( '@src="([^"]+)"@' , $images[$i], $match );
-        $final = substr($match[0], 3);
-        $dato =  'data-lazysrc' . $final;
+        $final = substr($match[0], 5);
+        $dato =  substr($final, -1);
         $i++;
     }
+    $img = "img/inventario/$id.png";
+    file_put_contents($img, file_get_contents($dato));
     $sql = "UPDATE `inventario` SET `imagen` = '$dato' WHERE id = $id";
     if(mysqli_query($link, $sql)){
-        return $dato;
+        return $img;
     }
     
 }
