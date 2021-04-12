@@ -92,7 +92,7 @@ if (isset($_POST["equipo"])) {
           $do = mysqli_query($link, $sql);
           $departamento = $row["Departamento"];
           while ($row2 = mysqli_fetch_assoc($do)) {
-            if($departamento == $row2["departamento"]){
+            if($departamento == $row2["id"]){
                 echo '<option value="' . $row2["id"] . '" selected>' . $row2["departamento"] . '</option>';
             }else{
                 echo '<option value="' . $row2["id"] . '">' . $row2["departamento"] . '</option>';
