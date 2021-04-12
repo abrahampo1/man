@@ -20,6 +20,7 @@ function googleimage($id){
         $final = substr($match[0], 3);
         $dato =  'data-lazysrc' . $final;
         echo $final;
+        $i++;
     }
     $sql = "UPDATE `inventario` SET `imagen` = '$dato' WHERE id = $id";
     if(mysqli_query($link, $sql)){
