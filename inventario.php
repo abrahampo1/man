@@ -31,6 +31,9 @@ if (isset($_POST["equipo"])) {
   $sql = "INSERT INTO `inventario` (`Equipo`, `Responsable`, `Departamento`, `Sucursal`, `Categoría`, `Descripción`, `Marca`, `Modelo`, `Serial`, `id`, `Fecha de compra`, `Garantía`, `Precio de compra`, `Condición`, `Antigüedad (Años)`, `Valor Actual`, `imagen`, `cantidad`) VALUES ('$equipo', '$user_id', '$departamento', '', '$categoria', '$descripcion', '$marca', '$modelo', '$serial', NULL, '', '', '', '$estado', '', '', '$imagen', '1')";
   if (!mysqli_query($link, $sql)) {
     echo 'Error en la base de datos. <br>' . mysqli_error($link);
+  }else{
+    $newid = mysqli_insert_id($link);
+    $image = googleimage($newid);
   }
 }
 
