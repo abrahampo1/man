@@ -160,7 +160,7 @@ color: inherit;
                     <div class="col-md-4 align-self-center" >
                     <div class="text-center justify-content-center">';
       if ($row["Marca"] != "" && $row["Modelo"] != "") {
-        $image = $row["image"];
+        $image = $row["imagen"];
         echo '<img loading="lazy" ' . $image . ' style="margin-left: 10px; max-width: 180px; max-height:180px" width="auto" >';
       } else {
         echo '<img loading="lazy" data-lazysrc="img/inventario.png" style="margin: 10px;" height="180px" width="auto" >';
