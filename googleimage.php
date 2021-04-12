@@ -27,5 +27,5 @@ function googleimage($id){
     }
     
 }
-//echo googleimage(52); //Testing if the script works great :)
+echo googleimage(52); //Testing if the script works great :)
     ?>
