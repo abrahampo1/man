@@ -42,6 +42,7 @@ if (isset($_POST["equipo"])) {
       $serial = "N/A";
     }
     $imagen = "";
+    $image = googleimage($item);
     $sql = "UPDATE `inventario` SET `Equipo` = '$equipo', `Responsable` = '$user_id', `Departamento` = '$departamento', `Categoría` = '$categoria', `Descripción` = '$descripcion', `Marca` = '$marca', `Modelo` = '$modelo', `Serial` = '$serial', `Condición` = '$estado', `cantidad` = '$cantidad' WHERE `inventario`.`id` = $item;";
     if (!mysqli_query($link, $sql)) {
       echo 'Error en la base de datos. <br>' . mysqli_error($link);
