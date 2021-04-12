@@ -67,7 +67,7 @@ if (isset($_POST["equipo"])) {
      <div class="col-md-3">
      <?php
      if ($row["Marca"] != "" && $row["Modelo"] != "") {
-        $image = googleimage($row["Marca"] . ' ' . $row["Modelo"]);
+        $image = $row["image"];
         echo '<img loading="lazy" ' . $image . ' style="margin-left: 10px; max-width: 280px; max-height:280px" width="auto" >';
       } else {
         echo '<img loading="lazy" data-lazysrc="img/inventario.png" style="margin: 10px;" height="180px" width="auto" >';
