@@ -18,7 +18,7 @@ function googleimage($id){
         if($i == $image_count) break;
         preg_match( '@src="([^"]+)"@' , $images[$i], $match );
         $final = substr($match[0], 5);
-        $dato =  substr($final, -1);
+        $dato =  substr($final, 0, -1);
         $i++;
     }
     $img = "img/inventario/$id.png";
