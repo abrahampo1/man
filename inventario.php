@@ -142,9 +142,9 @@ color: inherit;
     <?php
     if (isset($_GET["search"])) {
       $busqueda = $_GET["search"];
-      $sql = "SELECT * FROM inventario WHERE Marca LIKE '%$busqueda%' or Modelo LIKE '%$busqueda%' or Descripción LIKE '%$busqueda%' or Categoría LIKE '%$busqueda%' or Equipo LIKE '%$busqueda%' or Departamento LIKE '%$busqueda%' LIMIT 16";
+      $sql = "SELECT * FROM inventario WHERE Marca LIKE '%$busqueda%' or Modelo LIKE '%$busqueda%' or Descripción LIKE '%$busqueda%' or Categoría LIKE '%$busqueda%' or Equipo LIKE '%$busqueda%' or Departamento LIKE '%$busqueda%'";
     } else {
-      $sql = "SELECT * FROM inventario ORDER BY id desc LIMIT 16";
+      $sql = "SELECT * FROM inventario ORDER BY id desc";
     }
     if (!$do = mysqli_query($link, $sql)) {
       echo mysqli_error($link);
