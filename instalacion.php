@@ -63,8 +63,8 @@
             <h1>¡Hola!</h1>
             <h2>Está a punto de comenzar una nueva instalación</h2>
             <div style="margin-top: 40px;">
-                    <input type="text" id="name" name="nombre" placeholder="Escribe aqui tu nombre"><br>
-                    <button onclick="next()">Siguiente</button>
+                <input type="text" id="name" name="nombre" placeholder="Escribe aqui tu nombre"><br>
+                <button onclick="next()">Siguiente</button>
 
             </div>
         </div>
@@ -73,14 +73,14 @@
 
 <div class="card" id="step2">
     <div style="text-align: center; ">
-    <img src="img/logo i+d.png" alt="" style="border-radius: 10px;margin-bottom: 60px" width="300px" height="auto">
+        <img src="img/logo i+d.png" alt="" style="border-radius: 10px;margin-bottom: 60px" width="300px" height="auto">
         <div>
             <h1 id="display_name1">Abraham</h1>
             <h2>¿En donde lo vas a instalar?</h2>
             <div style="margin-top: 40px;">
-                    <input type="text" placeholder="Escribe aqui el equipo">
-                    <br>
-                    <button onclick="next()">Siguiente</button>
+                <input type="text" placeholder="Escribe aqui el equipo">
+                <br>
+                <button onclick="next()">Siguiente</button>
 
             </div>
         </div>
@@ -89,9 +89,10 @@
 
 <div class="card" id="step3">
     <div style="text-align: center; ">
-    <img src="img/logo i+d.png" alt="" style="border-radius: 10px;margin-bottom: 60px" width="300px" height="auto">
+        <img src="img/logo i+d.png" alt="" style="border-radius: 10px;margin-bottom: 60px" width="300px" height="auto">
         <div>
-            <h1 id="display_name2">Abraham</h1><h1>estás a punto de instalar lo siguiente:</h1>
+            <h1 id="display_name2">Abraham</h1>
+            <h1>estás a punto de instalar lo siguiente:</h1>
             <h2>¿Es correcto?</h2>
             <div style="margin-top: 40px;">
                 <div>
@@ -102,8 +103,9 @@
                     </div>
                 </div>
                 <form action="" method="post">
-                <input type="hidden" name="name" id="name_final">
-                <input type="hidden" name="equipo" id="equipo_final">
+                    <input type="hidden" name="name" id="name_final">
+                    <input type="hidden" name="equipo" id="equipo_final">
+                    <button onclick="cancel()">Cancelar</button>
                     <button>Comenzar</button>
                 </form>
 
@@ -117,23 +119,27 @@
 </html>
 
 <script>
-var nombre;
-var equipo;
-var step = 1;
-window.onload = function(){
-    document.getElementById("step"+step).style.display = "flex";
-}
+    var nombre;
+    var equipo;
+    var step = 1;
+    window.onload = function() {
+        document.getElementById("step" + step).style.display = "flex";
+    }
 
-function next(){
-    nombre = document.getElementById("name").value;
-    equipo = document.getElementById("equipo").value;
-    document.getElementById("display_name1").innerHTML = nombre;
-    document.getElementById("display_name2").innerHTML = nombre + ",";
-    document.getElementById("name_final").value = nombre;
-    document.getElementById("equipo_final").value = equipo;
-    document.getElementById("step"+step).style.display = "none";
-    step++;
-    document.getElementById("step"+step).style.display = "flex";
-}
-    
+    function next() {
+        document.getElementById("step" + step).style.display = "none";
+        step++;
+        document.getElementById("step" + step).style.display = "flex";
+        nombre = document.getElementById("name").value;
+        equipo = document.getElementById("equipo").value;
+        document.getElementById("display_name1").innerHTML = nombre;
+        document.getElementById("display_name2").innerHTML = nombre + ",";
+        document.getElementById("name_final").value = nombre;
+        document.getElementById("equipo_final").value = equipo;
+
+    }
+
+    function cancel() {
+        location.reload();
+    }
 </script>
