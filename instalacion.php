@@ -40,7 +40,36 @@
     }
 </style>
 
+<?php
+include("database.php");
+if(isset($_GET["t"])){
+    $sql = "SELECT * FROM kits_token WHERE token = ".$_GET["t"];
+    $do = mysqli_query($link, $sql);
+    if($do->num_rows == 0){
+        header("location: 500");
+    }
+    $token = mysqli_fetch_assoc($do);
+    $id_token = $token["id"];
+    if($token["user"] && $token["equipo"] != ""){
+        //redirigir al panel principal
+        echo "He detectado que este codigo ya ha sido usado, pero el vago de abraham aun no ha programado la redireccion interna.";
+        exit;
+    }
+    $kit = $token["kit"];
+    if(isset($_POST["name"])){
+        $nombre = $_POST["name"];
+        $equipo = $_POST["equipo"];
+        $sql = "UPDATE `kits_token` SET `user` = '$nombre', `equipo` = '$equipo' WHERE `kits_token`.`id` = $id_token;";
+        if(mysqli_query($link, $sql)){
 
+        }else{
+            echo "<h1>Error :(</h1><br><p>No se puede acceder a la base de datos ahora mismo, quizá sea un error temporal, recarga la página y vuelve a intentarlo</p>";
+        }
+    }
+}else{
+    header("location: 500");
+}
+?>
 
 <html>
 
@@ -65,7 +94,6 @@
             <div style="margin-top: 40px;">
                 <input type="text" id="name" name="nombre" placeholder="Escribe aqui tu nombre"><br>
                 <button onclick="next()">Siguiente</button>
-
             </div>
         </div>
     </div>
@@ -75,10 +103,10 @@
     <div style="text-align: center; ">
         <img src="img/logo i+d.png" alt="" style="border-radius: 10px;margin-bottom: 60px" width="300px" height="auto">
         <div>
-            <h1 id="display_name1">Abraham</h1>
+            <h1 id="display_name1">ERROR</h1>
             <h2>¿En donde lo vas a instalar?</h2>
             <div style="margin-top: 40px;">
-                <input type="text" placeholder="Escribe aqui el equipo">
+                <input type="text" id="equipo" placeholder="Escribe aqui el equipo">
                 <br>
                 <button onclick="next()">Siguiente</button>
 
@@ -91,22 +119,33 @@
     <div style="text-align: center; ">
         <img src="img/logo i+d.png" alt="" style="border-radius: 10px;margin-bottom: 60px" width="300px" height="auto">
         <div>
-            <h1 id="display_name2">Abraham</h1>
+            <h1 id="display_name2">ERROR</h1>
             <h1>estás a punto de instalar lo siguiente:</h1>
             <h2>¿Es correcto?</h2>
             <div style="margin-top: 40px;">
                 <div>
-                    <div class="articulo">
-                        <img src="img/inventario/29.png" alt="" width="200px" height="auto">
-                        <h2>SSD KINGSTON 240GB</h2>
-                        <h2>Cantidad: 1</h2>
-                    </div>
+                <?php
+                $sql = "SELECT * FROM kits_data WHERE kit = $kit";
+                $do = mysqli_query($link, $sql);
+                while($row = mysqli_fetch_assoc($do)){
+                    $sql = "SELECT * FROM inventario WHERE id = ".$row["articulo"];
+                    $do2 = mysqli_query($link, $sql);
+                    $articulo = mysqli_fetch_assoc($do2);
+                    echo 
+                '<div class="articulo">
+                    <img '.$articulo["imagen"].' alt="" width="200px" height="auto">
+                    <h2>'.$articulo["Marca"].' '.$articulo["Modelo"].'</h2>
+                    <h2>Cantidad: '.$row["cantidad"].'</h2>
+                </div>';
+                }
+                ?>
+                    
                 </div>
                 <form action="" method="post">
                     <input type="hidden" name="name" id="name_final">
                     <input type="hidden" name="equipo" id="equipo_final">
                     <button onclick="cancel()">Cancelar</button>
-                    <button>Comenzar</button>
+                    <button type="submit">Comenzar</button>
                 </form>
 
             </div>
