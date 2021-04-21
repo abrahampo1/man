@@ -37,7 +37,7 @@ if (isset($_GET["kit"]) && $_GET["cant"]) {
         $result = mysqli_fetch_assoc($do);
         $date = date("d-m-Y", time());
         $text = sprintf("%s\n%s\n%s\n%s %s, %s", "I+D+I+o+t+a+s", 'IES FRANCISCO ASOREY', 'Codigo: '.$codigo, $result["nombre"], '', $date);
-        $pdf->Add_Label($text);
+        $pdf->Add_Label($text, $codigo);
     }
 
     $pdf->Output();

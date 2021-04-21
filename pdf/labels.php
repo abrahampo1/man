@@ -39,6 +39,7 @@
 **/
 
 require_once('fpdf.php');
+include_once('../phpqrcode/index.php');
 
 class PDF_Label extends FPDF {
 
@@ -89,6 +90,8 @@ class PDF_Label extends FPDF {
         $this->SetAutoPageBreak(false); 
         $this->_COUNTX = $posX-2;
         $this->_COUNTY = $posY-1;
+        
+        
     }
 
     function _Set_Format($format) {
@@ -133,7 +136,7 @@ class PDF_Label extends FPDF {
     }
 
     // Print a label
-    function Add_Label($text) {
+    function Add_Label($text, $codigo) {
         $this->_COUNTX++;
         if ($this->_COUNTX == $this->_X_Number) {
             // Row full, we start a new one
@@ -143,13 +146,19 @@ class PDF_Label extends FPDF {
                 // End of page reached, we start a new one
                 $this->_COUNTY=0;
                 $this->AddPage();
+                
             }
+            
         }
-
+        
         $_PosX = $this->_Margin_Left + $this->_COUNTX*($this->_Width+$this->_X_Space) + $this->_Padding;
         $_PosY = $this->_Margin_Top + $this->_COUNTY*($this->_Height+$this->_Y_Space) + $this->_Padding;
+        
+        $qr = getqr('http://' . $_SERVER['HTTP_HOST'] . '/instalacion?t=' . $codigo, 'L', 3);
+        $this->Image($qr,$_PosX + 50,$_PosY + 0,22);
         $this->SetXY($_PosX, $_PosY);
         $this->MultiCell($this->_Width - $this->_Padding, $this->_Line_Height, $text, 0, 'L');
+        
     }
 
     function _putcatalog()
