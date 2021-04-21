@@ -9,3 +9,4 @@
 /.database.php
 /documentacion.php
 /img/inventario/*
+/phpqrcode/temp/*
