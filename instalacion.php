@@ -89,7 +89,7 @@ if(isset($_GET["t"])){
 
 <div class="card" id="step1">
     <div style="text-align: center; ">
-        <img src="img/logo i+d.png" alt="" style="border-radius: 10px;margin-bottom: 60px" width="300px" height="auto">
+        <img src="img/logoi+d.png" alt="" style="border-radius: 10px;margin-bottom: 60px" width="300px" height="auto">
         <div>
             <h1>¡Código Aceptado!</h1>
             <h2>Está a punto de comenzar una nueva instalación</h2>
@@ -103,7 +103,7 @@ if(isset($_GET["t"])){
 
 <div class="card" id="step2">
     <div style="text-align: center; ">
-        <img src="img/logo i+d.png" alt="" style="border-radius: 10px;margin-bottom: 60px" width="300px" height="auto">
+        <img src="img/logoi+d.png" alt="" style="border-radius: 10px;margin-bottom: 60px" width="300px" height="auto">
         <div>
             <h1 id="display_name1">ERROR</h1>
             <h2>¿En donde lo vas a instalar?</h2>
@@ -119,7 +119,7 @@ if(isset($_GET["t"])){
 
 <div class="card" id="step3">
     <div style="text-align: center; ">
-        <img src="img/logo i+d.png" alt="" style="border-radius: 10px;margin-bottom: 60px" width="300px" height="auto">
+        <img src="img/logoi+d.png" alt="" style="border-radius: 10px;margin-bottom: 60px" width="300px" height="auto">
         <div>
             <h1 id="display_name2">ERROR</h1>
             <h1>estás a punto de instalar lo siguiente:</h1>
