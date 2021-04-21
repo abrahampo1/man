@@ -11,6 +11,7 @@
     }
 
     .card {
+        display: none;
         justify-content: center;
         flex-direction: row;
     }
@@ -30,6 +31,7 @@
         font-family: 'Ubuntu', sans-serif;
         font-size: 20px;
         padding: 10px;
+        margin: 20px;
         border-radius: 10px;
         margin-top: 10px;
     }
@@ -70,26 +72,69 @@ if(isset($_GET["qr"])){
     }
 }
 ?>
-
+<head>
+    <title><?php echo $nombre; ?> - Instalación</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+</head>
 <html>
 
-<div class="card" id="step1">
-    <div style="text-align: center; ">
-        <img src="img/logoi+d.png" alt="" style="border-radius: 10px;margin-bottom: 60px" width="300px" height="auto">
-    </div>
-</div>
 <div style="margin-top: 20px;">
 <?php
 if($terminado == 1){
     echo "<h1>Trabajo marcado como terminado.</h1>";
 }
 ?>
+<div class="card" id="topstep">
 <h1>Hola <?php echo $nombre; ?>,</h1>
 <h2>tienes que hacer lo siguiente:</h2>
+</div>
 <br>
-<h2><?php echo $info_kit["instrucciones"]; ?></h2>
-<br>
-<div class="card" id="step3">
+
+<?php
+
+$sql = "SELECT * FROM kits_pasos WHERE kit = $id_token ORDER BY paso asc";
+$do = mysqli_query($link, $sql);
+$steps = $do->num_rows;
+$i = 0;
+while($kit_paso = mysqli_fetch_assoc($do)){
+    $i++;
+    echo '<div class="card" id="step'.$i.'">
+    <div style="text-align: center; ">
+        <div>
+            <h1>Paso '.$kit_paso["paso"].'</h1>
+            <h2>'.$kit_paso["descripcion"].'</h2>
+            <img src="'.$kit_paso["imagen"].'" alt="" style="border-radius: 10px;margin-bottom: 60px" width="300px" height="auto">
+            <div style="margin-top: 40px;">
+                ';
+                if($i > 1){
+                    echo '<button onclick="back()">Atrás</button>';
+                }
+                if($i != $steps){
+                    echo '<button onclick="next()">Siguiente</button>';
+                }else{
+                    echo '<form action="" method="post">
+                    <input type="hidden" name="terminado" id="">
+                    <button type="submit">Marcar terminado</button>
+                </form>';
+                }
+                echo '
+            </div>
+        </div>
+        
+    </div>
+</div>';
+}
+
+?>
+
+<div class="card" id="">
     <div style="text-align: center; ">
         <div>
             <h1>Material Asignado:</h1>
@@ -112,13 +157,34 @@ if($terminado == 1){
                 ?>
                     
                 </div>
-                <form action="" method="post">
-                    <input type="hidden" name="terminado" id="">
-                    <button type="submit">Marcar terminado</button>
-                </form>
+                
             </div>
         </div>
     </div>
 </div>
 </div>
 </html> 
+
+<script>
+    var step = 1;
+    window.onload = function() {
+        document.getElementById("step" + step).style.display = "flex";
+        document.getElementById("topstep").style.display = "block";
+    }
+
+    function next() {
+        if(step == 1){
+            document.getElementById("topstep").style.display = "none";
+        }
+        document.getElementById("step" + step).style.display = "none";
+        step++;
+        document.getElementById("step" + step).style.display = "flex";
+    }
+    function back() {
+        if(step != 1){
+            document.getElementById("step" + step).style.display = "none";
+        step--;
+        document.getElementById("step" + step).style.display = "flex";
+        }
+    }
+</script>
