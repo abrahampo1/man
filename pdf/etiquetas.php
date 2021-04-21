@@ -26,8 +26,12 @@ if (isset($_GET["kit"]) && $_GET["cant"]) {
                 $coincidencia = true;
             }
         }
-        $sql = "INSERT INTO `kits_token` (`id`, `kit`, `token`, `user`, `equipo`) VALUES (NULL, '$kit', '$codigo', '', '');";
-        mysqli_query($link, $sql);
+        $sql = "INSERT INTO `kits_token` (`id`, `kit`, `token`, `user`, `equipo`, `terminado`) VALUES (NULL, '$kit', '$codigo', '', '', 0);";
+        if(mysqli_query($link, $sql)){
+
+        }else{
+            echo mysqli_error($link);
+        }
         $sql = "SELECT * FROM kits WHERE id = '$kit'";
         $do = mysqli_query($link, $sql);
         $result = mysqli_fetch_assoc($do);
