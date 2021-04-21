@@ -146,7 +146,7 @@ if(isset($_GET["t"])){
                 <form action="" method="post">
                     <input type="hidden" name="name" id="name_final">
                     <input type="hidden" name="equipo" id="equipo_final">
-                    <button onclick="cancel()">Cancelar</button>
+                    <button type="button" onclick="cancel()">Cancelar</button>
                     <button type="submit">Comenzar</button>
                 </form>
 
