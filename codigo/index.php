@@ -41,7 +41,7 @@
 
 <?php
 if(isset($_POST["code"])){
-    header("location: ../instalacion?t=".$_POST["code"]);
+    header("location: mantenimiento.asorey.net/instalacion?t=".$_POST["code"]);
 }
 ?>
 

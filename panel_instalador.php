@@ -43,13 +43,15 @@
 include("database.php");
 if(isset($_GET["qr"])){
     $token = $_GET["qr"];
-    $sql = "SELECT * FROM kits_token WHERE token = ".$token;
+    $sql = "SELECT * FROM kits_token WHERE token = '$token'";
     $do = mysqli_query($link, $sql);
     if($do->num_rows == 0){
         header("location: 500");
     }
     $token = mysqli_fetch_assoc($do);
+    $terminado = $token["terminado"];
     $id_token = $token["kit"];
+    $id_raw = $token["id"];
     if($token["user"] == "" && $token["equipo"] == ""){
         //redirigir al panel principal
         echo "He detectado que este codigo ya ha sido usado, pero el vago de abraham aun no ha programado la redireccion interna.";
@@ -61,6 +63,11 @@ if(isset($_GET["qr"])){
     $sql = "SELECT * FROM kits WHERE id = ".$id_token;
     $do = mysqli_query($link, $sql);
     $info_kit = mysqli_fetch_assoc($do);
+    if(isset($_POST["terminado"])){
+        $sql = "UPDATE `kits_token` SET `terminado` = '1' WHERE `kits_token`.`id` = $id_raw;";
+        mysqli_query($link, $sql);
+        header("location panel_instalador?qr=".$_GET["qr"]);
+    }
 }
 ?>
 
@@ -72,6 +79,11 @@ if(isset($_GET["qr"])){
     </div>
 </div>
 <div style="margin-top: 20px;">
+<?php
+if($terminado == 1){
+    echo "<h1>Trabajo marcado como terminado.</h1>";
+}
+?>
 <h1>Hola <?php echo $nombre; ?>,</h1>
 <h2>tienes que hacer lo siguiente:</h2>
 <br>
@@ -100,7 +112,10 @@ if(isset($_GET["qr"])){
                 ?>
                     
                 </div>
-
+                <form action="" method="post">
+                    <input type="hidden" name="terminado" id="">
+                    <button type="submit">Marcar terminado</button>
+                </form>
             </div>
         </div>
     </div>
