@@ -50,7 +50,7 @@ if(isset($_GET["qr"])){
     }
     $token = mysqli_fetch_assoc($do);
     $id_token = $token["kit"];
-    if($token["user"] && $token["equipo"] == ""){
+    if($token["user"] == "" && $token["equipo"] == ""){
         //redirigir al panel principal
         echo "He detectado que este codigo ya ha sido usado, pero el vago de abraham aun no ha programado la redireccion interna.";
         header("location: instalacion?t=".$_GET["qr"]);

@@ -43,7 +43,8 @@
 <?php
 include("database.php");
 if(isset($_GET["t"])){
-    $sql = "SELECT * FROM kits_token WHERE token = ".$_GET["t"];
+    $token =$_GET["t"];
+    $sql = "SELECT * FROM kits_token WHERE token = '$token'" ;
     $do = mysqli_query($link, $sql);
     if($do->num_rows == 0){
         header("location: 500");
@@ -53,6 +54,7 @@ if(isset($_GET["t"])){
     if($token["user"] && $token["equipo"] != ""){
         //redirigir al panel principal
         echo "He detectado que este codigo ya ha sido usado, pero el vago de abraham aun no ha programado la redireccion interna.";
+        header("location: panel_instalador?qr=".$_GET["t"]);
         exit;
     }
     $kit = $token["kit"];
@@ -61,13 +63,13 @@ if(isset($_GET["t"])){
         $equipo = $_POST["equipo"];
         $sql = "UPDATE `kits_token` SET `user` = '$nombre', `equipo` = '$equipo' WHERE `kits_token`.`id` = $id_token;";
         if(mysqli_query($link, $sql)){
-
+            header("location: panel_instalador?qr=".$_GET["t"]);
         }else{
             echo "<h1>Error :(</h1><br><p>No se puede acceder a la base de datos ahora mismo, quizá sea un error temporal, recarga la página y vuelve a intentarlo</p>";
         }
     }
 }else{
-    header("location: 500");
+    //header("location: 500");
 }
 ?>
 
@@ -89,7 +91,7 @@ if(isset($_GET["t"])){
     <div style="text-align: center; ">
         <img src="img/logo i+d.png" alt="" style="border-radius: 10px;margin-bottom: 60px" width="300px" height="auto">
         <div>
-            <h1>¡Hola!</h1>
+            <h1>¡Código Aceptado!</h1>
             <h2>Está a punto de comenzar una nueva instalación</h2>
             <div style="margin-top: 40px;">
                 <input type="text" id="name" name="nombre" placeholder="Escribe aqui tu nombre"><br>
