@@ -101,6 +101,6 @@ while True:
             output = os.popen(comando[1]).read()
         print(line , sep='',end ='\r')
     myobj = {
-        'consola': 
+        'consola': output
             }
     sleep(3)
