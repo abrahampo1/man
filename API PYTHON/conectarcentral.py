@@ -97,12 +97,18 @@ while True:
             os.system('pmset sleepnow')
             output = os.popen('shutdown /s').read()
             print('Suspendiendo...')
-        if 'comando' in line:
+        if 'ping' in line:
             comando = line.split(': ')
-            output = os.popen(comando[1]).read()
-        print(line , sep='',end ='\r')
-    myobj = {
-        'consola': output
+            hostname = comando[1]
+            response = os.system("ping -c 1 " + hostname)
+            if response == 0:
+                output = 1
+            else:
+                output = 0
+            myobj = {
+            'consola': output
             }
-    x = requests.post(url, data = myobj)
+            x = requests.post(url, data = myobj)
+        print(line , sep='',end ='\r')
+    
     sleep(3)

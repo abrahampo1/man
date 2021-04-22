@@ -39,7 +39,7 @@ if (isset($_POST["token"])) {
                     {
                         echo ';apagar';
                     }else if($info_ordenador["orden"] != ""){
-                        echo ';comando: '.$info_ordenador["orden"];
+                        echo ';'.$info_ordenador["orden"];
                     }
                     if(isset($_POST["consola"])){
                         $consola = $_POST["consola"];
