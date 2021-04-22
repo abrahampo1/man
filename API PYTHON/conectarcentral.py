@@ -6,6 +6,8 @@ from datetime import datetime
 import os
 import subprocess
 import sys
+import pyping
+
 from getmac import get_mac_address as gma
 cpu = "Default"
 error = "OK"
@@ -107,8 +109,8 @@ while True:
             for ip in hostname:
                 if ip != '':
                     print("Pingeando a " + ip + "\r")
-                    response = os.system("ping " + ip)
-                    if response == 0:
+                    r = pyping.ping(ip)
+                    if r.ret_code == 0:
                         consola += ip + ":si,"
                         print(ip + " conectado!\r")
                     else:
