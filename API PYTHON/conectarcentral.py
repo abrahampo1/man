@@ -101,15 +101,18 @@ while True:
             print('Suspendiendo...')
         if 'ping' in line:
             comando = line.split(': ')
-            hostname = comando[1]
-            print("Pingeando a " + hostname + "\r")
-            response = os.system("ping " + hostname)
-            if response == 0:
-                consola = 1
-                print(hostname + " conectado!\r")
-            else:
-                consola = 0
-                print(hostname + " sin respuesta\r")
+            hostname = comando[1].split[',']
+            if consola != '':
+                consola = ''
+            for ip in hostname:
+                if ip != '':
+                    print("Pingeando a " + ip + "\r")
+                    response = os.system("ping " + hostname)
+                    if response == 0:
+                        consola += ip + ":si,"
+                        print(ip + " conectado!\r")
+                    else:
+                        print(ip + " sin respuesta\r")
         print(line , sep='',end ='\r')
     
     sleep(3)

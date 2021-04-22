@@ -19,6 +19,7 @@ if (isset($_POST['sendping'])) {
                         echo '<p>Conectado</p>';
                         $conectado = true;
                         $ipbuena = $ip_usable[$i];
+                        break;
                     } else {
                         $estado = 'Desconectado';
                     }
