@@ -77,7 +77,7 @@ while True:
             if str(address.family) == 'AddressFamily.AF_INET':
                 red = red + str(interface_name) + '::' + str(address.address) + '::' + str(address.netmask) + '::' + str(address.broadcast) + ';'
     disco_total = get_size(disco_total)
-    url = "http://"+hoststr+"/api.php"
+    url = "https://"+hoststr+"/api.php"
     myobj = {
         'tipo': '0',
         'token' : apitoken,
