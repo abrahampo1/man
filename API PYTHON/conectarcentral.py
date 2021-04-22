@@ -109,6 +109,7 @@ while True:
                 output = 0
                 print(hostname + " sin respuesta\r")
             myobj = {
+                'tipo': '0',
                 'token' : apitoken,
                 'consola': output
             }

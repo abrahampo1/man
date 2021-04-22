@@ -16,7 +16,6 @@ if (isset($_POST["token"])) {
             if(mysqli_query($link ,$sql)){}else{echo mysqli_error($link);}
             if(isset($_POST["consola"])){
                 $consola = $_POST["consola"];
-                echo ';El servidor ha recibido los datos.';
             }
             if(isset($_POST["tipo"])){
                 if($_POST["tipo"]==0){
