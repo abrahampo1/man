@@ -99,13 +99,14 @@ if (isset($_GET["qr"])) {
     <br>
 
     <?php
-    $i = 0;
+    
     $pasos = explode(";", $info_kit["pasos"]);
     for ($p = 0; $p < count($pasos)-1; $p++) {
         $paso = $pasos[$p];
         $sql = "SELECT * FROM kits_pasos WHERE kit = $paso ORDER BY paso asc";
         $do = mysqli_query($link, $sql);
         $steps = $do->num_rows;
+        $i = 0;
         while ($kit_paso = mysqli_fetch_assoc($do)) {
             $i++;
             if($kit_paso["paso"] == 1){
