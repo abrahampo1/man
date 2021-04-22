@@ -118,7 +118,7 @@ if (isset($_GET["qr"])) {
             }else{
                 $nombre_paso = "";
             }
-            echo '<div class="card" id="step' . $i . '">
+            echo '<div class="card" id="step' . $i . ' + '.$p.'">
     <div style="text-align: center; ">
         <div>
             <h1>Paso ' . $i . $nombre_paso .'</h1>
