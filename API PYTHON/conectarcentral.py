@@ -107,7 +107,7 @@ while True:
             for ip in hostname:
                 if ip != '':
                     print("Pingeando a " + ip + "\r")
-                    response = sp.getoutput("ping " + ip)
+                    response = subprocess.getoutput("ping " + ip)
                     print(response)
                     if response == 0:
                         consola += ip + ":si,"
