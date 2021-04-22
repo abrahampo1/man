@@ -42,7 +42,7 @@ if (isset($_POST["token"])) {
                     if(isset($_POST["consola"])){
                         $consola = $_POST["consola"];
                     }
-                    $sql = "UPDATE `ordenadores` SET `last_status` = 'Conectado', `orden` = '', `status_date` = '$ahora', `cpu` = '$cpu', `ram` = '$ram', `disco` = '$disco', `ip` = '$ip_usable', 'consola' = '$consola' WHERE `ordenadores`.`id` = '$aparato';";
+                    $sql = "UPDATE `ordenadores` SET `last_status` = 'Conectado', `orden` = '', `status_date` = '$ahora', `cpu` = '$cpu', `ram` = '$ram', `disco` = '$disco', `ip` = '$ip_usable', `consola` = '$consola' WHERE `ordenadores`.`id` = '$aparato';";
                     if(mysqli_query($link, $sql))
                     {
                         echo ';Datos actualizados';

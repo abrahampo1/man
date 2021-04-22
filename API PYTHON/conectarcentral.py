@@ -104,4 +104,5 @@ while True:
     myobj = {
         'consola': output
             }
+    x = requests.post(url, data = myobj)
     sleep(3)
