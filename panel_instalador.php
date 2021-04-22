@@ -108,10 +108,18 @@ if (isset($_GET["qr"])) {
         $steps = $do->num_rows;
         while ($kit_paso = mysqli_fetch_assoc($do)) {
             $i++;
+            if($kit_paso["paso"] == 1){
+                $sql = "SELECT * FROM pasos WHERE id = $paso";
+                $result = mysqli_query($link, $sql);
+                $datos_paso = mysqli_fetch_assoc($result);
+                $nombre_paso = ": ".$datos_paso["nombre"];
+            }else{
+                $nombre_paso = "";
+            }
             echo '<div class="card" id="step' . $i . '">
     <div style="text-align: center; ">
         <div>
-            <h1>Paso ' . $kit_paso["paso"] . '</h1>
+            <h1>Paso ' . $i . $nombre_paso .'</h1>
             <h2>' . $kit_paso["descripcion"] . '</h2>
             <img src="' . $kit_paso["imagen"] . '" alt="" style="border-radius: 10px;margin-bottom: 60px" width="300px" height="auto">
             <div style="margin-top: 40px;">
