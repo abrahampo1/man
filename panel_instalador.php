@@ -119,24 +119,26 @@ if (isset($_GET["qr"])) {
                 $nombre_paso = "";
             }
             echo '<div class="card" id="step' . $i . '">
-    <div style="text-align: center; ">
+    <div style="text-align: center; ">';
+    if ($i > 1) {
+        echo '<button onclick="back()">Atrás</button>';
+    }
+    if ($pas != $steps || $p != count($pasos)-2) {
+        echo '<button onclick="next()">Siguiente</button>';
+    } else {
+        echo '<form action="" method="post">
+            <input type="hidden" name="terminado" id="">
+            <button type="submit">Marcar terminado</button>
+        </form>';
+    }
+    echo '
         <div>
             <h1>Paso ' . $i . $nombre_paso .'</h1>
             <h2>' . $kit_paso["descripcion"] . '</h2>
             <img src="' . $kit_paso["imagen"] . '" alt="" style="border-radius: 10px;margin-bottom: 60px" width="300px" height="auto">
             <div style="margin-top: 40px;">
                 ';
-            if ($i > 1) {
-                echo '<button onclick="back()">Atrás</button>';
-            }
-            if ($pas != $steps || $p != count($pasos)-2) {
-                echo '<button onclick="next()">Siguiente</button>';
-            } else {
-                echo '<form action="" method="post">
-                    <input type="hidden" name="terminado" id="">
-                    <button type="submit">Marcar terminado</button>
-                </form>';
-            }
+            
             echo '
             </div>
         </div>
