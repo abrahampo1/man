@@ -94,10 +94,13 @@ while True:
     for line in texto:
         if(line == 'apagar'):
             os.system('pmset sleepnow')
-            os.system('shutdown /s')
+            output = os.popen('shutdown /s').read()
             print('Suspendiendo...')
         if(line == 'comando'):
             comando = line.split(': ')
-            os.system(comando[1])
+            output = os.popen(comando[1]).read()
         print(line , sep='',end ='\r')
-    sleep(1)
+    myobj = {
+        'consola': 
+            }
+    sleep(3)
