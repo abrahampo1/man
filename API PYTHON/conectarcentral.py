@@ -100,6 +100,7 @@ while True:
         if 'ping' in line:
             comando = line.split(': ')
             hostname = comando[1]
+            print("Pingeando a " + hostname)
             response = os.system("ping " + hostname)
             if response == 0:
                 output = 1
