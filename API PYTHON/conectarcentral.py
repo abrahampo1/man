@@ -101,7 +101,7 @@ while True:
             print('Suspendiendo...')
         if 'ping' in line:
             comando = line.split(': ')
-            hostname = comando[1].split[',']
+            hostname = comando[1].split(',')
             if consola != '':
                 consola = ''
             for ip in hostname:
