@@ -9,6 +9,7 @@ if (isset($_POST["token"])) {
             $sql = "SELECT * FROM ordenadores WHERE id = ".$info_token["aparato"];
             $do = mysqli_query($link, $sql);
             $info_ordenador = mysqli_fetch_assoc($do);
+            $consola = $info_ordenador["consola"];
             $usos = $info_token["usos"]+1;
             $id_token = $info_token["id"];
             $sql = "UPDATE `token` SET `usos` = '$usos' WHERE `token`.`id` = $id_token;";
@@ -38,7 +39,10 @@ if (isset($_POST["token"])) {
                     {
                         echo ';apagar';
                     }
-                    $sql = "UPDATE `ordenadores` SET `last_status` = 'Conectado', `orden` = '', `status_date` = '$ahora', `cpu` = '$cpu', `ram` = '$ram', `disco` = '$disco', `ip` = '$ip_usable' WHERE `ordenadores`.`id` = '$aparato';";
+                    if(isset($_POST["consola"])){
+                        $consola = $_POST["consola"];
+                    }
+                    $sql = "UPDATE `ordenadores` SET `last_status` = 'Conectado', `orden` = '', `status_date` = '$ahora', `cpu` = '$cpu', `ram` = '$ram', `disco` = '$disco', `ip` = '$ip_usable', 'consola' = '$consola' WHERE `ordenadores`.`id` = '$aparato';";
                     if(mysqli_query($link, $sql))
                     {
                         echo ';Datos actualizados';
