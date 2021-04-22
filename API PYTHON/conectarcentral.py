@@ -54,6 +54,7 @@ else:
     apitoken = texto
     print("usando token: " + apitoken)
 print(gma())
+consola = ""
 while True:
     mac = gma()
     disco_total = 0
@@ -87,7 +88,8 @@ while True:
         'ramtotal' : ram_total,
         'discototal' : disco_total,
         'red' : red,
-        'mac' : mac
+        'mac' : mac,
+        'consola' : consola
             }
     x = requests.post(url, data = myobj)
     texto = x.text.split(';')
@@ -103,17 +105,11 @@ while True:
             print("Pingeando a " + hostname + "\r")
             response = os.system("ping " + hostname)
             if response == 0:
-                output = 1
+                consola = 1
                 print(hostname + " conectado!\r")
             else:
-                output = 0
+                consola = 0
                 print(hostname + " sin respuesta\r")
-            myobj = {
-                'tipo': '0',
-                'token' : apitoken,
-                'consola': output
-            }
-            x = requests.post(url, data = myobj)
         print(line , sep='',end ='\r')
     
     sleep(3)
