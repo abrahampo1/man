@@ -128,7 +128,7 @@ if (isset($_GET["qr"])) {
     } else {
         echo '<form action="" method="post">
             <input type="hidden" name="terminado" id="">
-            <button type="submit">Marcar terminado</button>
+            <button type="submit">Marcar como terminado</button>
         </form>';
     }
     echo '
