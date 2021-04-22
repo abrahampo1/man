@@ -99,16 +99,17 @@ if (isset($_GET["qr"])) {
     <br>
 
     <?php
-    
+    $i = 0;
     $pasos = explode(";", $info_kit["pasos"]);
     for ($p = 0; $p < count($pasos)-1; $p++) {
         $paso = $pasos[$p];
         $sql = "SELECT * FROM kits_pasos WHERE kit = $paso ORDER BY paso asc";
         $do = mysqli_query($link, $sql);
         $steps = $do->num_rows;
-        $i = 0;
+        $pas = 0;
         while ($kit_paso = mysqli_fetch_assoc($do)) {
             $i++;
+            $pas++;
             if($kit_paso["paso"] == 1){
                 $sql = "SELECT * FROM pasos WHERE id = $paso";
                 $result = mysqli_query($link, $sql);
@@ -128,7 +129,7 @@ if (isset($_GET["qr"])) {
             if ($i > 1) {
                 echo '<button onclick="back()">Atrás</button>';
             }
-            if ($i != $steps || $p != count($pasos)-1) {
+            if ($pas != $steps || $p != count($pasos)-1) {
                 echo '<button onclick="next()">Siguiente</button>';
             } else {
                 echo '<form action="" method="post">
