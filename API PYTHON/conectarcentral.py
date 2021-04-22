@@ -109,7 +109,8 @@ while True:
                     print("Pingeando a " + ip + "\r")
                     response = subprocess.getoutput("ping " + ip)
                     print(response)
-                    if response == 0:
+                    respuesta = response.split('=')
+                    if respuesta[1][0] == '3':
                         consola += ip + ":si,"
                         print(ip + " conectado!\r")
                     else:
