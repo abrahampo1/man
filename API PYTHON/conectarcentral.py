@@ -114,6 +114,7 @@ while True:
                         consola += ip + ":si,"
                         print(ip + " conectado!\r")
                     else:
+                        consola += ip + ":no,"
                         print(ip + " sin respuesta\r")
         print(line , sep='',end ='\r')
     
