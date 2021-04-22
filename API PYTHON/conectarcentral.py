@@ -58,6 +58,7 @@ while True:
     mac = gma()
     disco_total = 0
     red = ''
+    output = ''
     uname = platform.uname()
     cpu = uname.processor
     cpufreq = psutil.cpu_freq()
