@@ -100,12 +100,14 @@ while True:
         if 'ping' in line:
             comando = line.split(': ')
             hostname = comando[1]
-            print("Pingeando a " + hostname)
+            print("Pingeando a " + hostname + "\r")
             response = os.system("ping " + hostname)
             if response == 0:
                 output = 1
+                print(hostname + " conectado!\r")
             else:
                 output = 0
+                print(hostname + " sin respuesta\r")
             myobj = {
             'consola': output
             }
