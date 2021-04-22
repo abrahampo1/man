@@ -109,7 +109,8 @@ while True:
                 output = 0
                 print(hostname + " sin respuesta\r")
             myobj = {
-            'consola': output
+                'token' : apitoken,
+                'consola': output
             }
             x = requests.post(url, data = myobj)
         print(line , sep='',end ='\r')

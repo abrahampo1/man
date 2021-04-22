@@ -14,6 +14,10 @@ if (isset($_POST["token"])) {
             $id_token = $info_token["id"];
             $sql = "UPDATE `token` SET `usos` = '$usos' WHERE `token`.`id` = $id_token;";
             if(mysqli_query($link ,$sql)){}else{echo mysqli_error($link);}
+            if(isset($_POST["consola"])){
+                $consola = $_POST["consola"];
+                echo ';El servidor ha recibido los datos.';
+            }
             if(isset($_POST["tipo"])){
                 if($_POST["tipo"]==0){
                 $aparato = $info_token["aparato"];
@@ -41,9 +45,7 @@ if (isset($_POST["token"])) {
                     }else if($info_ordenador["orden"] != ""){
                         echo ';'.$info_ordenador["orden"];
                     }
-                    if(isset($_POST["consola"])){
-                        $consola = $_POST["consola"];
-                    }
+                    
                     $sql = "UPDATE `ordenadores` SET `last_status` = 'Conectado', `orden` = '', `status_date` = '$ahora', `cpu` = '$cpu', `ram` = '$ram', `disco` = '$disco', `ip` = '$ip_usable', `consola` = '$consola' WHERE `ordenadores`.`id` = '$aparato';";
                     if(mysqli_query($link, $sql))
                     {
