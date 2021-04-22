@@ -127,7 +127,7 @@ if (isset($_GET["qr"])) {
             if ($i > 1) {
                 echo '<button onclick="back()">Atrás</button>';
             }
-            if ($i != $steps) {
+            if ($i != $steps || $p != count($pasos)) {
                 echo '<button onclick="next()">Siguiente</button>';
             } else {
                 echo '<form action="" method="post">
