@@ -9,46 +9,10 @@ if (isset($_POST['sendping'])) {
     if (count($ip_usable) > 1) {
         for ($i = 0; $i < count($ip_usable); $i++) {
             if ($ip_usable[$i] != '' && $ip_usable[$i] != '127.0.0.1') {
-                exec('ping -c2 -q ' . $ip_usable[$i], $pingout);
-                $pong = explode(',', $pingout[3]);
-                $pongpor = explode('%', $pong[2]);
-                $estado = 'Desconectado';
-                if ($conectado == false) {
-                    if ($pongpor[0] == '0') {
-                        $estado = 'Conectado';
-                        echo '<p>Conectado</p>';
-                        $conectado = true;
-                        $ipbuena = $ip_usable[$i];
-                        break;
-                    } else {
-                        $estado = 'Desconectado';
-                    }
-                }
+                
             }
         }
-    } else {
-        if ($ip != '') {
-            exec('ping -c2 -q ' . $ip, $pingout);
-            $pong = explode(',', $pingout[3]);
-            if (!isset($pong[2])) {
-                $conectado = false;
-                $estado = 'Desconectado';
-            } else {
-
-                $pongpor = explode('%', $pong[2]);
-                $estado = 'Desconectado';
-                if ($conectado == false) {
-                    if ($pongpor[0] == '0') {
-                        $estado = 'Conectado';
-                        echo '<p>Conectado</p>';
-                        $conectado = true;
-                        $ipbuena = $ip;
-                    } else {
-                        $estado = 'Desconectado';
-                    }
-                }
-            }
-        }else
+    }else
         {
             $estado = 'Desconectado';
             $conectado = false;
