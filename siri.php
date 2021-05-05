@@ -12,7 +12,7 @@
             if(isset($_POST["orden"])){
 
             }else{
-                echo "La conexión con el departamento de I+Diotas ha sido establecida. ¿Que quieres que haga?";
+                echo "\nLa conexión con el departamento de I+Diotas ha sido establecida. ¿Que quieres que haga?";
             }
         }else{
             echo "Buen intento, pero no tienes acceso y no te voy a decir por qué.";
