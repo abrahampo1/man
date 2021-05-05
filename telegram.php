@@ -4,7 +4,8 @@ $update = json_decode(file_get_contents("php://input"), TRUE);
 $path = "https://api.telegram.org/bot1516953636:AAEL5KIZB59oOkPd4rn8iy9tUeRuKgF6k-E";
 $chatId = $update["message"]["chat"]["id"];
 $message = $update["message"]["text"];
-
+$text = file_get_contents("https://api.telegram.org/bot1516953636:AAEL5KIZB59oOkPd4rn8iy9tUeRuKgF6k-E/getUpdates");
+echo $text;
 if (isset($_GET["texto"]) && $_GET["chatid"]) {
     session_start();
     include("database.php");
@@ -29,6 +30,6 @@ if (strtolower($message) == "hola") {
     file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
 }
 if (strtolower($message) == "dame tus ids") {
-    $texto = "¡Claro!\n". implode(";", $update);
+    $texto = "¡Ojala pudiera!\n";
     file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
 }
