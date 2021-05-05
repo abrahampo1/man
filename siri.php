@@ -25,7 +25,7 @@
                         $sql = "SELECT * FROM kits_token WHERE terminado = 0  and equipo != ''";
                         $do = mysqli_query($link, $sql);
                         while($row = mysqli_fetch_assoc($do)){
-                            echo $row["token"].":".$row["kit"].":".$row["equipo"].":".$row["user"].";";
+                            echo "Codigo: ".$row["token"]."<br>Kit: ".$row["kit"]."<br>Equipo: ".$row["equipo"]."<br>Tecnico: ".$row["user"]."<hr>";
                         }
                         break;
                 }
