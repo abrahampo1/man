@@ -29,6 +29,6 @@ if (strtolower($message) == "hola") {
     file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
 }
 if (strtolower($message) == "dame tus ids") {
-    $texto = "¡Claro!\n". print_r($update);
+    $texto = "¡Claro!\n". implode(";", $update);
     file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
 }
