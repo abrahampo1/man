@@ -8,7 +8,6 @@
         $do = mysqli_query($link, $sql);
         if($do->num_rows > 0){
             $tech = mysqli_fetch_assoc($do);
-            echo $tech["nombre"].".\n\n\n";
             if(isset($_POST["orden"])){
                 $orden = $_POST["orden"];
                 switch ($orden){
