@@ -6,4 +6,4 @@ $chatId = $update["message"]["chat"]["id"];
 $message = $update["message"]["text"];
 
 
-file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=Funciona");
+file_get_contents($path."/sendmessage?chat_id=".$chatId."&text=Me acabas de decir: '".$message."', ¿verdad?");
