@@ -21,6 +21,13 @@
                         $do = mysqli_query($link, $sql);
                         echo "".$do->num_rows." equipos están empezados y sin terminar.";
                         break;
+                    case "empezados_lista":
+                        $sql = "SELECT * FROM kits_token WHERE terminado = 0  and equipo != ''";
+                        $do = mysqli_query($link, $sql);
+                        while($row = mysqli_fetch_assoc($do)){
+                            echo $row["token"].":".$row["kit"].":".$row["equipo"].":".$row["user"].";";
+                        }
+                        break;
                 }
             }else{
                 echo "La conexión con el departamento de I+Diotas ha sido establecida. ¿Que quieres que haga?";
