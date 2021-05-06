@@ -121,9 +121,9 @@ if($do = mysqli_query($link, $sql)){
                 $id_equipo = $id_equipo["id"];
             }else{
                 $texto = "🚨 NO SE HA ENCONTRADO ESE EQUIPO EN LA BASE DE DATOS, VUELVE A INTENTARLO O REPORTA EL FALLO DIRECTAMENTE AL DEPARTAMENTO 🚨";
-                file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+                file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto); 
             }
-            $sql = "INSERT INTO `ticket` (`id`, `aparato`, `usuario`, `tipo_error`, `descripcion`, `tecnico`, `fecha`, `estado`) VALUES (NULL, '$id_equipo', '$chatId', 'Problema', '$descripcion', '', '$ahora', 'pendiente');";
+            $sql = "INSERT INTO `ticket` (`id`, `aparato`, `usuario`, `tipo_error`, `descripcion`, `tecnico`, `fecha`, `estado`) VALUES (NULL, '$id_equipo', '$chatId', 'Problema', '$descripcion', '1', '$ahora', 'pendiente');";
             if(mysqli_query($link, $sql)){
                 $texto = "🚨 Se ha reportado una incidencia para el equipo: $equipo. '$descripcion'. 🚨";
                 file_get_contents($path . "/sendmessage?chat_id=" . $grupo . "&text=" . $texto);
