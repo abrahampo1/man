@@ -99,7 +99,7 @@ if (isset($_POST["profeclave"])) {
     var equipo;
     var step = 1;
     window.onload = function() {
-        document.getElementById("step" + step).style.display = "flex";
+        document.getElementById("step" + step).style.display = "block";
     }
 
     function next() {
@@ -109,7 +109,7 @@ if (isset($_POST["profeclave"])) {
         if (nombre != "") {
             document.getElementById("step" + step).style.display = "none";
             step++;
-            document.getElementById("step" + step).style.display = "flex";
+            document.getElementById("step" + step).style.display = "block";
             equipo = document.getElementById("equipo").value;
         }else{
         }
