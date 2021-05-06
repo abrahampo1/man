@@ -39,3 +39,19 @@ if (strtolower($message) == "dame tus ids") {
     $texto = "¡Ojala pudiera!\n";
     file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
 }
+if(str_contains($message, "apagar aula")){
+    $texto = "Vaya, eso que quieres hacer es peligroso, voy a verificar que tienes acceso a estas funciones...";
+    file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+    $sql = "SELECT * FROM tecnicos WHERE telegram = '$chatId'";
+    $do = mysqli_query($link, $sql);
+    if($do->num_rows > 0){
+        $persona = mysqli_fetch_assoc($do);
+        $aula = explode(" aula ", $message);
+        $aula = $aula[1];
+        $texto = "Vale ".$persona["nombre"].", veo que estas autorizado para hacer esto. Apagando el aula ".$aula;
+        file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+    }else{
+        $texto = "No tienes acceso a estas funciones.";
+        file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+    }
+}
