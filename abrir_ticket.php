@@ -60,8 +60,9 @@
 </style>
 
 <?php
-if (isset($_POST["profeclave"])) {
+if (isset($_POST["profeclave"]) && isset($_POST["equipo"])) {
     $profeclave = $_POST["profeclave"];
+    $equipo = $_POST["equipo"];
     include("database.php");
     $sql = "SELECT * FROM ajustes WHERE nombre = 'profeclave'";
     $do = mysqli_query($link, $sql);
@@ -97,13 +98,13 @@ if (isset($_POST["profeclave"])) {
             <div style="margin-top: 40px;">
                 <form action="" method="post">
                     <div id="step1" style="display: none;">
-                        <input type="text" id="name" name="name" placeholder="Escribe aqui su nombre"><br>
+                        <input type="text" id="name" name="name" required placeholder="Escribe aqui su nombre"><br>
                         <button type="button" onclick="next()">Siguiente</button>
                     </div>
                     <div id="step2" style="display: none;">
-                        <input type="text" id="incidencia_breve" name="incidencia_breve" placeholder="Indique el titulo de la incidencia (ej: no enciende)"><br>
-                        <textarea type="textarea" id="incidencia" name="incidencia" placeholder="Explique brevemente cual es la incidencia"></textarea><br>
-                        <button type="submit" onclick="next()">Siguiente</button>
+                        <input type="text" id="incidencia_breve" required name="incidencia_breve" placeholder="Indique el titulo de la incidencia (ej: no enciende)"><br>
+                        <textarea type="textarea" id="incidencia" required name="incidencia" placeholder="Explique brevemente cual es la incidencia"></textarea><br>
+                        <button type="submit">Enviar</button>
                     </div>
 
                 </form>
