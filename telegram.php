@@ -98,5 +98,5 @@ if($do = mysqli_query($link, $sql)){
 }
 
 
-$sql = "INSERT INTO `conversaciones_telegram` (`id`, `chatid`, `mensaje`, `resouesta`, `fecha`) VALUES (NULL, '$chatId', '$message', '$texto', '$hora');";
+$sql = "INSERT INTO `conversaciones_telegram` (`id`, `chatid`, `mensaje`, `respuesta`, `fecha`) VALUES (NULL, '$chatId', '$message', '$texto', '$hora');";
 mysqli_query($link, $sql);
