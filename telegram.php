@@ -13,7 +13,7 @@ $path = "https://api.telegram.org/bot" . $api;
 $chatId = $update["message"]["chat"]["id"];
 $message = $update["message"]["text"];
 $hora = time();
-
+$texto = "";
 if (isset($_GET["texto"]) && $_GET["chatid"]) {
     session_start();
     include("database.php");
@@ -98,5 +98,5 @@ if($do = mysqli_query($link, $sql)){
 }
 
 
-$sql = "INSERT INTO `conversaciones_telegram` (`id`, `chatid`, `mensaje`, `resouesta`, `fecha`) VALUES (NULL, '$chatId', '$message','$texto', '$hora');";
+$sql = "INSERT INTO `conversaciones_telegram` (`id`, `chatid`, `mensaje`, `resouesta`, `fecha`) VALUES (NULL, '$chatId', '$message', '$texto', '$hora');";
 mysqli_query($link, $sql);
