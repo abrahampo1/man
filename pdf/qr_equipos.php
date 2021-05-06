@@ -15,7 +15,10 @@ if (isset($_GET["aula"])) {
         return $randomString;
     }
     $sql = "SELECT * FROM ordenadores WHERE ubicacion = ".$_GET["aula"];
-    $do = mysqli_query($link, $sql);
+    if($do = mysqli_query($link, $sql)){}else{
+        echo mysqli_error($link);
+        exit;
+    }
     require('equipos_etiquetas.php');
     $pdf = new PDF_Label('L7163');
     $pdf->AddPage();
