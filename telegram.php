@@ -122,8 +122,10 @@ if($do = mysqli_query($link, $sql)){
                 $texto = "🚨 HA HABIDO UN ERROR AL REPORTAR LA INCIDENCIA, REPORTALO AL DEPARTAMENTO DIRECTAMENTE 🚨";
                 file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
             }
+        }else{
+            $texto = "De acuerdo, he cancelado.";
+            file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
         }
-        $texto = "¿Quieres abrir la incidencia?";
     }   
 }
 
