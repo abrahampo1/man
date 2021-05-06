@@ -39,7 +39,7 @@ if (strtolower($message) == "dame tus ids") {
     $texto = "¡Ojala pudiera!\n";
     file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
 }
-if(str_contains($message, "apagar aula")){
+if(str_contains("Apagar aula", $message)){
     $texto = "Vaya, eso que quieres hacer es peligroso, voy a verificar que tienes acceso a estas funciones...";
     file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
     $sql = "SELECT * FROM tecnicos WHERE telegram = '$chatId'";
