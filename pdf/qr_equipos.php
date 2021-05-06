@@ -47,7 +47,7 @@ if (isset($_GET["aula"])) {
         }
         
         
-        $sql = "SELECT * FROM ordenadores WHERE ubicacion = ".$_POST["aula"];
+        $sql = "SELECT * FROM ordenadores WHERE ubicacion = '$aula'";
         $do = mysqli_query($link, $sql);
         $result = mysqli_fetch_assoc($do);
         $date = date("d-m-Y", time());
