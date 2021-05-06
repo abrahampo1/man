@@ -86,7 +86,7 @@ $user_id = $_SESSION["user_id"];
                     <?
                 if($conteo_tickets > 0)
                 {
-                    $sql = "SELECT * FROM ticket WHERE tecnico = $user_id";
+                    $sql = "SELECT * FROM ticket WHERE tecnico = $user_id and estado = 'pendiente'";
                     $ticket_bd = mysqli_query($link, $sql);
                     while($ticket = mysqli_fetch_assoc($ticket_bd))
                     {
