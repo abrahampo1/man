@@ -9,7 +9,7 @@ $sql = "SELECT * FROM ajustes WHERE nombre = 'apitelegram'";
 $do = mysqli_query($link, $sql);
 $result = mysqli_fetch_assoc($do);
 $api = $result["valor"];
-$path = "https://api.telegram.org/bot".$api;
+$path = "https://api.telegram.org/bot" . $api;
 $chatId = $update["message"]["chat"]["id"];
 $message = $update["message"]["text"];
 if (isset($_GET["texto"]) && $_GET["chatid"]) {
@@ -39,18 +39,31 @@ if (strtolower($message) == "dame tus ids") {
     $texto = "¡Ojala pudiera!\n";
     file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
 }
-if(strpos(strtolower($message), "apagar aula") !== false){
+if (strpos(strtolower($message), "apagar aula") !== false) {
     $texto = "Vaya, eso que quieres hacer es peligroso, voy a verificar que tienes acceso a estas funciones...";
     file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
     $sql = "SELECT * FROM tecnicos WHERE telegram = '$chatId'";
     $do = mysqli_query($link, $sql);
-    if($do->num_rows > 0){
+    if ($do->num_rows > 0) {
         $persona = mysqli_fetch_assoc($do);
         $aula = explode(" aula ", $message);
         $aula = $aula[1];
-        $texto = "Vale ".$persona["nombre"].", veo que estas autorizado para hacer esto. Apagando el aula ".$aula;
+        $texto = "Vale " . $persona["nombre"] . ", veo que estas autorizado para hacer esto. Apagando el aula " . $aula;
         file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
-    }else{
+        $ubicacion = "Aula " . $aula;
+        $ordenadores = 0;
+        $sql = "SELECT * FROM ordenadores WHERE ubicacion = '$ubicacion'";
+        $do = mysqli_query($link, $sql);
+        while ($row = mysqli_fetch_assoc($do)) {
+            $aparato = $row["id"];
+            $sql = "UPDATE `ordenadores` SET `orden` = 'apagar' WHERE `ordenadores`.`id` = '$aparato';";
+            if (mysqli_query($link, $sql)) {
+                $ordenadores++;
+            }
+        }
+        $texto = "He apagado ".$ordenadores." equipos. Se apagaran en 1 minuto. ⏳⏳⏳ (recuerda que puedes cancelar el apagado escribiendo 'shutdown -a' en el terminal de windows)";
+        file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+    } else {
         $texto = "No tienes acceso a estas funciones.";
         file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
     }
