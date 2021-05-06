@@ -246,7 +246,11 @@ if (isset($_POST["nombre"])) {
                                                     <?
                                         $ip_usable = explode(';', $info['ip']);
                                         if (count($ip_usable) > 1) {
-                                            $ip = $ip_usable[1];
+                                            for($i = 0; $i != count($ip_usable); $i++){
+                                                if($ip_usable[$i] != "127.0.0.1" && $ip_usable[$i] != ""){
+                                                    $ip = $ip_usable[$i];
+                                                }
+                                            }
                                         } else {
                                             $ip = $info["ip"];
                                         }

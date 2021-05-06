@@ -123,7 +123,7 @@ else
                             if ($ip == '') {
                                 $ip = 'SIN ASIGNAR';
                             }
-                            echo '<a style="text-decoration:none;" href="aparato.php?a=' . $fila['id'] . '"><div class="col-xl-3 col-md-6 mb-4">
+                            echo '<a style="text-decoration:none;" href="aparato?a=' . $fila['id'] . '"><div class="col-xl-3 col-md-6 mb-4">
                         <div class="card border-left-primary shadow py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
