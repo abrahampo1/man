@@ -125,7 +125,7 @@ if($do = mysqli_query($link, $sql)){
             }
             $sql = "INSERT INTO `ticket` (`id`, `aparato`, `usuario`, `tipo_error`, `descripcion`, `tecnico`, `fecha`, `estado`) VALUES (NULL, '$id_equipo', '$chatId', 'Problema', '$descripcion', '', '$ahora', 'pendiente');";
             if(mysqli_query($link, $sql)){
-                $texto = "🚨 Incidencia reportada correctamente, algún tecnico de dirigirá al lugar... 🚨";
+                $texto = "🚨 Incidencia reportada correctamente, algún tecnico se dirigirá al lugar... 🚨";
                 file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
             }else{
                 $texto = "🚨 HA HABIDO UN ERROR AL REPORTAR LA INCIDENCIA, REPORTALO AL DEPARTAMENTO DIRECTAMENTE 🚨";
