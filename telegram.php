@@ -96,7 +96,36 @@ if($do = mysqli_query($link, $sql)){
         file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
     }   
 }
-
+$sql = "SELECT * FROM conversaciones_telegram WHERE chatid = $chatId ORDER BY id desc";
+if($do = mysqli_query($link, $sql)){
+    $mensaje = mysqli_fetch_assoc($do);
+    if($mensaje["respuesta"] == "¿Quieres abrir la incidencia? (si o no)"){
+        if(strtolower($message) == "si"){
+            $texto = "Asignando la incidencia, un momento...";
+            file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+            $sql = "SELECT * FROM conversaciones_telegram WHERE chatid = $chatId ORDER BY id desc LIMIT 2";
+            $do = mysqli_query($link, $sql);
+            while($incidencia = mysqli_fetch_assoc($do)){
+                if($incidencia["respuesta"] == "¿Que le pasa al equipo?"){
+                    $equipo = $incidencia["mensaje"];
+                }
+                if($incidencia["respuesta"] == "¿Quieres abrir la incidencia? (si o no)"){
+                    $descripcion = $incidencia["mensaje"];
+                }
+            }
+            $ahora = time();
+            $sql = "INSERT INTO `ticket` (`id`, `aparato`, `usuario`, `tipo_error`, `descripcion`, `tecnico`, `fecha`, `estado`) VALUES (NULL, '$equipo', '$chatId', 'Problema', '$descripcion', '', '$ahora', 'abierto');";
+            if(mysqli_query($link, $sql)){
+                $texto = "🚨 Incidencia reportada correctamente, algún tecnico de dirigirá al lugar... 🚨";
+                file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+            }else{
+                $texto = "🚨 HA HABIDO UN ERROR AL REPORTAR LA INCIDENCIA, REPORTALO AL DEPARTAMENTO DIRECTAMENTE 🚨";
+                file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+            }
+        }
+        $texto = "¿Quieres abrir la incidencia?";
+    }   
+}
 
 $sql = "INSERT INTO `conversaciones_telegram` (`id`, `chatid`, `mensaje`, `respuesta`, `fecha`) VALUES (NULL, '$chatId', '$message', '$texto', '$hora');";
 mysqli_query($link, $sql);
