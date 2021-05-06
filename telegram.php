@@ -1,7 +1,15 @@
 <?php
-$grupo = "-527484123";
+include("database.php");
+$sql = "SELECT * FROM ajustes WHERE nombre = 'grupotelegram'";
+$do = mysqli_query($link, $sql);
+$result = mysqli_fetch_assoc($do);
+$grupo = $result["valor"];
 $update = json_decode(file_get_contents("php://input"), TRUE);
-$path = "https://api.telegram.org/bot1516953636:AAEL5KIZB59oOkPd4rn8iy9tUeRuKgF6k-E";
+$sql = "SELECT * FROM ajustes WHERE nombre = 'apitelegram'";
+$do = mysqli_query($link, $sql);
+$result = mysqli_fetch_assoc($do);
+$api = $result["valor"];
+$path = "https://api.telegram.org/bot".$api;
 $chatId = $update["message"]["chat"]["id"];
 $message = $update["message"]["text"];
 if (isset($_GET["texto"]) && $_GET["chatid"]) {
