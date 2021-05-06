@@ -38,6 +38,16 @@
     .articulo {
         width: auto;
     }
+
+    @media only screen and (min-width: 600px) {
+        input {
+        width: 90%;
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 20px;
+        border: 0px solid black;
+        padding: 20px;
+    }
+}
 </style>
 
 <?php
