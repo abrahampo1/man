@@ -71,5 +71,19 @@ if (strpos(strtolower($message), "apagar aula") !== false) {
     }
 }
 
+if (strtolower($message) == "abrir incidencia") {
+    $texto = "¿Que equipo tiene el problema?";
+    file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+    
+}
+$sql = "SELECT * FROM conversaciones_telegram WHERE chatid = $chatId ORDER BY id desc";
+if($do = mysqli_query($link, $sql)){
+    $mensaje = mysqli_fetch_assoc($do);
+    if($mensaje["mensaje"] == "abrir incidencia"){
+        $texto = "Asignando incidencia a ".$message.". ¿Que le pasa al equipo?";
+        file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+    }   
+}
+
 $sql = "INSERT INTO `conversaciones_telegram` (`id`, `chatid`, `mensaje`, `fecha`) VALUES (NULL, '$chatId', '$message', '$hora');";
 mysqli_query($link, $sql);
