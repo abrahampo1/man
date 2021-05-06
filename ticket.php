@@ -16,7 +16,15 @@ $tecnico = $info_ticket['tecnico'];
 $sql = "SELECT * FROM tecnicos WHERE id=$tecnico";
 $do = mysqli_query($link, $sql);
 $info_tecnico = mysqli_fetch_assoc($do);
-
+$sql = "SELECT * FROM ajustes WHERE nombre = 'grupotelegram'";
+$do = mysqli_query($link, $sql);
+$result = mysqli_fetch_assoc($do);
+$grupo = $result["valor"];
+$sql = "SELECT * FROM ajustes WHERE nombre = 'apitelegram'";
+$do = mysqli_query($link, $sql);
+$result = mysqli_fetch_assoc($do);
+$api = $result["valor"];
+$path = "https://api.telegram.org/bot" . $api;
 
 if(isset($_POST['cerrar']))
 {
@@ -30,6 +38,8 @@ if(isset($_POST['cerrar']))
             header('location: ok.php?o=1');
         }
     }
+    $texto = "✅  ".$info_tecnico["nombre"]." ha cerrado la incidencia. En el equipo: ".$info_aparato["nombre"].", el fallo era: '".$info_ticket["descripcion"]."' 👌";
+    file_get_contents($path . "/sendmessage?chat_id=" . $grupo . "&text=" . $texto);
 }
 if(isset($_POST['abrir']))
 {
