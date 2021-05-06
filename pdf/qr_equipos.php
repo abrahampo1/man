@@ -14,7 +14,7 @@ if (isset($_GET["aula"])) {
         }
         return $randomString;
     }
-    $sql = "SELECT * FROM ordenadores WHERE aula = ".$_GET["aula"];
+    $sql = "SELECT * FROM ordenadores WHERE ubicacion = ".$_GET["aula"];
     $do = mysqli_query($link, $sql);
     require('equipos_etiquetas.php');
     $pdf = new PDF_Label('L7163');
@@ -43,7 +43,7 @@ if (isset($_GET["aula"])) {
         }
         
         
-        $sql = "SELECT * FROM ordenadores WHERE aula = ".$_POST["aula"];
+        $sql = "SELECT * FROM ordenadores WHERE ubicacion = ".$_POST["aula"];
         $do = mysqli_query($link, $sql);
         $result = mysqli_fetch_assoc($do);
         $date = date("d-m-Y", time());
