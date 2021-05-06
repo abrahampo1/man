@@ -30,12 +30,14 @@ if (isset($_GET["aula"])) {
         $do2 = mysqli_query($link, $sql);
         if($do2->num_rows > 0){
             $coincidencia = true;
+            $code = mysqli_fetch_assoc($do2);
+            $codigo = $code["token"];
         }
         while($coincidencia == false){
             $codigo = generateRandomString(6);
             $sql = "SELECT * FROM token WHERE token = '$codigo'";
-            $do = mysqli_query($link, $sql);
-            if($do->num_rows == 0){
+            $do2 = mysqli_query($link, $sql);
+            if($do2->num_rows == 0){
                 $coincidencia = true;
                 $sql = "INSERT INTO `token` (`id`, `aparato`, `token`, `usos`) VALUES (NULL, '$aparato', '$codigo', 0);";
                 if(mysqli_query($link, $sql)){
@@ -45,13 +47,8 @@ if (isset($_GET["aula"])) {
                 }
             }
         }
-        
-        
-        $sql = "SELECT * FROM ordenadores WHERE ubicacion = '$aula'";
-        $do = mysqli_query($link, $sql);
-        $result = mysqli_fetch_assoc($do);
         $date = date("d-m-Y", time());
-        $text = sprintf("%s\n%s\n%s\n%s %s, %s", "I+D Aula 121", 'IES FRANCISCO ASOREY', 'Codigo: '.$codigo, $result["nombre"], '', $date);
+        $text = sprintf("%s\n%s\n%s\n%s %s, %s", "I+D", 'IES FRANCISCO ASOREY', 'Codigo: '.$codigo, $row["nombre"], '', $date);
         $pdf->Add_Label($text, $codigo);
     }
 
