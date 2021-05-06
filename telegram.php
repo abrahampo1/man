@@ -79,7 +79,7 @@ if (strtolower($message) == "abrir incidencia") {
 $sql = "SELECT * FROM conversaciones_telegram WHERE chatid = $chatId ORDER BY id desc";
 if($do = mysqli_query($link, $sql)){
     $mensaje = mysqli_fetch_assoc($do);
-    if($mensaje["mensaje"] == "abrir incidencia"){
+    if($mensaje["respuesta"] == "¿Que equipo tiene el problema?"){
         $texto = "Asignando incidencia a ".$message.".";
         file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
         $texto = "¿Que le pasa al equipo?";
