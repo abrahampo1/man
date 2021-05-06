@@ -80,10 +80,23 @@ $sql = "SELECT * FROM conversaciones_telegram WHERE chatid = $chatId ORDER BY id
 if($do = mysqli_query($link, $sql)){
     $mensaje = mysqli_fetch_assoc($do);
     if($mensaje["mensaje"] == "abrir incidencia"){
-        $texto = "Asignando incidencia a ".$message.". ¿Que le pasa al equipo?";
+        $texto = "Asignando incidencia a ".$message.".";
+        file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+        $texto = "¿Que le pasa al equipo?";
+        file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+    }   
+}
+$sql = "SELECT * FROM conversaciones_telegram WHERE chatid = $chatId ORDER BY id desc";
+if($do = mysqli_query($link, $sql)){
+    $mensaje = mysqli_fetch_assoc($do);
+    if($mensaje["respuesta"] == "¿Que le pasa al equipo?"){
+        $texto = "Entonces al equipo ".$mensaje["mensaje"].". Le pasa que: '".$message."'.";
+        file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+        $texto = "¿Quieres abrir la incidencia?";
         file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
     }   
 }
 
-$sql = "INSERT INTO `conversaciones_telegram` (`id`, `chatid`, `mensaje`, `fecha`) VALUES (NULL, '$chatId', '$message', '$hora');";
+
+$sql = "INSERT INTO `conversaciones_telegram` (`id`, `chatid`, `mensaje`, `resouesta`, `fecha`) VALUES (NULL, '$chatId', '$message','$texto', '$hora');";
 mysqli_query($link, $sql);
