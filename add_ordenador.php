@@ -94,8 +94,8 @@ if(isset($_POST["name"]) && isset($_POST["aula"])){
             <h2>Inserta el nombre:</h2>
             <div style="margin-top: 40px; display: block">
                 <form action="" method="post">
-                    <input type="text" id="name" name="name" placeholder="Nombre">
-                    <input type="text" id="name" name="aula" placeholder="Aula">
+                    <input type="text" id="name" name="name" placeholder="Nombre"><br><br>
+                    <input type="text" id="name" name="aula" placeholder="Aula"><br><br>
                     <button type="submit">Añadir</button>
                 </form>
             </div>
