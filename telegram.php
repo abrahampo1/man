@@ -12,6 +12,8 @@ $api = $result["valor"];
 $path = "https://api.telegram.org/bot" . $api;
 $chatId = $update["message"]["chat"]["id"];
 $message = $update["message"]["text"];
+$hora = time();
+
 if (isset($_GET["texto"]) && $_GET["chatid"]) {
     session_start();
     include("database.php");
@@ -68,3 +70,6 @@ if (strpos(strtolower($message), "apagar aula") !== false) {
         file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
     }
 }
+
+$sql = "INSERT INTO `conversaciones_telegram` (`id`, `chatid`, `mensaje`, `fecha`) VALUES (NULL, '$chatId', '$message', '$hora');";
+mysqli_query($link, $sql);
