@@ -88,7 +88,7 @@ if(isset($_POST["name"]) && isset($_POST["aula"])){
 
 <div class="card" id="step1">
     <div style="text-align: center; ">
-        <img src="img/logo i+d.png" alt="" style="border-radius: 10px;margin-bottom: 60px" width="300px" height="auto">
+        <img src="img/logoi+d.png" alt="" style="border-radius: 10px;margin-bottom: 60px" width="300px" height="auto">
         <div>
             <h1>Añadir Equipo</h1>
             <h2>Inserta el nombre:</h2>
