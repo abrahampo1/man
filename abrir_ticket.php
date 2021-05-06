@@ -47,6 +47,10 @@
         border: 0px solid black;
         padding: 20px;
     }
+        textarea {
+            width: 90%;
+            height: 400px;
+        }
 }
 </style>
 
