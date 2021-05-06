@@ -92,7 +92,7 @@ if($do = mysqli_query($link, $sql)){
     if($mensaje["respuesta"] == "¿Que le pasa al equipo?"){
         $texto = "Entonces al equipo ".$mensaje["mensaje"].". Le pasa que: '".$message."'.";
         file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
-        $texto = "¿Quieres abrir la incidencia?";
+        $texto = "¿Quieres abrir la incidencia? (si o no)";
         file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
     }   
 }
