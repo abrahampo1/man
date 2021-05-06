@@ -40,17 +40,17 @@
 </style>
 
 <?php
-if(isset($_POST["profeclave"])){
+if (isset($_POST["profeclave"])) {
     $profeclave = $_POST["profeclave"];
     include("database.php");
     $sql = "SELECT * FROM ajustes WHERE nombre = 'profeclave'";
     $do = mysqli_query($link, $sql);
     $result = mysqli_fetch_assoc($do);
-    if($profeclave != $result["valor"]){
+    if ($profeclave != $result["valor"]) {
         echo "Clave de profesor incorrecta. <br>Atte. Departamento de I+D Asorey";
         exit;
     }
-}else{
+} else {
     echo "Acceso sin autorización detectado. <br> Este equipo acaba de quedar registrado, si piensas que se trata de un error, vuelve a intentarlo. <br><br>Atte. Departamento de I+D Asorey";
     exit;
 }
@@ -69,18 +69,54 @@ if(isset($_POST["profeclave"])){
     <meta name="author" content="">
 </head>
 
-<div class="card" id="step1">
+<div class="card">
     <div style="text-align: center; ">
-        <img src="img/logo i+d.png" alt="" style="border-radius: 10px;margin-bottom: 60px" width="300px" height="auto">
+        <img src="img/logoi+d.png" alt="" style="border-radius: 10px;margin-bottom: 60px" width="300px" height="auto">
         <div>
             <h1>Equipo: {insertar equipo}</h1>
-            <h2>Inserta la clave de profesor para continuar:</h2>
             <div style="margin-top: 40px;">
-                <form action="https://mantenimiento.asorey.net/abrir_ticket" method="post">
-                    <input type="text" id="name" name="profeclave" placeholder="Escribe aqui la clave"><br>
-                    <button onclick="next()">Siguiente</button>
+                <form action="" method="post">
+                    <div id="step1" style="display: none;">
+                        <input type="text" id="name" name="name" placeholder="Escribe aqui su nombre"><br>
+                        <button type="button" onclick="next()">Siguiente</button>
+                    </div>
+                    <div id="step2" style="display: none;">
+                        <input type="text" id="incidencia_breve" name="incidencia_breve" placeholder="Indique el titulo de la incidencia (ej: no enciende)"><br>
+                        <input type="textarea" id="incidencia" name="incidencia" placeholder="Explique brevemente cual es la incidencia"><br>
+                        <button type="submit" onclick="next()">Siguiente</button>
+                    </div>
+
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+
+
+<script>
+    var nombre;
+    var equipo;
+    var step = 1;
+    window.onload = function() {
+        document.getElementById("step" + step).style.display = "flex";
+    }
+
+    function next() {
+
+        document.getElementById("step" + step).style.display = "none";
+        nombre = document.getElementById("name").value;
+        if (nombre != "") {
+            step++;
+            document.getElementById("step" + step).style.display = "flex";
+            equipo = document.getElementById("equipo").value;
+        }else{
+        }
+
+
+    }
+
+    function cancel() {
+        location.reload();
+    }
+</script>
