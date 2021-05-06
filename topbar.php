@@ -149,6 +149,10 @@ $user_id = $_SESSION["user_id"];
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                     Settings
                 </a>
+                <a class="dropdown-item" href="add_ordenador">
+                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Añadir equipo
+                </a>
                 <a class="dropdown-item" href="actividad.php">
                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                     Actividad

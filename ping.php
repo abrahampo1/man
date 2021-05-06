@@ -17,7 +17,6 @@ if (isset($_POST['sendping'])) {
             $estado = 'Desconectado';
             $conectado = false;
         }
-    }
     $ahora = time();
     if ($conectado == false) {
         echo '<p>Desconectado</p>';
