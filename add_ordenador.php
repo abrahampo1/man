@@ -18,6 +18,15 @@ else
     }
 }
 
+if(isset($_POST["name"]) && isset($_POST["aula"])){
+    $nombre = $_POST["name"];
+    $aula = $_POST["aula"];
+    $sql = "INSERT INTO `ordenadores` (`id`, `nombre`, `ip`, `ubicacion`, `last_status`, `status_date`, `icono`, `tipo`, `cpu`, `ram`, `disco`, `ip_buena`, `orden`, `consola`) VALUES (NULL, '$nombre', '', '$aula', '0', '', 'fas fa-computer', 'ordenador', '', '', '', '', '', '');";
+    if($do = mysqli_query($link, $sql)){
+        header("location: /");
+    }
+}
+
 ?>
 
 <style>
@@ -83,8 +92,9 @@ else
             <h1>Añadir Equipo</h1>
             <h2>Inserta el nombre:</h2>
             <div style="margin-top: 40px;">
-                <form action="https://mantenimiento.asorey.net/abrir_ticket" method="post">
+                <form action="" method="post">
                     <input type="text" id="name" name="name" placeholder="Escribe el nombre del equipo"><br>
+                    <input type="text" id="name" name="aula" placeholder="Escribe el aula del equipo"><br>
                     <button type="submit">Añadir</button>
                 </form>
             </div>
