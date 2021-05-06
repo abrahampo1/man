@@ -62,7 +62,7 @@
             <h2>Inserta la clave de profesor para continuar:</h2>
             <div style="margin-top: 40px;">
                 <form action="https://mantenimiento.asorey.net/abrir_ticket" method="post" target="_blank">
-                    <input type="text" id="name" name="profeclave" placeholder="Escribe aqui la clave"><br>
+                    <input type="password" id="name" name="profeclave" placeholder="Escribe aqui la clave"><br>
                     <button onclick="next()">Siguiente</button>
                 </form>
             </div>
