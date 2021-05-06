@@ -51,6 +51,7 @@ if(isset($_POST["name"]) && isset($_POST["aula"])){
         font-size: 20px;
         border: 0px solid black;
         padding: 20px;
+        margin: 5px;
     }
 
     button {
@@ -93,8 +94,8 @@ if(isset($_POST["name"]) && isset($_POST["aula"])){
             <h2>Inserta el nombre:</h2>
             <div style="margin-top: 40px;">
                 <form action="" method="post">
-                    <input type="text" id="name" name="name" placeholder="Escribe el nombre del equipo"><br>
-                    <input type="text" id="name" name="aula" placeholder="Escribe el aula del equipo"><br>
+                    <input type="text" id="name" name="name" placeholder="Nombre">
+                    <input type="text" id="name" name="aula" placeholder="Aula">
                     <button type="submit">Añadir</button>
                 </form>
             </div>
