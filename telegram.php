@@ -114,7 +114,16 @@ if($do = mysqli_query($link, $sql)){
                 }
             }
             $ahora = time();
-            $sql = "INSERT INTO `ticket` (`id`, `aparato`, `usuario`, `tipo_error`, `descripcion`, `tecnico`, `fecha`, `estado`) VALUES (NULL, '$equipo', '$chatId', 'Problema', '$descripcion', '', '$ahora', 'pendiente');";
+            $sql = "SELECT * FROM ordenadores WHERE nombre = '$equipo'";
+            $do = mysqli_query($link, $sql);
+            if($do->num_rows > 0){
+                $id_equipo = mysqli_fetch_assoc($do);
+                $id_equipo = $id_equipo["id"];
+            }else{
+                $texto = "🚨 NO SE HA ENCONTRADO ESE EQUIPO EN LA BASE DE DATOS, VUELVE A INTENTARLO O REPORTA EL FALLO DIRECTAMENTE AL DEPARTAMENTO 🚨";
+                file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+            }
+            $sql = "INSERT INTO `ticket` (`id`, `aparato`, `usuario`, `tipo_error`, `descripcion`, `tecnico`, `fecha`, `estado`) VALUES (NULL, '$id_equipo', '$chatId', 'Problema', '$descripcion', '', '$ahora', 'pendiente');";
             if(mysqli_query($link, $sql)){
                 $texto = "🚨 Incidencia reportada correctamente, algún tecnico de dirigirá al lugar... 🚨";
                 file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);

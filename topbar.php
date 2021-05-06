@@ -90,7 +90,7 @@ $user_id = $_SESSION["user_id"];
                     $ticket_bd = mysqli_query($link, $sql);
                     while($ticket = mysqli_fetch_assoc($ticket_bd))
                     {
-                        $aparato = $ticket["aparato"];
+                            $aparato = $ticket["aparato"];
                             $sql = "SELECT * FROM ordenadores WHERE id = $aparato";
                             $do = mysqli_query($link, $sql);
                             $info_aparato = mysqli_fetch_assoc($do);
