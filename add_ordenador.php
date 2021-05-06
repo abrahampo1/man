@@ -92,7 +92,7 @@ if(isset($_POST["name"]) && isset($_POST["aula"])){
         <div>
             <h1>Añadir Equipo</h1>
             <h2>Inserta el nombre:</h2>
-            <div style="margin-top: 40px;">
+            <div style="margin-top: 40px; display: block">
                 <form action="" method="post">
                     <input type="text" id="name" name="name" placeholder="Nombre">
                     <input type="text" id="name" name="aula" placeholder="Aula">
