@@ -37,6 +37,10 @@ if (strtolower($message) == "hola") {
     $texto = "¡Hola! Soy un bot creado por Abraham Leiro Fernandez, dispuesto a hacer la gestión mucho mas sencilla.";
     file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
 }
+if (strtolower($message) == "tonto") {
+    $texto = "Tonto tú 😜😜😜";
+    file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+}
 if (strtolower($message) == "dame tus ids") {
     $texto = "¡Ojala pudiera!\n";
     file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
