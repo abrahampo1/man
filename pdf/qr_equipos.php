@@ -14,7 +14,8 @@ if (isset($_GET["aula"])) {
         }
         return $randomString;
     }
-    $sql = "SELECT * FROM ordenadores WHERE ubicacion = ".$_GET["aula"];
+    $aula = $_GET["aula"];
+    $sql = "SELECT * FROM ordenadores WHERE ubicacion = '$aula'";
     if($do = mysqli_query($link, $sql)){}else{
         echo mysqli_error($link);
         exit;
