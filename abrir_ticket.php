@@ -16,7 +16,7 @@
     }
 
     input {
-        width: 100px;
+        width: 500px;
         font-family: 'Ubuntu', sans-serif;
         font-size: 20px;
         border: 0px solid black;
