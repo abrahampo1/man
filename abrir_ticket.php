@@ -23,6 +23,11 @@
         padding: 20px;
     }
 
+    textarea {
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 20px;
+    }
+
     button {
         text-decoration: none;
         background-color: black;
