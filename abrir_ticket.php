@@ -104,9 +104,10 @@ if (isset($_POST["profeclave"])) {
 
     function next() {
 
-        document.getElementById("step" + step).style.display = "none";
+        
         nombre = document.getElementById("name").value;
         if (nombre != "") {
+            document.getElementById("step" + step).style.display = "none";
             step++;
             document.getElementById("step" + step).style.display = "flex";
             equipo = document.getElementById("equipo").value;
