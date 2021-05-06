@@ -82,7 +82,7 @@ if (isset($_POST["profeclave"])) {
                     </div>
                     <div id="step2" style="display: none;">
                         <input type="text" id="incidencia_breve" name="incidencia_breve" placeholder="Indique el titulo de la incidencia (ej: no enciende)"><br>
-                        <input type="textarea" id="incidencia" name="incidencia" placeholder="Explique brevemente cual es la incidencia"><br>
+                        <textarea type="textarea" id="incidencia" name="incidencia" placeholder="Explique brevemente cual es la incidencia"></textarea><br>
                         <button type="submit" onclick="next()">Siguiente</button>
                     </div>
 
