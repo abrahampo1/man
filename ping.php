@@ -4,7 +4,7 @@ if (isset($_POST['sendping'])) {
     $ip = $_POST["sendping"];
     $aparato = $_POST["aparato"];
     $ip_usable = explode(';', $ip);
-    $estado = 'Fallo 288';
+    $estado = 'Desconectado';
     $conectado = false;
     if (count($ip_usable) > 1) {
         for ($i = 0; $i < count($ip_usable); $i++) {
