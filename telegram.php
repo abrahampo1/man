@@ -190,7 +190,7 @@ if ($do = mysqli_query($link, $sql)) {
     $mensaje = mysqli_fetch_assoc($do);
     if ($mensaje["respuesta"] == "¿Quieres añadirlo? (si o no)") {
         if (strtolower($message) == "si") {
-            $texto = "Asignando la incidencia, un momento...";
+            $texto = "Verificando acceso y añadiendo el equipo, un momento...";
             file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
             $sql = "SELECT * FROM conversaciones_telegram WHERE chatid = $chatId ORDER BY id desc LIMIT 2";
             $do = mysqli_query($link, $sql);
@@ -205,12 +205,13 @@ if ($do = mysqli_query($link, $sql)) {
             $ahora = time();
             $sql = "SELECT * FROM ordenadores WHERE nombre = '$equipo'";
             $do = mysqli_query($link, $sql);
-            if ($do->num_rows > 0) {
+            if ($do->num_rows == 0) {
                 $id_equipo = mysqli_fetch_assoc($do);
                 $id_equipo = $id_equipo["id"];
             } else {
-                $texto = "🚨 NO SE HA ENCONTRADO ESE EQUIPO EN LA BASE DE DATOS, VUELVE A INTENTARLO O REPORTA EL FALLO DIRECTAMENTE AL DEPARTAMENTO 🚨";
+                $texto = "🚨 Ya hay un equipo con ese nombre. 🚨";
                 file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+                exit;
             }
             $sql = "INSERT INTO `ordenadores` (`id`, `nombre`, `ip`, `ubicacion`, `last_status`, `status_date`, `icono`, `tipo`, `cpu`, `ram`, `disco`, `ip_buena`, `orden`, `consola`) VALUES (NULL, '$equipo', '', '$aula', '', '0', 'fas fa-desktop', 'ordenador', '', '', '', '', '', '');";
             $sql2 = "SELECT * FROM tecnicos WHERE telegram = '$chatId'";
@@ -248,7 +249,7 @@ if ($do = mysqli_query($link, $sql)) {
                     $texto = "✅ Se ha añadido el equipo. Su API es: '$api' ✅ ";
                     file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
                 } else {
-                    $texto = "🚨 HA HABIDO UN ERROR AL REPORTAR LA INCIDENCIA, REPORTALO AL DEPARTAMENTO DIRECTAMENTE 🚨";
+                    $texto = "🚨 HA HABIDO UN ERROR AL AÑADIR EL EQUIPO, REPORTALO AL DEPARTAMENTO DIRECTAMENTE 🚨";
                     file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
                 }
             }else{
