@@ -21,7 +21,7 @@ else
 if(isset($_POST["name"]) && isset($_POST["aula"])){
     $nombre = $_POST["name"];
     $aula = $_POST["aula"];
-    $sql = "INSERT INTO `ordenadores` (`id`, `nombre`, `ip`, `ubicacion`, `last_status`, `status_date`, `icono`, `tipo`, `cpu`, `ram`, `disco`, `ip_buena`, `orden`, `consola`) VALUES (NULL, '$nombre', '', '$aula', '', '0', 'fas fa-computer', 'ordenador', '', '', '', '', '', '');";
+    $sql = "INSERT INTO `ordenadores` (`id`, `nombre`, `ip`, `ubicacion`, `last_status`, `status_date`, `icono`, `tipo`, `cpu`, `ram`, `disco`, `ip_buena`, `orden`, `consola`) VALUES (NULL, '$nombre', '', '$aula', '', '0', 'fas fa-desktop', 'ordenador', '', '', '', '', '', '');";
     if($do = mysqli_query($link, $sql)){
         header("location: /");
     }
