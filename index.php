@@ -94,6 +94,26 @@ else
                         }else if (isset($_GET["ub"]) && isset($_GET["au"])) {
                             $busc = $_GET['au'];
                             $sql = "SELECT * FROM ordenadores WHERE nombre LIKE '%$busc%' or id LIKE '$busc' or ip_buena LIKE '%$busc%' or ubicacion LIKE '%$busc%' or tipo LIKE '%$busc%' or cpu LIKE '%$busc%' or ram LIKE '%$busc%' or disco LIKE '%$busc%'";
+                            $busqueda = mysqli_query($link, $sql);
+                        while ($fila = mysqli_fetch_assoc($busqueda)) {
+                            
+                            $date = time();
+                            echo '<a style="text-decoration:none;" href="?ub=' . $fila['nombre'] . '&au='.$fila["id"].'"><div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            ' . $fila['nombre'] . '</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-desktop" fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div></a>
+                        </div>';
+                        }
                         }else{
                             $sql = 'SELECT * FROM aulas';
                             $busqueda = mysqli_query($link, $sql);
@@ -109,7 +129,7 @@ else
                                             ' . $fila['nombre'] . '</div>
                                     </div>
                                     <div class="col-auto">
-                                        <i class="fas fa-desktop" fa-2x text-gray-300"></i>
+                                        <i class="fas fa-chalkboard-teacher" fa-2x text-gray-300"></i>
                                     </div>
                                 </div>
                             </div>
