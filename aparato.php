@@ -61,8 +61,7 @@ if (isset($_POST["ip"])) {
 }
 if (isset($_POST["ubicacion"])) {
     $var_nueva = $_POST["ubicacion"];
-    $aula = $_POST["aula"];
-    $sql = "UPDATE `aulas` SET `nombre` = '$var_nueva' WHERE `aulas`.`id` = $aula";
+    $sql = "UPDATE `ordenadores` SET `ubicacion` = '$var_nueva' WHERE `ordenadores`.`id` = $aparato";
     if ($_POST["csrf_token"] == $_SESSION["token"]) {
         if (mysqli_query($link, $sql)) {
             $unix_time = time();
