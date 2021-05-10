@@ -72,22 +72,9 @@ if (strpos(strtolower($message), "apagar aula") !== false) {
     $do = mysqli_query($link, $sql);
     if ($do->num_rows > 0) {
         $persona = mysqli_fetch_assoc($do);
-        $aula = explode(" aula ", $message);
-        $aula = $aula[1];
-        $texto = "Vale " . $persona["nombre"] . ", veo que estas autorizado para hacer esto. Apagando el aula " . $aula;
+        $texto = "Vale " . $persona["nombre"] . ", veo que estas autorizado para hacer esto.";
         file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
-        $ubicacion = "Aula " . $aula;
-        $ordenadores = 0;
-        $sql = "SELECT * FROM ordenadores WHERE ubicacion = '$ubicacion'";
-        $do = mysqli_query($link, $sql);
-        while ($row = mysqli_fetch_assoc($do)) {
-            $aparato = $row["id"];
-            $sql = "UPDATE `ordenadores` SET `orden` = 'apagar' WHERE `ordenadores`.`id` = '$aparato';";
-            if (mysqli_query($link, $sql)) {
-                $ordenadores++;
-            }
-        }
-        $texto = "He apagado " . $ordenadores . " equipos. Se apagaran en 1 minuto. ⏳⏳⏳ (recuerda que puedes cancelar el apagado escribiendo 'shutdown -a' en el terminal de windows)";
+        $texto = "¿Que aula quieres apagar?";
         file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
     } else {
         $texto = "No tienes acceso a estas funciones.";
@@ -95,10 +82,49 @@ if (strpos(strtolower($message), "apagar aula") !== false) {
     }
 }
 
+$sql = "SELECT * FROM conversaciones_telegram WHERE chatid = $chatId ORDER BY id desc";
+if ($do = mysqli_query($link, $sql)) {
+    $mensaje = mysqli_fetch_assoc($do);
+    if ($mensaje["respuesta"] == "¿Que aula quieres apagar?") {
+        $sql = "SELECT * FROM aulas WHERE nombre LIKE '%$message%'";
+        $do = mysqli_query($link, $sql);
+        if($do->num_rows == 0){
+            $texto = "No existe ese aula.";
+            file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+            fin($chatId);
+            exit;
+        }
+        $aula_info = mysqli_fetch_assoc($do);
+        $aula_id = $aula_info["id"];
+        $sql = "SELECT * FROM ordenadores WHERE ubicacion = '$aula_id'";
+        $do = mysqli_query($link, $sql);
+        if($do->num_rows > 0){
+            while ($row = mysqli_fetch_assoc($do)) {
+                $aparato = $row["id"];
+                $sql = "UPDATE `ordenadores` SET `orden` = 'apagar' WHERE `ordenadores`.`id` = '$aparato';";
+                if (mysqli_query($link, $sql)) {
+                    $ordenadores++;
+                }
+            }
+            $texto = "He apagado " . $ordenadores . " equipos. Se apagaran en 1 minuto. ⏳⏳⏳ (recuerda que puedes cancelar el apagado escribiendo 'shutdown -a' en el terminal de windows)";
+            file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+        }else{
+            $texto = "Ese aula está vacía.";
+            file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+            fin($chatId);
+            exit;
+        }
+        
+        
+    }
+}
+
+
 if (strtolower($message) == "abrir incidencia") {
     $texto = "¿Que equipo tiene el problema?";
     file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
 }
+
 $sql = "SELECT * FROM conversaciones_telegram WHERE chatid = $chatId ORDER BY id desc";
 if ($do = mysqli_query($link, $sql)) {
     $mensaje = mysqli_fetch_assoc($do);
@@ -258,7 +284,7 @@ if ($do = mysqli_query($link, $sql)) {
                     if (mysqli_query($link, $sql)) {
                         $api = $random;
                         $unix_time = time();
-                        
+
                         $sql = "SELECT * FROM aulas WHERE id = " . $aula_id;
                         $do = mysqli_query($link, $sql);
                         $aulainfo = mysqli_fetch_assoc($do);
@@ -273,7 +299,6 @@ if ($do = mysqli_query($link, $sql)) {
                     $texto = "✅ Se ha añadido el equipo. Su API es: '$api' ✅ ";
                     file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
                     fin($chatId);
-                    
                 } else {
                     $texto = "🚨 HA HABIDO UN ERROR AL AÑADIR EL EQUIPO, REPORTALO AL DEPARTAMENTO DIRECTAMENTE 🚨";
                     file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
@@ -295,7 +320,8 @@ $sql = "INSERT INTO `conversaciones_telegram` (`id`, `chatid`, `mensaje`, `respu
 mysqli_query($link, $sql);
 
 
-function fin($chatId){
+function fin($chatId)
+{
     $hora = time();
     include("database.php");
     $sql = "INSERT INTO `conversaciones_telegram` (`id`, `chatid`, `mensaje`, `respuesta`, `fecha`) VALUES (NULL, '$chatId', '', '-FIN CONVERSACIÓN-', '$hora');";
