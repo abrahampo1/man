@@ -49,6 +49,14 @@ if (isset($_POST["name"]) && isset($_POST["aula"])) {
         margin: 5px;
     }
 
+    select {
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 20px;
+        border: 0px solid black;
+        padding: 20px;
+        margin: 5px;
+    }
+
     button {
         text-decoration: none;
         background-color: black;
