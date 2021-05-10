@@ -259,11 +259,11 @@ if ($do = mysqli_query($link, $sql)) {
                         $api = $random;
                         $unix_time = time();
                         
-                        $sql = "SELECT * FROM aulas WHERE id = " . $aula;
+                        $sql = "SELECT * FROM aulas WHERE id = " . $aula_id;
                         $do = mysqli_query($link, $sql);
                         $aulainfo = mysqli_fetch_assoc($do);
                         $aula_nombre = $aulainfo["nombre"];
-                        $sql = "INSERT INTO `actividad` (`id`, `persona`, `accion`, `fecha`) VALUES (NULL, '$tecnico', 'Creó el equipo <a href=aparato?a=$id_equipo> $nombre</a> en <a href=/?ub=$aula_nombre&au=$aula> $aula_nombre</a>', '$unix_time')";
+                        $sql = "INSERT INTO `actividad` (`id`, `persona`, `accion`, `fecha`) VALUES (NULL, '$tecnico', 'Creó el equipo <a href=aparato?a=$id_equipo> $equipo</a> en <a href=/?ub=$aula_nombre&au=$aula> $aula_nombre</a>', '$unix_time')";
                         mysqli_query($link, $sql);
                     } else {
                         echo mysqli_error($link);
