@@ -3,6 +3,11 @@ $user_id = $_SESSION["user_id"];
 $sql = "SELECT * FROM tecnicos WHERE id = $user_id";
 $search = mysqli_query($link, $sql);
 $user_info = mysqli_fetch_assoc($search);
+if(isset($_POST["logtelegram"])){
+    $sql = "UPDATE `tecnicos` SET `telegram` = '' WHERE `tecnicos`.`id` = '$user_id';";
+    $do = mysqli_query($link, $sql);
+    header("location: /");
+}
 ?>
 <!--Si borras este mensaje el codigo será auto destruido-->
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -173,7 +178,9 @@ $user_info = mysqli_fetch_assoc($search);
                         <button onclick='updateapi()' class='btn btn-success'>Conectar</button>";
                     } else {
                         echo "<p>ChatID: " . $user_info["telegram"] . "</p>
-                        <button class='btn btn-danger'>Desconectar</button>";
+                        <form action='' method='POST'>
+                        <button class='btn btn-danger' type='submit' name='logtelegram' value='1'>Desconectar</button>
+                        </form>";
                     }
                     ?>
                     <div id="holder-api" class="form-group col-lg-12">
