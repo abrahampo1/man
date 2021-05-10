@@ -343,6 +343,8 @@ if ($do = mysqli_query($link, $sql)) {
             if(mysqli_query($link, $sql)){
                 $texto = "✅  ¡Verificado! Gracias por usar mi programa. - Abraham ✅ ";
                 file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+                $sql = "UPDATE `tecnicos` SET `api` = '' WHERE `tecnicos`.`id` = '$tecnico';";
+                mysqli_query($link, $sql);
                 fin($chatId);
             }
         }else{
