@@ -145,7 +145,7 @@ $user_id = $_SESSION["user_id"];
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                     Profile
                 </a>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" data-toggle="modal" data-target="#ajustes" href="#">
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                     Settings
                 </a>
@@ -166,6 +166,36 @@ $user_id = $_SESSION["user_id"];
         </li>
 
     </ul>
+    <div class="modal fade" id="ajustes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">API</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="h5 modal-body">
+                    <p>API Actual:</p>
+                    <button onclick="updateapi()" class="btn btn-primary">Generar Token Nuevo</button>
+                </div>
 
+                <div id="holder-api" class="form-group col-lg-12">
+                    <?php $sql = "SELECT * FROM token WHERE aparato = '$aparato'";
+                    $do = mysqli_query($link, $sql);
+                    $info_api = mysqli_fetch_assoc($do);
+
+                    if ($do->num_rows > 0) {
+                        echo '<p>Token: ' . $info_api["token"] . '</p>';
+                    }
+                    ?>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <input type="hidden" name="cambioclave" id="">
+                </div>
+            </div>
+        </div>
+    </div>
 </nav>
 <!-- End of Topbar -->
