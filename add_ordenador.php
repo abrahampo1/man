@@ -1,9 +1,11 @@
 <?php
 session_start();
 include("database.php");
+
 if (!isset($_SESSION["user_id"])) {
     header("location: login.php");
 } else {
+    $tecnico = $_SESSION["user_id"];
     $user_id = $_SESSION["user_id"];
     $sql = "SELECT * FROM tecnicos WHERE id = $user_id";
     if ($do = mysqli_query($link, $sql)) {
@@ -18,6 +20,14 @@ if (isset($_POST["name"]) && isset($_POST["aula"])) {
     $aula = $_POST["aula"];
     $sql = "INSERT INTO `ordenadores` (`id`, `nombre`, `ip`, `ubicacion`, `last_status`, `status_date`, `icono`, `tipo`, `cpu`, `ram`, `disco`, `ip_buena`, `orden`, `consola`) VALUES (NULL, '$nombre', '', '$aula', '', '0', 'fas fa-desktop', 'ordenador', '', '', '', '', '', '');";
     if ($do = mysqli_query($link, $sql)) {
+        $unix_time = time();
+        $id_equipo = mysqli_insert_id($link);
+        $sql = "SELECT * FROM aulas WHERE id = " . $aula;
+        $do = mysqli_query($link, $sql);
+        $aulainfo = mysqli_fetch_assoc($do);
+        $aula_nombre = $aulainfo["nombre"];
+        $sql = "INSERT INTO `actividad` (`id`, `persona`, `accion`, `fecha`) VALUES (NULL, '$tecnico', 'Creó el equipo <a href=aparato.php?a=$id_equipo> $nombre</a> en <a href=?ub=$aula> $aula_nombre</a>', '$unix_time')";
+        mysqli_query($link, $sql);
         header("location: /");
     }
 }
@@ -106,7 +116,7 @@ if (isset($_POST["name"]) && isset($_POST["aula"])) {
                     $do = mysqli_query($link, $sql);
                     while ($aula = mysqli_fetch_assoc($do)) {
                         echo '<option ';
-                        
+
                         echo '  value="' . $aula["id"] . '">' . $aula["nombre"] . '</option>';
                     }
                     echo '</select><br>';
