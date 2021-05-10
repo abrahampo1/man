@@ -210,6 +210,7 @@ if ($do = mysqli_query($link, $sql)) {
             if ($do->num_rows > 0) {
                 $texto = "🚨 Ya hay un equipo con ese nombre. 🚨";
                 file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+                fin($chatId);
                 exit;
             }
             $sql = "SELECT * FROM aulas WHERE nombre LIKE %$aula%";
@@ -220,6 +221,7 @@ if ($do = mysqli_query($link, $sql)) {
             } else {
                 $texto = "🚨 No existe ese aula en nuestro sistema, creala con /crearaula o revisa la interfaz web. 🚨";
                 file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+                fin($chatId);
                 exit;
             }
 
@@ -269,22 +271,32 @@ if ($do = mysqli_query($link, $sql)) {
                     }
                     $texto = "✅ Se ha añadido el equipo. Su API es: '$api' ✅ ";
                     file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+                    fin($chatId);
+                    
                 } else {
                     $texto = "🚨 HA HABIDO UN ERROR AL AÑADIR EL EQUIPO, REPORTALO AL DEPARTAMENTO DIRECTAMENTE 🚨";
                     file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+                    fin($chatId);
                 }
             } else {
                 $texto = "🚨 No tienes acceso a estas funciones 🚨";
                 file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+                fin($chatId);
             }
         } else {
             $texto = "De acuerdo, he cancelado.";
             file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+            fin($chatId);
         }
     }
 }
-
-
-
 $sql = "INSERT INTO `conversaciones_telegram` (`id`, `chatid`, `mensaje`, `respuesta`, `fecha`) VALUES (NULL, '$chatId', '$message', '$texto', '$hora');";
 mysqli_query($link, $sql);
+
+
+function fin($chatId){
+    $hora = time();
+    include("database.php");
+    $sql = "INSERT INTO `conversaciones_telegram` (`id`, `chatid`, `mensaje`, `respuesta`, `fecha`) VALUES (NULL, '$chatId', '', '-FIN CONVERSACIÓN-', '$hora');";
+    mysqli_query($link, $sql);
+}
