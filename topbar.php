@@ -174,7 +174,7 @@ if(isset($_POST["logtelegram"])){
                     <p>Telegram</p>
                     <?php
                     if ($user_info["telegram"] == "") {
-                        echo "Desconectado.
+                        echo "<p>Desconectado.</p><br>
                         <button onclick='updateapi()' class='btn btn-success'>Conectar</button>";
                     } else {
                         echo "<p>ChatID: " . $user_info["telegram"] . "</p>
@@ -183,9 +183,9 @@ if(isset($_POST["logtelegram"])){
                         </form>";
                     }
                     ?>
-                    <div id="holder-api" class="form-group col-lg-12">
+                    <p id="holder-api">
 
-                    </div>
+                    </p>
                 </div>
 
 

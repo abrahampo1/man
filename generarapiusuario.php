@@ -38,7 +38,7 @@ if ($_POST["aparato"]) {
         echo "Error completamente extraño y desconocido.";
     }
     if (mysqli_query($link, $sql)) {
-        echo "<p>Clave Mágica: ".$random."</p>";
+        echo "Clave Mágica: ".$random;
     } else {
         echo mysqli_error($link);
         exit;
