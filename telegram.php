@@ -318,7 +318,7 @@ if ($do = mysqli_query($link, $sql)) {
 if (strtolower($message) == "/verificar") {
     $sql = "SELECT * FROM tecnicos WHERE telegram = '$chatId'";
     $do = mysqli_query($link, $sql);
-    if ($do->num_rows > 0) {
+    if ($do->num_rows == 0) {
         $texto = "¡De acuerdo! Entra en la interfaz WEB, dale click a tu usuario y en ajustes dale al botón verde 'conectar' en la sección de Telegram.";
         file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
         $texto = "¿Cual es tu clave mágica?";
