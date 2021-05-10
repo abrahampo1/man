@@ -497,7 +497,7 @@ $token = $_SESSION["token"];
             },
             error: function() {}
         });
-        updatetime();
+        
     });
 </script>
 <script>
