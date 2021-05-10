@@ -170,14 +170,21 @@ $user_id = $_SESSION["user_id"];
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">API</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Ajustes</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="h5 modal-body">
-                    <p>API Actual:</p>
-                    <button onclick="updateapi()" class="btn btn-primary">Generar Token Nuevo</button>
+                    <p>Telegram</p>
+                    <p>ChatID: <?php
+                    if($user_info["telegram"] == ""){
+                        echo "Desconectado.";
+                    }else{
+                        echo $user_info["telegram"];
+                    }
+                    ?></p>
+                    <button class="btn btn-primary">Desconectar</button>
                 </div>
 
                 <div id="holder-api" class="form-group col-lg-12">
