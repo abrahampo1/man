@@ -1,8 +1,8 @@
 <?
 $user_id = $_SESSION["user_id"];
-    $sql = "SELECT * FROM tecnicos WHERE id = $user_id";
-    $search = mysqli_query($link, $sql);
-    $user_info = mysqli_fetch_assoc($search);
+$sql = "SELECT * FROM tecnicos WHERE id = $user_id";
+$search = mysqli_query($link, $sql);
+$user_info = mysqli_fetch_assoc($search);
 ?>
 <!--Si borras este mensaje el codigo será auto destruido-->
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -48,34 +48,27 @@ $user_id = $_SESSION["user_id"];
                 <?
                 //Sistema de tickets
 
-                    $sql = "SELECT * FROM ticket WHERE tecnico = $user_id AND estado = 'pendiente'";
-                    $conteo_tickets = 0;
-                    if($ticket_bd = mysqli_query($link, $sql))
-                    {
+                $sql = "SELECT * FROM ticket WHERE tecnico = $user_id AND estado = 'pendiente'";
+                $conteo_tickets = 0;
+                if ($ticket_bd = mysqli_query($link, $sql)) {
 
-                        while($ticket = mysqli_fetch_assoc($ticket_bd)){
-                            $conteo_tickets++;
+                    while ($ticket = mysqli_fetch_assoc($ticket_bd)) {
+                        $conteo_tickets++;
+                    }
 
-                        }
-        
-                        if($conteo_tickets == 0)
-                        {
-                            echo '
-                            </a>';
-                        }else
-                        {
-                            echo '<span class="badge badge-danger badge-counter">+'.$conteo_tickets.'</span>
-                    </a>';
-                        }
-                    
-                    
-                    }else
-                    {
-                        $conteo_tickets = 0;
+                    if ($conteo_tickets == 0) {
                         echo '
+                            </a>';
+                    } else {
+                        echo '<span class="badge badge-danger badge-counter">+' . $conteo_tickets . '</span>
                     </a>';
                     }
-                    
+                } else {
+                    $conteo_tickets = 0;
+                    echo '
+                    </a>';
+                }
+
                 ?>
 
                 <!-- Dropdown - Alerts -->
@@ -84,32 +77,29 @@ $user_id = $_SESSION["user_id"];
                         Centro de Alertas
                     </h6>
                     <?
-                if($conteo_tickets > 0)
-                {
-                    $sql = "SELECT * FROM ticket WHERE tecnico = $user_id and estado = 'pendiente'";
-                    $ticket_bd = mysqli_query($link, $sql);
-                    while($ticket = mysqli_fetch_assoc($ticket_bd))
-                    {
+                    if ($conteo_tickets > 0) {
+                        $sql = "SELECT * FROM ticket WHERE tecnico = $user_id and estado = 'pendiente'";
+                        $ticket_bd = mysqli_query($link, $sql);
+                        while ($ticket = mysqli_fetch_assoc($ticket_bd)) {
                             $aparato = $ticket["aparato"];
                             $sql = "SELECT * FROM ordenadores WHERE id = $aparato";
                             $do = mysqli_query($link, $sql);
                             $info_aparato = mysqli_fetch_assoc($do);
-                        $fecha_creacion = date('Y-m-d H:i:s', $ticket["fecha"]);
-                        echo'<a class="dropdown-item d-flex align-items-center" href="ticket.php?t='.$ticket["id"].'">
+                            $fecha_creacion = date('Y-m-d H:i:s', $ticket["fecha"]);
+                            echo '<a class="dropdown-item d-flex align-items-center" href="ticket.php?t=' . $ticket["id"] . '">
                         <div class="mr-3">
                             <div class="icon-circle bg-danger">
                             <i class="fas fa-exclamation-triangle"></i>
                             </div>
                         </div>
                         <div>
-                            <div class="small text-gray-500">'.$fecha_creacion.'</div>
-                            <span class="font-weight-bold">'.$info_aparato["nombre"].' - '.$ticket["tipo_error"].'</span>
+                            <div class="small text-gray-500">' . $fecha_creacion . '</div>
+                            <span class="font-weight-bold">' . $info_aparato["nombre"] . ' - ' . $ticket["tipo_error"] . '</span>
                         </div>
                     </a>';
-                    }
-                }else
-                {
-                    echo'<a class="dropdown-item d-flex align-items-center">
+                        }
+                    } else {
+                        echo '<a class="dropdown-item d-flex align-items-center">
                     <div class="mr-3">
                         <div class="icon-circle bg-success">
                         <i class="fas fa-clipboard-check"></i>
@@ -118,9 +108,9 @@ $user_id = $_SESSION["user_id"];
                     <div>
                         <span class="font-weight-bold">Todo en orden</span>
                     </div>
-                </a>';  
-                }
-                ?>
+                </a>';
+                    }
+                    ?>
 
                     <a class="dropdown-item text-center small text-gray-500" href="#">Todas las alertas</a>
                 </div>
@@ -135,7 +125,7 @@ $user_id = $_SESSION["user_id"];
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                    <? echo $user_info["nombre"]?>
+                    <? echo $user_info["nombre"] ?>
                 </span>
                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
             </a>
@@ -177,14 +167,15 @@ $user_id = $_SESSION["user_id"];
                 </div>
                 <div class="h5 modal-body">
                     <p>Telegram</p>
-                    <p>ChatID: <?php
-                    if($user_info["telegram"] == ""){
+                    <?php
+                    if ($user_info["telegram"] == "") {
                         echo "Desconectado.";
-                    }else{
-                        echo $user_info["telegram"];
+                    } else {
+                        echo "<p>ChatID: " . $user_info["telegram"] . "</p>
+                        <button class='btn btn-danger'>Desconectar.</button>";
                     }
-                    ?></p>
-                    <button class="btn btn-primary">Desconectar</button>
+                    ?>
+
                 </div>
 
                 <div id="holder-api" class="form-group col-lg-12">
