@@ -110,7 +110,7 @@ else
                             $ip_usable = explode(';', $fila["ip"]);
                             if (count($ip_usable) > 0) {
                                 for($i = 0; $i != count($ip_usable); $i++){
-                                    if($ip_usable[$i] != "127.0.0.1" && $ip_usable[$i] != "" && strpos($ip_usable[$i], "169.254 ") === true){
+                                    if($ip_usable[$i] != "127.0.0.1" && $ip_usable[$i] != "" && strpos($ip_usable[$i], "169.254") === true){
                                         $ip = $ip_usable[$i];
                                     }
                                 }
