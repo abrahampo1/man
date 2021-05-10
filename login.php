@@ -16,7 +16,8 @@ if(password_verify($pass, $result["clave"]))
 {
   session_start();
   $_SESSION['user_id'] = $result['id'];
-  header("location: index.php");
+  $_SESSION["token"] = md5(uniqid(mt_rand(), true));
+  header("location: /");
 }
 }
 ?>

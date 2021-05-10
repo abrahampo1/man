@@ -87,55 +87,28 @@ else
                     <div class="row">
                         <?php
                         include('database.php');
-                        $sql = 'SELECT * FROM ordenadores';
+                        $sql = 'SELECT * FROM aulas';
                         if (isset($_GET["b"])) {
                             $busc = $_GET['b'];
+                            $sql = "SELECT * FROM ordenadores WHERE nombre LIKE '%$busc%' or id LIKE '$busc' or ip_buena LIKE '%$busc%' or ubicacion LIKE '%$busc%' or tipo LIKE '%$busc%' or cpu LIKE '%$busc%' or ram LIKE '%$busc%' or disco LIKE '%$busc%'";
+                        }
+                        if (isset($_GET["ub"])) {
+                            $busc = $_GET['ub'];
                             $sql = "SELECT * FROM ordenadores WHERE nombre LIKE '%$busc%' or id LIKE '$busc' or ip_buena LIKE '%$busc%' or ubicacion LIKE '%$busc%' or tipo LIKE '%$busc%' or cpu LIKE '%$busc%' or ram LIKE '%$busc%' or disco LIKE '%$busc%'";
                         }
                         $busqueda = mysqli_query($link, $sql);
                         while ($fila = mysqli_fetch_assoc($busqueda)) {
                             $date = time();
-                            $date_status = $fila['status_date'];
-                            $diff = $date - $date_status;
-                            $diffmins = $diff / 60;
-                            $diffminutos = $diffmins % 60;
-                            $diffsecs = $diff % 60;
-                            $diffhoras = floor($diffmins / 60);
-                            $tiempo = '<div class="mb-0 text-gray-800">Hace ' . $diffhoras . ' horas ' . $diffminutos . ' mins y ' . $diffsecs . ' segundos</div>';
-                            if(($date - $date_status) < 5)
-                            {
-                                $tiempo = '<div style="font-color:green; color:green" class="mb-0">CONEXION ESTABLECIDA</div>';
-                            }
-                            $ip = '';
-                            $ip_usable = explode(';', $fila["ip"]);
-                            if (count($ip_usable) > 0) {
-                                for($i = 0; $i != count($ip_usable); $i++){
-                                    if($ip_usable[$i] != "127.0.0.1" && $ip_usable[$i] != "" && strpos($ip_usable[$i], '169.254.') === false){
-                                        $ip = $ip_usable[$i];
-                                    }
-                                }
-                            } else {
-                                $ip = $fila["ip"];
-                            }
-                            if ($fila["ip_buena"] != '') {
-                                $ip = $fila["ip_buena"];
-                            }
-                            if ($ip == '') {
-                                $ip = 'SIN ASIGNAR';
-                            }
-                            echo '<a style="text-decoration:none;" href="aparato?a=' . $fila['id'] . '"><div class="col-xl-3 col-md-6 mb-4">
+                            echo '<a style="text-decoration:none;" href="?ub=' . $fila['nombre'] . '"><div class="col-xl-3 col-md-6 mb-4">
                         <div class="card border-left-primary shadow py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                             ' . $fila['nombre'] . '</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">' . $fila['last_status'] . '</div>
-                                        <div class="h9 mb-0 font-weight-bold text-gray-800">' . $ip . '</div>
-                                        '.$tiempo.'
                                     </div>
                                     <div class="col-auto">
-                                        <i class="' . $fila['icono'] . ' fa-2x text-gray-300"></i>
+                                        <i class="fas fa-desktop" fa-2x text-gray-300"></i>
                                     </div>
                                 </div>
                             </div>
