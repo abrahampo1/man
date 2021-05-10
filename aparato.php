@@ -284,6 +284,10 @@ if (isset($_POST["nombre"])) {
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 Ubicación</div>
                                             <?
+                                            $sql = "SELECT * FROM aulas WHERE id = ".$info['ubicacion'];
+                                            $do = mysqli_query($link, $sql);
+                                            $ubi = mysqli_fetch_assoc($do);
+                                            $ubicacion = $ubi["nombre"];
                                         if(isset($_GET["edit"]))
                                         {
                                             echo'<form method="post" action="aparato.php?a='.$info["id"].'"><input name="ubicacion" type="text" class="form-control form-control-user h5 mb-0 mr-3 font-weight-bold text-gray-800" value="'.$info['ubicacion'].'"><br><button class="btn btn-primary btn-user btn-block" type="submit">Guardar</button></form>';
@@ -293,7 +297,7 @@ if (isset($_POST["nombre"])) {
                                             {
                                                 echo('<!-- Emosido engañados -->');
                                             }
-                                            echo '<div class="h5 mb-0 font-weight-bold text-gray-800">'.$info['ubicacion'].'</div>';
+                                            echo '<div class="h5 mb-0 font-weight-bold text-gray-800">'.$ubicacion.'</div>';
                                         }
                                         ?>
 
