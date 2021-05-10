@@ -93,7 +93,7 @@ else
                             $sql = "SELECT * FROM ordenadores WHERE nombre LIKE '%$busc%' or id LIKE '$busc' or ip_buena LIKE '%$busc%' or ubicacion LIKE '%$busc%' or tipo LIKE '%$busc%' or cpu LIKE '%$busc%' or ram LIKE '%$busc%' or disco LIKE '%$busc%'";
                         }else if (isset($_GET["ub"]) && isset($_GET["au"])) {
                             $busc = $_GET['au'];
-                            $sql = "SELECT * FROM ordenadores WHERE ubicacion = '$busc";
+                            $sql = "SELECT * FROM ordenadores WHERE ubicacion = '$busc'";
                             $busqueda = mysqli_query($link, $sql);
                         while ($fila = mysqli_fetch_assoc($busqueda)) {
                             
