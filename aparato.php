@@ -266,7 +266,7 @@ $token = $_SESSION["token"];
                                                     $sql = "SELECT * FROM aulas";
                                                     $do = mysqli_query($link, $sql);
                                                     while($aula = mysqli_fetch_assoc($do)){
-                                                        echo '<option value="'.$aula["id"].'">'.$aula["nombre"].'</option>';
+                                                        echo '<option '; if($aula["id"]==$info["ubicacion"]){echo 'selected';} echo'  value="'.$aula["id"].'">'.$aula["nombre"].'</option>';
                                                     }
                                                 echo'</select><br><button class="btn btn-primary btn-user btn-block" type="submit">Guardar</button></form>';
                                             } else {
