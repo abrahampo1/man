@@ -87,7 +87,8 @@ else
                     <div class="row">
                         <?php
                         include('database.php');
-                        
+                        $_SESSION["token"] = md5(uniqid(mt_rand(), true));
+                        $token = $_SESSION["token"];
                         if (isset($_GET["b"])) {
                             $busc = $_GET['b'];
                             $sql = "SELECT * FROM ordenadores WHERE nombre LIKE '%$busc%' or id LIKE '$busc' or ip_buena LIKE '%$busc%' or ubicacion LIKE '%$busc%' or tipo LIKE '%$busc%' or cpu LIKE '%$busc%' or ram LIKE '%$busc%' or disco LIKE '%$busc%'";
@@ -98,7 +99,7 @@ else
                         while ($fila = mysqli_fetch_assoc($busqueda)) {
                             
                             $date = time();
-                            echo '<a style="text-decoration:none;" href="?ub=' . $fila['nombre'] . '&au='.$fila["id"].'"><div class="col-xl-3 col-md-6 mb-4">
+                            echo '<a style="text-decoration:none;" href="aparato?a=' . $fila['id'] . '&token='.$token.'"><div class="col-xl-3 col-md-6 mb-4">
                         <div class="card border-left-primary shadow py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
