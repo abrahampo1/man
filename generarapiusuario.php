@@ -18,7 +18,7 @@ if ($_POST["aparato"]) {
     $con = true;
     while($con == true)
     {
-        $coincidencia = "SELECT * FROM tecnicos WHERE BINARY api = '$random'";
+        $coincidencia = "SELECT * FROM token WHERE BINARY token = '$random'";
         $do = mysqli_query($link, $coincidencia);
         if($do->num_rows > 0)
         {
@@ -29,16 +29,16 @@ if ($_POST["aparato"]) {
             $con = false;
         }
     } 
-    $sql = "SELECT * FROM tecnicos WHERE id = '$aparato'";
+    $sql = "SELECT * FROM token WHERE aparato = '$aparato'";
     $do = mysqli_query($link, $sql);
     $ahora = time();
     if ($do->num_rows > 0) {
-        $sql = "UPDATE `tecnicos` SET `api` = '$random' WHERE `tecnicos`.`id` = '$aparato';";
+        $sql = "UPDATE `token` SET `token` = '$random' WHERE `token`.`aparato` = '$aparato';";
     } else {
-        echo "Error completamente extraño y desconocido.";
+        $sql = "INSERT INTO `token` (`id`, `token`, `aparato`, `usos`) VALUES (NULL, '$random', '$aparato', '0');";
     }
     if (mysqli_query($link, $sql)) {
-        echo "<p>Clave Mágica: ".$random."</p>";
+        echo 'Token: '.$random;
     } else {
         echo mysqli_error($link);
         exit;

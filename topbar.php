@@ -169,25 +169,19 @@ $user_info = mysqli_fetch_assoc($search);
                     <p>Telegram</p>
                     <?php
                     if ($user_info["telegram"] == "") {
-                        echo "Desconectado.";
+                        echo "Desconectado.
+                        <button onclick='updateapi()' class='btn btn-success'>Conectar</button>";
                     } else {
                         echo "<p>ChatID: " . $user_info["telegram"] . "</p>
-                        <button class='btn btn-danger'>Desconectar.</button>";
+                        <button class='btn btn-danger'>Desconectar</button>";
                     }
                     ?>
+                    <div id="holder-api" class="form-group col-lg-12">
 
+                    </div>
                 </div>
 
-                <div id="holder-api" class="form-group col-lg-12">
-                    <?php $sql = "SELECT * FROM token WHERE aparato = '$aparato'";
-                    $do = mysqli_query($link, $sql);
-                    $info_api = mysqli_fetch_assoc($do);
 
-                    if ($do->num_rows > 0) {
-                        echo '<p>Token: ' . $info_api["token"] . '</p>';
-                    }
-                    ?>
-                </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
                     <input type="hidden" name="cambioclave" id="">
@@ -195,5 +189,22 @@ $user_info = mysqli_fetch_assoc($search);
             </div>
         </div>
     </div>
+    <script>
+        var holderapi = document.getElementById("holder-api");
+        var updateapi = function() {
+            var apid = '<?php echo $user_info["id"]; ?>';
+            $.ajax({
+                type: 'post',
+                url: 'generarapiusuario.php',
+                data: {
+                    aparato: apid,
+                },
+                success: function(response) {
+                    holderapi.innerHTML = response;
+                },
+                error: function() {}
+            });
+        };
+    </script>
 </nav>
 <!-- End of Topbar -->
