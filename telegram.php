@@ -332,7 +332,7 @@ $sql = "SELECT * FROM conversaciones_telegram WHERE chatid = $chatId ORDER BY id
 if ($do = mysqli_query($link, $sql)) {
     $mensaje = mysqli_fetch_assoc($do);
     if ($mensaje["respuesta"] == "¿Cual es tu clave mágica?") {
-        $sql = "SELECT * FROM tecnicos WHERE api BINARY '$message'";
+        $sql = "SELECT * FROM tecnicos WHERE BINARY api = '$message'";
         $do = mysqli_query($link, $sql);
         if($do->num_rows > 0){
             $user = mysqli_fetch_assoc($do);
