@@ -10,6 +10,8 @@ $do = mysqli_query($link, $sql);
 $result = mysqli_fetch_assoc($do);
 $api = $result["valor"];
 $path = "https://api.telegram.org/bot" . $api;
+$message = "";
+$chatId = "";
 $chatId = $update["message"]["chat"]["id"];
 $message = $update["message"]["text"];
 $hora = time();
@@ -205,19 +207,30 @@ if ($do = mysqli_query($link, $sql)) {
             $ahora = time();
             $sql = "SELECT * FROM ordenadores WHERE nombre = '$equipo'";
             $do = mysqli_query($link, $sql);
-            if ($do->num_rows == 0) {
-                $id_equipo = mysqli_fetch_assoc($do);
-                $id_equipo = $id_equipo["id"];
-            } else {
+            if ($do->num_rows > 0) {
                 $texto = "🚨 Ya hay un equipo con ese nombre. 🚨";
                 file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
                 exit;
             }
-            $sql = "INSERT INTO `ordenadores` (`id`, `nombre`, `ip`, `ubicacion`, `last_status`, `status_date`, `icono`, `tipo`, `cpu`, `ram`, `disco`, `ip_buena`, `orden`, `consola`) VALUES (NULL, '$equipo', '', '$aula', '', '0', 'fas fa-desktop', 'ordenador', '', '', '', '', '', '');";
+            $sql = "SELECT * FROM aulas WHERE nombre LIKE %$aula%";
+            $do = mysqli_query($link, $sql);
+            if ($do->num_rows > 0) {
+                $aula_info = mysqli_fetch_assoc($do);
+                $aula_id = $aula_info["id"];
+            } else {
+                $texto = "🚨 No existe ese aula en nuestro sistema, creala con /crearaula o revisa la interfaz web. 🚨";
+                file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+                exit;
+            }
+
+            $sql = "INSERT INTO `ordenadores` (`id`, `nombre`, `ip`, `ubicacion`, `last_status`, `status_date`, `icono`, `tipo`, `cpu`, `ram`, `disco`, `ip_buena`, `orden`, `consola`) VALUES (NULL, '$equipo', '', '$aula_id', '', '0', 'fas fa-desktop', 'ordenador', '', '', '', '', '', '');";
             $sql2 = "SELECT * FROM tecnicos WHERE telegram = '$chatId'";
             $do2 = mysqli_query($link, $sql2);
             if ($do2->num_rows > 0) {
+                $tecnico_data = mysqli_fetch_assoc($do2);
+                $tecnico = $tecnico_data["id"];
                 if (mysqli_query($link, $sql)) {
+                    $id_equipo = mysqli_insert_id($link);
                     $random = generateRandomString(6);
                     $aparato = mysqli_insert_id($link);
                     $con = true;
@@ -242,6 +255,14 @@ if ($do = mysqli_query($link, $sql)) {
                     }
                     if (mysqli_query($link, $sql)) {
                         $api = $random;
+                        $unix_time = time();
+                        
+                        $sql = "SELECT * FROM aulas WHERE id = " . $aula;
+                        $do = mysqli_query($link, $sql);
+                        $aulainfo = mysqli_fetch_assoc($do);
+                        $aula_nombre = $aulainfo["nombre"];
+                        $sql = "INSERT INTO `actividad` (`id`, `persona`, `accion`, `fecha`) VALUES (NULL, '$tecnico', 'Creó el equipo <a href=aparato?a=$id_equipo> $nombre</a> en <a href=/?ub=$aula_nombre&au=$aula> $aula_nombre</a>', '$unix_time')";
+                        mysqli_query($link, $sql);
                     } else {
                         echo mysqli_error($link);
                         exit;
@@ -252,7 +273,7 @@ if ($do = mysqli_query($link, $sql)) {
                     $texto = "🚨 HA HABIDO UN ERROR AL AÑADIR EL EQUIPO, REPORTALO AL DEPARTAMENTO DIRECTAMENTE 🚨";
                     file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
                 }
-            }else{
+            } else {
                 $texto = "🚨 No tienes acceso a estas funciones 🚨";
                 file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
             }
