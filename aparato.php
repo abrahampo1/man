@@ -263,7 +263,13 @@ $token = $_SESSION["token"];
                                             $ubi = mysqli_fetch_assoc($do);
                                             $ubicacion = $ubi["nombre"];
                                             if (isset($_GET["edit"])) {
-                                                echo '<form method="post" action="aparato.php?a=' . $info["id"] . '"><input type="hidden" value="' . $token . '" name="csrf_token"><input name="aula" value="'.$ubi["id"].'" type="hidden"><input name="ubicacion" type="text" class="form-control form-control-user h5 mb-0 mr-3 font-weight-bold text-gray-800" value="' . $ubicacion . '"><br><button class="btn btn-primary btn-user btn-block" type="submit">Guardar</button></form>';
+                                                echo '<form method="post" action="aparato.php?a=' . $info["id"] . '"><input type="hidden" value="' . $token . '" name="csrf_token"><input name="aula" value="'.$ubi["id"].'" type="hidden"><select name="ubicacion" type="text" class="form-control form-control-user h5 mb-0 mr-3 font-weight-bold text-gray-800" >'; 
+                                                    $sql = "SELECT * FROM aulas";
+                                                    $do = mysqli_query($link, $sql);
+                                                    while($aula = mysqli_fetch_assoc($do)){
+                                                        echo '<option value="'.$aula["id"].'">'.$aula["nombre"].'</option>';
+                                                    }
+                                                echo'</select><br><button class="btn btn-primary btn-user btn-block" type="submit">Guardar</button></form>';
                                             } else {
                                                 echo '<div class="h5 mb-0 font-weight-bold text-gray-800">' . $ubicacion . '</div>';
                                             }
@@ -435,6 +441,10 @@ $token = $_SESSION["token"];
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+
+    <!-- Page level custom scripts -->
 
 </body>
 
