@@ -7,7 +7,7 @@ $user_id = $_SESSION["user_id"];
 <!--Si borras este mensaje el codigo será auto destruido-->
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-    <a href="index.php"><i class="fas fa-home"></i></a>
+    <a href="/"><i class="fas fa-home"></i></a>
     <form method="get" action="/" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
         <div class="input-group">
             <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar aparato..." value="<?php if (isset($_GET['b'])) {
