@@ -93,7 +93,7 @@ if (isset($_POST["name"]) && isset($_POST["aula"])) {
                     <?php
                     $_SESSION["token"] = md5(uniqid(mt_rand(), true));
                     $token = $_SESSION["token"];
-                    echo '<form method="post" action="aparato.php?a=' . $info["id"] . '"><input type="hidden" value="' . $token . '" name="csrf_token"><select name="aula" type="text" class="form-control form-control-user h5 mb-0 mr-3 font-weight-bold text-gray-800" >';
+                    echo '<input type="hidden" value="' . $token . '" name="csrf_token"><select name="aula" type="text" class="form-control form-control-user h5 mb-0 mr-3 font-weight-bold text-gray-800" >';
                     $sql = "SELECT * FROM aulas";
                     $do = mysqli_query($link, $sql);
                     while ($aula = mysqli_fetch_assoc($do)) {
@@ -103,7 +103,7 @@ if (isset($_POST["name"]) && isset($_POST["aula"])) {
                         }
                         echo '  value="' . $aula["id"] . '">' . $aula["nombre"] . '</option>';
                     }
-                    echo '</select><br><button class="btn btn-primary btn-user btn-block" type="submit">Guardar</button></form>';
+                    echo '</select><br>';
                     ?><br><br>
                     <button type="submit">Añadir</button>
                 </form>
