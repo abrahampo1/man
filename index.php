@@ -106,7 +106,7 @@ else
                             {
                                 $tiempo = '<div style="font-color:green; color:green" class="mb-0">CONEXION ESTABLECIDA</div>';
                             }
-
+                            $ip = '';
                             $ip_usable = explode(';', $fila["ip"]);
                             if (count($ip_usable) > 1) {
                                 for($i = 0; $i != count($ip_usable); $i++){
