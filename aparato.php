@@ -86,7 +86,7 @@ if (isset($_POST["nombre"])) {
             header("location: error.php?e=4");
         }
     }
-}
+}   
 
 $_SESSION["token"] = md5(uniqid(mt_rand(), true));
 $token = $_SESSION["token"];
@@ -262,7 +262,7 @@ $token = $_SESSION["token"];
                                             $ubi = mysqli_fetch_assoc($do);
                                             $ubicacion = $ubi["nombre"];
                                             if (isset($_GET["edit"])) {
-                                                echo '<form method="post" action="aparato.php?a=' . $info["id"] . '"><input type="hidden" value="' . $token . '" name="csrf_token"><input name="ubicacion" type="text" class="form-control form-control-user h5 mb-0 mr-3 font-weight-bold text-gray-800" value="' . $info['ubicacion'] . '"><br><button class="btn btn-primary btn-user btn-block" type="submit">Guardar</button></form>';
+                                                echo '<form method="post" action="aparato.php?a=' . $info["id"] . '"><input type="hidden" value="' . $token . '" name="csrf_token"><input name="ubicacion" type="text" class="form-control form-control-user h5 mb-0 mr-3 font-weight-bold text-gray-800" value="' . $ubicacion . '"><br><button class="btn btn-primary btn-user btn-block" type="submit">Guardar</button></form>';
                                             } else {
                                                 echo '<div class="h5 mb-0 font-weight-bold text-gray-800">' . $ubicacion . '</div>';
                                             }
