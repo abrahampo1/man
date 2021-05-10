@@ -213,7 +213,7 @@ if ($do = mysqli_query($link, $sql)) {
                 fin($chatId);
                 exit;
             }
-            $sql = "SELECT * FROM aulas WHERE nombre LIKE %$aula%";
+            $sql = "SELECT * FROM aulas WHERE nombre LIKE '%$aula%'";
             $do = mysqli_query($link, $sql);
             if ($do->num_rows > 0) {
                 $aula_info = mysqli_fetch_assoc($do);
