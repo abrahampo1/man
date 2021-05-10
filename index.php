@@ -113,6 +113,7 @@ else
                                     if($ip_usable[$i] != "127.0.0.1" && $ip_usable[$i] != "" && strpos($ip_usable[$i], "169.254") === true){
                                         $ip = $ip_usable[$i];
                                     }
+                                    echo 'si';
                                 }
                             } else {
                                 $ip = $fila["ip"];
