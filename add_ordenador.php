@@ -1,28 +1,23 @@
 <?php
 session_start();
 include("database.php");
-if(!isset($_SESSION["user_id"]))
-{
+if (!isset($_SESSION["user_id"])) {
     header("location: login.php");
-}
-else
-{
+} else {
     $user_id = $_SESSION["user_id"];
     $sql = "SELECT * FROM tecnicos WHERE id = $user_id";
-    if($do = mysqli_query($link, $sql))
-    { 
+    if ($do = mysqli_query($link, $sql)) {
         $info = mysqli_fetch_assoc($do);
-    }else
-    {
+    } else {
         header("location: error.php?e=4");
     }
 }
 
-if(isset($_POST["name"]) && isset($_POST["aula"])){
+if (isset($_POST["name"]) && isset($_POST["aula"])) {
     $nombre = $_POST["name"];
     $aula = $_POST["aula"];
     $sql = "INSERT INTO `ordenadores` (`id`, `nombre`, `ip`, `ubicacion`, `last_status`, `status_date`, `icono`, `tipo`, `cpu`, `ram`, `disco`, `ip_buena`, `orden`, `consola`) VALUES (NULL, '$nombre', '', '$aula', '', '0', 'fas fa-desktop', 'ordenador', '', '', '', '', '', '');";
-    if($do = mysqli_query($link, $sql)){
+    if ($do = mysqli_query($link, $sql)) {
         header("location: /");
     }
 }
@@ -95,7 +90,21 @@ if(isset($_POST["name"]) && isset($_POST["aula"])){
             <div style="margin-top: 40px; display: block">
                 <form action="" method="post">
                     <input type="text" id="name" name="name" placeholder="Nombre"><br><br>
-                    <input type="text" id="name" name="aula" placeholder="Aula"><br><br>
+                    <?php
+                    $_SESSION["token"] = md5(uniqid(mt_rand(), true));
+                    $token = $_SESSION["token"];
+                    echo '<form method="post" action="aparato.php?a=' . $info["id"] . '"><input type="hidden" value="' . $token . '" name="csrf_token"><select name="aula" type="text" class="form-control form-control-user h5 mb-0 mr-3 font-weight-bold text-gray-800" >';
+                    $sql = "SELECT * FROM aulas";
+                    $do = mysqli_query($link, $sql);
+                    while ($aula = mysqli_fetch_assoc($do)) {
+                        echo '<option ';
+                        if ($aula["id"] == $info["ubicacion"]) {
+                            echo 'selected';
+                        }
+                        echo '  value="' . $aula["id"] . '">' . $aula["nombre"] . '</option>';
+                    }
+                    echo '</select><br><button class="btn btn-primary btn-user btn-block" type="submit">Guardar</button></form>';
+                    ?><br><br>
                     <button type="submit">Añadir</button>
                 </form>
             </div>
