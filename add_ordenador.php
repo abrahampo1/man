@@ -98,9 +98,7 @@ if (isset($_POST["name"]) && isset($_POST["aula"])) {
                     $do = mysqli_query($link, $sql);
                     while ($aula = mysqli_fetch_assoc($do)) {
                         echo '<option ';
-                        if ($aula["id"] == $info["ubicacion"]) {
-                            echo 'selected';
-                        }
+                        
                         echo '  value="' . $aula["id"] . '">' . $aula["nombre"] . '</option>';
                     }
                     echo '</select><br>';
