@@ -88,7 +88,7 @@ if ($do = mysqli_query($link, $sql)) {
     if ($mensaje["respuesta"] == "¿Que aula quieres apagar?") {
         $sql = "SELECT * FROM aulas WHERE nombre LIKE '%$message%'";
         $do = mysqli_query($link, $sql);
-        if($do->num_rows == 0){
+        if ($do->num_rows == 0) {
             $texto = "No existe ese aula.";
             file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
             fin($chatId);
@@ -98,7 +98,7 @@ if ($do = mysqli_query($link, $sql)) {
         $aula_id = $aula_info["id"];
         $sql = "SELECT * FROM ordenadores WHERE ubicacion = '$aula_id'";
         $do = mysqli_query($link, $sql);
-        if($do->num_rows > 0){
+        if ($do->num_rows > 0) {
             while ($row = mysqli_fetch_assoc($do)) {
                 $aparato = $row["id"];
                 $sql = "UPDATE `ordenadores` SET `orden` = 'apagar' WHERE `ordenadores`.`id` = '$aparato';";
@@ -108,14 +108,12 @@ if ($do = mysqli_query($link, $sql)) {
             }
             $texto = "He apagado " . $ordenadores . " equipos. Se apagaran en 1 minuto. ⏳⏳⏳ (recuerda que puedes cancelar el apagado escribiendo 'shutdown -a' en el terminal de windows)";
             file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
-        }else{
+        } else {
             $texto = "Ese aula está vacía.";
             file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
             fin($chatId);
             exit;
         }
-        
-        
     }
 }
 
@@ -316,6 +314,45 @@ if ($do = mysqli_query($link, $sql)) {
         }
     }
 }
+
+if (strtolower($message) == "/verificar") {
+    $sql = "SELECT * FROM tecnicos WHERE telegram = '$chatId'";
+    $do = mysqli_query($link, $sql);
+    if ($do->num_rows > 0) {
+        $texto = "¡De acuerdo! Entra en la interfaz WEB, dale click a tu usuario y en ajustes dale al botón verde 'conectar' en la sección de Telegram.";
+        file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+        $texto = "¿Cual es tu clave mágica?";
+        file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+    } else {
+        $texto = "¡Ya estás verificado!";
+        file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+    }
+}
+$sql = "SELECT * FROM conversaciones_telegram WHERE chatid = $chatId ORDER BY id desc";
+if ($do = mysqli_query($link, $sql)) {
+    $mensaje = mysqli_fetch_assoc($do);
+    if ($mensaje["respuesta"] == "¿Cual es tu clave mágica?") {
+        $sql = "SELECT * FROM tecnicos WHERE api BINARY '$message'";
+        $do = mysqli_query($link, $sql);
+        if($do->num_rows > 0){
+            $user = mysqli_fetch_assoc($do);
+            $texto = "Vale ".$user["nombre"].", eres tú, voy a verificarte...";
+            file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+            $tecnico = $user["id"];
+            $sql = "UPDATE `tecnicos` SET `telegram` = '$chatId' WHERE `tecnicos`.`id` = '$tecnico';";
+            if(mysqli_query($link, $sql)){
+                $texto = "✅  ¡Verificado! Gracias por usar mi programa. - Abraham ✅ ";
+                file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+                fin($chatId);
+            }
+        }else{
+            $texto = "Esta clave no es muy magica que digamos...";
+            file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+            fin($chatId);
+        }
+    }
+}
+
 $sql = "INSERT INTO `conversaciones_telegram` (`id`, `chatid`, `mensaje`, `respuesta`, `fecha`) VALUES (NULL, '$chatId', '$message', '$texto', '$hora');";
 mysqli_query($link, $sql);
 
