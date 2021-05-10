@@ -290,13 +290,9 @@ if (isset($_POST["nombre"])) {
                                             $ubicacion = $ubi["nombre"];
                                         if(isset($_GET["edit"]))
                                         {
-                                            echo'<form method="post" action="aparato.php?a='.$info["id"].'"><input name="ubicacion" type="text" class="form-control form-control-user h5 mb-0 mr-3 font-weight-bold text-gray-800" value="'.$info['ubicacion'].'"><br><button class="btn btn-primary btn-user btn-block" type="submit">Guardar</button></form>';
+                                            echo'<form method="post" action="aparato.php?a='.$info["id"].'"><input name="ubicacion" type="text" class="form-control form-control-user h5 mb-0 mr-3 font-weight-bold text-gray-800" value="'.$info['ubicacion'].'"><br><button class="btn btn-primary btn-user btn-block" type="submit">Guardar</button>';
                                         }else
                                         {
-                                            if($info["ubicacion"] == "forocoches")
-                                            {
-                                                echo('<!-- Emosido engañados -->');
-                                            }
                                             echo '<div class="h5 mb-0 font-weight-bold text-gray-800">'.$ubicacion.'</div>';
                                         }
                                         ?>
@@ -323,15 +319,16 @@ if (isset($_POST["nombre"])) {
                         {
                             if(isset($_GET["edit"]))
                             {
+                                $_SESSION["token"] = md5(uniqid(mt_rand(), true));
+                                $token = $_SESSION["token"];
                                 echo(
-                                    '<div class="col-lg-4 mb-3">
+                                    '<input type="hidden" value="'.$token.' name="csrf_token"">
+                                    <div class="col-lg-4 mb-3">
                                     <div class="card bg-primary text-white shadow">
                                         <div class="card-body">
                                             CPU
-                                            <form method="post" action="aparato.php?a='.$aparato.'">
                                             <input name="cpu" class="form-control form-control-user text-black-50 small" value="'.$info['cpu'].'"><br>
                                             <button class="btn btn-primary btn-user btn-block" type="submit">Guardar</button>
-                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -339,10 +336,8 @@ if (isset($_POST["nombre"])) {
                                     <div class="card bg-success text-white shadow">
                                         <div class="card-body">
                                             RAM
-                                            <form method="post" action="aparato.php?a='.$aparato.'">
                                             <input name="ram" class="form-control form-control-user text-black-50 small" value="'.$info['ram'].'"><br>
                                             <button class="btn btn-primary btn-user btn-block" type="submit">Guardar</button>
-                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -350,13 +345,12 @@ if (isset($_POST["nombre"])) {
                                     <div class="card bg-info text-white shadow">
                                         <div class="card-body">
                                             DISCO DURO
-                                            <form method="post" action="aparato.php?a='.$aparato.'">
                                             <input name="discoduro" class="form-control form-control-user text-black-50 small" value="'.$info['disco'].'"><br>
                                             <button class="btn btn-primary btn-user btn-block" type="submit">Guardar</button>
-                                            </form>
                                         </div>
                                     </div>
-                                </div>'
+                                </div>
+                                </form>'
                                 );
                             }else
                             {
