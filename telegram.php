@@ -56,7 +56,7 @@ if (isset($_GET["texto"]) && $_GET["chatid"]) {
 }
 
 if (strtolower($message) == "hola") {
-    $texto = "¡Hola! Soy un bot creado por Abraham Leiro Fernandez, dispuesto a hacer la gestión mucho mas sencilla.";
+    $texto = "¡Hola $nombre_telegram! Soy un bot creado por Abraham Leiro Fernandez, dispuesto a hacer la gestión mucho mas sencilla.";
     file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
 }
 if (strtolower($message) == "tonto") {
