@@ -4,16 +4,6 @@
 <?php
 if (isset($_GET["aula"])) {
     include("../database.php");
-    function generateRandomString($length = 10)
-    {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomString;
-    }
     $aula = $_GET["aula"];
     $sql = "SELECT * FROM ordenadores WHERE ubicacion = '$aula'";
     if($do = mysqli_query($link, $sql)){}else{
