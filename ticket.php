@@ -59,7 +59,7 @@ if (count($ip_usable) > 1) {
 } else {
     $ip = $info_aparato["ip"];
 }
-if ($info["ip_buena"] != '') {
+if ($info_aparato["ip_buena"] != '') {
     $ip = $info_aparato["ip_buena"];
 }
 if ($ip == '') {
