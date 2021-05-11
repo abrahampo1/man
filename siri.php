@@ -28,7 +28,7 @@
                             echo "Codigo: " . $row["token"] . "<br>Kit: " . $row["kit"] . "<br>Equipo: " . $row["equipo"] . "<br>Tecnico: " . $row["user"] . "<hr>";
                         }
                         break;
-                    case "muestrame el aula 5":
+                    case "muestrame_aula_5":
                         $sql = "SELECT * FROM ordenadores WHERE ubicacion = '1'";
                         $do = mysqli_query($link, $sql);
                         while ($row = mysqli_fetch_assoc($do)) {
