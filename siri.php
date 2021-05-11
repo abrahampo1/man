@@ -4,7 +4,7 @@
 
     if (isset($_POST["api"])) {
         $api = $_POST["api"];
-        $sql = "SELECT * FROM tecnicos WHERE api_siri = $api";
+        $sql = "SELECT * FROM tecnicos WHERE api_siri = '$api'";
         $do = mysqli_query($link, $sql);
         if ($do->num_rows > 0) {
             $tech = mysqli_fetch_assoc($do);
