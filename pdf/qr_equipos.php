@@ -18,7 +18,7 @@ if (isset($_GET["aula"])) {
         
         $date = date("d-m-Y", time());
         $text = sprintf("%s\n%s\n%s\n%s %s, %s", "I+D", 'IES FRANCISCO ASOREY', 'Codigo: '.$row["id"], $row["nombre"], '', $date);
-        $pdf->Add_Label($text, $codigo);
+        $pdf->Add_Label($text, $row["id"]);
     }
 
     $pdf->Output();
