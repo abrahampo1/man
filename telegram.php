@@ -14,8 +14,8 @@ $message = "";
 $chatId = "";
 $chatId = $update["message"]["chat"]["id"];
 $message = $update["message"]["text"];
-$nombre_telegram = $update["message"]["first_name"];
-$apellido_telegram = $update["message"]["last_name"];
+$nombre_telegram = $update["message"]["chat"]["first_name"];
+$apellido_telegram = $update["message"]["chat"]["last_name"];
 $hora = time();
 $texto = "";
 
