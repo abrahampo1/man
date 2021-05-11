@@ -87,7 +87,7 @@ if(isset($_POST["logtelegram"])){
                         $ticket_bd = mysqli_query($link, $sql);
                         while ($ticket = mysqli_fetch_assoc($ticket_bd)) {
                             $aparato = $ticket["aparato"];
-                            $sql = "SELECT * FROM ordenadores WHERE id = $aparato";
+                            $sql = "SELECT * FROM ordenadores WHERE id = '$aparato'";
                             $do = mysqli_query($link, $sql);
                             $info_aparato = mysqli_fetch_assoc($do);
                             $fecha_creacion = date('Y-m-d H:i:s', $ticket["fecha"]);
