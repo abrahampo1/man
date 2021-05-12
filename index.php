@@ -14,6 +14,16 @@ if (!isset($_SESSION["user_id"])) {
 }
 $horario = array('8:00', '8:50', '9:40', '10:30', '10:55', '11:45', '12:35', '13:25', '15:30', '16:20', '17:10', '18:00', '18:30', '19:20', '20:10', '21:00');
 $dias = array('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo');
+
+if(isset($_POST["horario-value"])){
+    $horario_value = $_POST["horario-value"];
+    $aula_value = $_POST["aula_id"];
+    $sql = "UPDATE `aulas` SET `horario` = '$horario_value' WHERE `aulas`.`id` = $aula_value;";
+    if(mysqli_query($link, $sql)){}else{
+        echo mysqli_error($link);
+        exit;
+    }
+}
 ?>
 <style>
     a {
@@ -207,7 +217,7 @@ echo'<div class="modal fade" id="aula1-settings" tabindex="-1" role="dialog" ari
                     echo '</div>';
                 }
 
-            echo'<form method="POST"><input type="hidden" name="aula_id" value="'.$aula_info["id"].'"><input type="hidden" id="horario-'.$aula_info["id"].'" value=""><button class="btn btn-info">Guardar</button></form></div>
+            echo'<form method="POST"><input type="hidden" name="aula_id" value="'.$aula_info["id"].'"><input type="hidden" name="horario-value" id="horario-'.$aula_info["id"].'" value=""><button class="btn btn-info">Guardar</button></form></div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
                 <input type="hidden" name="cambioclave" id="">
