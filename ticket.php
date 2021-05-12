@@ -146,7 +146,7 @@ $dias = array('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Do
                                     for ($d = 0; $d < count($dias)-2; $d++) {
                                         for ($i = 0; $i < count($horario); $i++) {
                                             if($horas[$hora]=="0"){
-                                                echo $dias[$d]." ".$horario[$i];
+                                                echo $dias[$d]." ".$horario[$i]."<hr>";
                                             }
                                             $hora++;
                                         }
