@@ -191,7 +191,7 @@ if ($do = mysqli_query($link, $sql)) {
                 for ($d = 0; $d < count($dias) - 2; $d++) {
                     for ($i = 0; $i < count($horario); $i++) {
                         if ($horas[$hora_num] == "0") {
-                            $texto .= $dias[$d] . " " . $horario[$i] . "\n";
+                            $texto .= urlencode($dias[$d] . " " . $horario[$i] . "\n");
                         }
                         $hora_num++;
                     }
