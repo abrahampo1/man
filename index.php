@@ -1,19 +1,14 @@
 <?
 session_start();
 include("database.php");
-if(!isset($_SESSION["user_id"]))
-{
+if (!isset($_SESSION["user_id"])) {
     header("location: login.php");
-}
-else
-{
+} else {
     $user_id = $_SESSION["user_id"];
     $sql = "SELECT * FROM tecnicos WHERE id = $user_id";
-    if($do = mysqli_query($link, $sql))
-    { 
+    if ($do = mysqli_query($link, $sql)) {
         $info = mysqli_fetch_assoc($do);
-    }else
-    {
+    } else {
         header("location: error.php?e=4");
     }
 }
@@ -92,14 +87,14 @@ else
                         if (isset($_GET["b"])) {
                             $busc = $_GET['b'];
                             $sql = "SELECT * FROM ordenadores WHERE nombre LIKE '%$busc%' or id LIKE '$busc' or ip_buena LIKE '%$busc%' or ubicacion LIKE '%$busc%' or tipo LIKE '%$busc%' or cpu LIKE '%$busc%' or ram LIKE '%$busc%' or disco LIKE '%$busc%'";
-                        }else if (isset($_GET["ub"]) && isset($_GET["au"])) {
+                        } else if (isset($_GET["ub"]) && isset($_GET["au"])) {
                             $busc = $_GET['au'];
                             $sql = "SELECT * FROM ordenadores WHERE ubicacion = '$busc'";
                             $busqueda = mysqli_query($link, $sql);
-                        while ($fila = mysqli_fetch_assoc($busqueda)) {
-                            
-                            $date = time();
-                            echo '<a style="text-decoration:none;" href="aparato?a=' . $fila['id'] . '&token='.$token.'"><div class="col-xl-3 col-md-6 mb-4">
+                            while ($fila = mysqli_fetch_assoc($busqueda)) {
+
+                                $date = time();
+                                echo '<a style="text-decoration:none;" href="aparato?a=' . $fila['id'] . '&token=' . $token . '"><div class="col-xl-3 col-md-6 mb-4">
                         <div class="card border-left-primary shadow py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
@@ -114,14 +109,14 @@ else
                             </div>
                         </div></a>
                         </div>';
-                        }
-                        }else{
+                            }
+                        } else {
                             $sql = 'SELECT * FROM aulas';
                             $busqueda = mysqli_query($link, $sql);
-                        while ($fila = mysqli_fetch_assoc($busqueda)) {
-                            
-                            $date = time();
-                            echo '<a style="text-decoration:none;" href="?ub=' . $fila['nombre'] . '&au='.$fila["id"].'"><div class="col-xl-3 col-md-6 mb-4">
+                            while ($fila = mysqli_fetch_assoc($busqueda)) {
+
+                                $date = time();
+                                echo '<a style="text-decoration:none;" href="?ub=' . $fila['nombre'] . '&au=' . $fila["id"] . '"><div class="col-xl-3 col-md-6 mb-4">
                         <div class="card border-left-primary shadow py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
@@ -132,13 +127,17 @@ else
                                     <div class="col-auto">
                                         <i class="fas fa-chalkboard-teacher" fa-2x text-gray-300"></i>
                                     </div>
+                                    a class="dropdown-item" data-toggle="modal" data-target="#1-ajustes" href="#">
+                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Settings
+                </a>
                                 </div>
                             </div>
                         </div></a>
                         </div>';
+                            }
                         }
-                        }
-                        
+
                         ?>
                     </div>
 
@@ -174,43 +173,40 @@ else
 
 </body>
 
-<div class="modal fade" id="-section" 
-
-
-ndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ajustes</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="h5 modal-body">
-                    <p>Telegram</p>
-                    <?php
-                    if ($user_info["telegram"] == "") {
-                        echo "<p>Desconectado.</p><br>
+<div class="modal fade" id="1-ajustes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ajustes</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="h5 modal-body">
+                <p>Telegram</p>
+                <?php
+                if ($user_info["telegram"] == "") {
+                    echo "<p>Desconectado.</p><br>
                         <button onclick='updateapi()' class='btn btn-success'>Conectar</button>";
-                    } else {
-                        echo "<p>ChatID: " . $user_info["telegram"] . "</p>
+                } else {
+                    echo "<p>ChatID: " . $user_info["telegram"] . "</p>
                         <form action='' method='POST'>
                         <button class='btn btn-danger' type='submit' name='logtelegram' value='1'>Desconectar</button>
                         </form>";
-                    }
-                    ?>
-                    <p id="holder-api">
+                }
+                ?>
+                <p id="holder-api">
 
-                    </p>
-                </div>
+                </p>
+            </div>
 
 
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <input type="hidden" name="cambioclave" id="">
-                </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                <input type="hidden" name="cambioclave" id="">
             </div>
         </div>
     </div>
+</div>
 
 </html>
