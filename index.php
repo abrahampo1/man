@@ -195,6 +195,7 @@ $do = mysqli_query($link, $sql);
 while($aula_info = mysqli_fetch_assoc($do)){
 $hora = 1;
 $horario_raw = "";
+$aula_horario = "";
 $aula_horario = explode(';', $aula_info["horario"]);
 echo'<div class="modal fade" id="aula'.$aula_info["id"].'-settings" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
@@ -223,7 +224,7 @@ echo'<div class="modal fade" id="aula'.$aula_info["id"].'-settings" tabindex="-1
                             }
                         }
                         $hora++;
-                        echo ' onchange="update_check('.$aula_info["id"].')" value="" id="' . $dias[$d] . '-' . $horario[$i] . '" type="checkbox"><br>';
+                        echo ' onchange="update_check('.$aula_info["id"].')" value="" id="'.$aula_info["id"].'-' . $dias[$d] . '-' . $horario[$i] . '" type="checkbox"><br>';
                     }
                     echo '</div>';
                 }
@@ -262,7 +263,7 @@ echo'<div class="modal fade" id="aula'.$aula_info["id"].'-settings" tabindex="-1
         document.getElementById("horario-"+aula).value = "";
         for(var i = 0; i < semana.length; i++){
             for(var d = 0; d < horario.length; d++){
-                if(document.getElementById(semana[i] + "-" + horario[d]).checked){
+                if(document.getElementById(aula + '-' + semana[i] + "-" + horario[d]).checked){
                     document.getElementById("horario-"+aula).value += ";1";
                 }else{
                     document.getElementById("horario-"+aula).value += ";0";
