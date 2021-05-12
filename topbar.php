@@ -196,38 +196,7 @@ if (isset($_POST["logtelegram"])) {
             </div>
         </div>
     </div>
-    <div class="modal fade" id="aula" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ajustes</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="h5 modal-body">
-                    <p>Telegram</p>
-                    <?php
-                    if ($user_info["telegram"] == "") {
-                        echo "<p>Desconectado.</p><br>
-                        <button onclick='updateapi()' class='btn btn-success'>Conectar</button>";
-                    } else {
-                        echo "<p>ChatID: " . $user_info["telegram"] . "</p>
-                        <form action='' method='POST'>
-                        <button class='btn btn-danger' type='submit' name='logtelegram' value='1'>Desconectar</button>
-                        </form>";
-                    }
-                    ?>
-                </div>
-
-
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <input type="hidden" name="cambioclave" id="">
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <script>
         var holderapi = document.getElementById("holder-api");
         var updateapi = function() {
