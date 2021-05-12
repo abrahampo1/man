@@ -57,7 +57,30 @@ if (!isset($_SESSION["user_id"])) {
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
+<div class="modal fade" id="1ajustes" tabindex="-1" role="dialog" aria-labelledby="Ajustes" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajustes</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="h5 modal-body">
+                    <p>Horario</p>
+                    <p id="holder-api">
 
+                    </p>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <input type="hidden" name="cambioclave" id="">
+                </div>
+            </div>
+        </div>
+    </div>
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -148,30 +171,7 @@ if (!isset($_SESSION["user_id"])) {
             <!-- End of Footer -->
 
         </div>
-        <div class="modal fade" id="1ajustes" tabindex="-1" role="dialog" aria-labelledby="Ajustes" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ajustes</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="h5 modal-body">
-                    <p>Horario</p>
-                    <p id="holder-api">
-
-                    </p>
-                </div>
-
-
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <input type="hidden" name="cambioclave" id="">
-                </div>
-            </div>
-        </div>
-    </div>
+        
         <!-- End of Content Wrapper -->
 
     </div>
