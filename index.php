@@ -250,9 +250,10 @@ echo'<div class="modal fade" id="aula'.$aula_info["id"].'-settings" tabindex="-1
     }
 
     function update(id) {
-        var dias = document.getElementById(id+ "-dias");
-        var dia = dias.options[dias.selectedIndex].value;
-        document.getElementById(dia + '-' + id + '-section').style.display = "none";
+        for(var i = 0; i < semana.length; i++){
+            document.getElementById(semana[i] + '-' + id + '-section').style.display = "none";
+        }
+        
         dias = document.getElementById(id+ "-dias");
         dia = dias.options[dias.selectedIndex].value;
         document.getElementById(dia + '-' + id + '-section').style.display = "block";
