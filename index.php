@@ -12,7 +12,8 @@ if (!isset($_SESSION["user_id"])) {
         header("location: error.php?e=4");
     }
 }
-
+$horario = array('8:00', '8:50', '9:40', '10:30', '10:55', '11:45', '12:35', '13:25', '15:30', '16:20', '17:10', '18:00', '18:30', '19:20', '20:10', '21:00');
+$dias = array('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo');
 ?>
 <style>
     a {
@@ -74,7 +75,7 @@ if (!isset($_SESSION["user_id"])) {
 
                 <?php include("topbar.php"); ?>
                 <!-- End of Topbar -->
-                
+
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
@@ -179,36 +180,59 @@ if (!isset($_SESSION["user_id"])) {
 
 
 <div class="modal fade" id="aula1-settings" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ajustes</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="h5 modal-body">
-                    <p>Telegram</p>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ajustes Aula</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="h5 modal-body">
+                <p>Horario</p>
+                <select name="horario_matrix" id="dias" onchange="update()">
                     <?php
-                    if ($user_info["telegram"] == "") {
-                        echo "<p>Desconectado.</p><br>
-                        <button onclick='updateapi()' class='btn btn-success'>Conectar</button>";
-                    } else {
-                        echo "<p>ChatID: " . $user_info["telegram"] . "</p>
-                        <form action='' method='POST'>
-                        <button class='btn btn-danger' type='submit' name='logtelegram' value='1'>Desconectar</button>
-                        </form>";
+                    for ($i = 0; $i < count($dias); $i++) {
+                        echo '<option value="' . $dias[$i] . '">' . $dias[$i] . '</option>';
                     }
                     ?>
-                </div>
+                </select>
+
+                <?php
+                for ($d = 0; $d < count($dias); $d++) {
+                    echo '<div style="display: none" id="' . $dias[$d] . '-section">';
+                    for ($i = 0; $i < count($horario); $i++) {
+                        echo $horario[$i] . ' <input value="" name="' . $dias[$d] . '-' . $horario[$i] . '" type="checkbox"><br>';
+                    }
+                    echo '</div>';
+                }
+
+                ?>
+
+            </div>
 
 
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <input type="hidden" name="cambioclave" id="">
-                </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                <input type="hidden" name="cambioclave" id="">
             </div>
         </div>
     </div>
+</div>
 
 </html>
+
+<script>
+    var dias = document.getElementById("dias");
+    var dia = dias.options[dias.selectedIndex].value;
+    window.onload = function() {
+        document.getElementById(dia + '-section').style.display = "block";
+    }
+
+    function update() {
+        document.getElementById(dia + '-section').style.display = "none";
+        dias = document.getElementById("dias");
+        dia = dias.options[dias.selectedIndex].value;
+        document.getElementById(dia + '-section').style.display = "block";
+    }
+</script>
