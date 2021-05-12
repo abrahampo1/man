@@ -20,8 +20,6 @@ if(isset($_POST["horario-value"])){
     $aula_value = $_POST["aula_id"];
     $sql = "UPDATE `aulas` SET `horario` = '$horario_value' WHERE `aulas`.`id` = '$aula_value';";
     if(mysqli_query($link, $sql)){
-        echo "GUARDADO!";
-        echo "<br>".$horario_value." en ".$aula_value;
     }else{
         echo mysqli_error($link);
         exit;
@@ -196,6 +194,7 @@ $do = mysqli_query($link, $sql);
 while($aula_info = mysqli_fetch_assoc($do)){
 $hora = 1;
 $horario_raw = "";
+$aula_horario = explode(';', $aula_info["horario"]);
 echo'<div class="modal fade" id="aula1-settings" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -215,7 +214,15 @@ echo'<div class="modal fade" id="aula1-settings" tabindex="-1" role="dialog" ari
                 for ($d = 0; $d < count($dias); $d++) {
                     echo '<div style="display: none" id="' . $dias[$d] . '-section">';
                     for ($i = 0; $i < count($horario); $i++) {
-                        echo $horario[$i] . ' <input onchange="update_check('.$aula_info["id"].')" value="" id="' . $dias[$d] . '-' . $horario[$i] . '" type="checkbox"><br>';
+                        
+                        echo $horario[$i] . ' <input';
+                        if($aula_info["horario"] != ""){
+                            if($aula_horario[$hora] == "1"){
+                                echo " checked ";
+                            }
+                        }
+                        $hora++;
+                        echo 'onchange="update_check('.$aula_info["id"].')" value="" id="' . $dias[$d] . '-' . $horario[$i] . '" type="checkbox"><br>';
                     }
                     echo '</div>';
                 }
