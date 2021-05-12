@@ -223,7 +223,7 @@ echo'<div class="modal fade" id="aula1-settings" tabindex="-1" role="dialog" ari
                             }
                         }
                         $hora++;
-                        echo 'onchange="update_check('.$aula_info["id"].')" value="" id="' . $dias[$d] . '-' . $horario[$i] . '" type="checkbox"><br>';
+                        echo ' onchange="update_check('.$aula_info["id"].')" value="" id="' . $dias[$d] . '-' . $horario[$i] . '" type="checkbox"><br>';
                     }
                     echo '</div>';
                 }
