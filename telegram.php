@@ -169,8 +169,8 @@ if ($do = mysqli_query($link, $sql)) {
             $do = mysqli_query($link, $sql);
             if ($do->num_rows > 0) {
                 $id_equipo = mysqli_fetch_assoc($do);
-                $id_equipo = $id_equipo["id"];
                 $aula_id = $id_equipo["ubicacion"];
+                $id_equipo = $id_equipo["id"];
             } else {
                 $texto = "🚨 NO SE HA ENCONTRADO ESE EQUIPO EN LA BASE DE DATOS, VUELVE A INTENTARLO O REPORTA EL FALLO DIRECTAMENTE AL DEPARTAMENTO 🚨";
                 file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
