@@ -181,20 +181,20 @@ if ($do = mysqli_query($link, $sql)) {
             if (mysqli_query($link, $sql)) {
                 $texto = "🚨 Se ha reportado una incidencia para el equipo: $equipo. '$descripcion'. 🚨";
                 file_get_contents($path . "/sendmessage?chat_id=" . $grupo . "&text=" . $texto);
-                
+
                 $hora_num = 1;
-                $sql = "SELECT * FROM aulas WHERE id = ".$aula_id;
+                $sql = "SELECT * FROM aulas WHERE id = " . $aula_id;
                 $do = mysqli_query($link, $sql);
                 $aula_info = mysqli_fetch_assoc($do);
-                $texto = urlencode("Horario recomendado en: ".$aula_info["nombre"]."\n");
+                $texto = urlencode("Horario recomendado en: " . $aula_info["nombre"] . "\n");
                 $horas = explode(';', $aula_info["horario"]);
-                $dia_de_la_semana = date("N",time());
-                if($dia_de_la_semana > 5){
+                $dia_de_la_semana = date("N", time());
+                if ($dia_de_la_semana > 5) {
                     $dia_de_la_semana = 1;
                 }
-                for ($d = $dia_de_la_semana; $d < $dia_de_la_semana+2; $d++) {
+                for ($d = 0; $d < count($dias); $d++) {
                     for ($i = 0; $i < count($horario); $i++) {
-                        if ($horas[$hora_num] == "0") {
+                        if ($horas[$hora] == "0" && $d >= $dia_de_la_semana && $d < 5) {
                             $texto .= urlencode($dias[$d] . " " . $horario[$i] . "\n");
                         }
                         $hora_num++;
