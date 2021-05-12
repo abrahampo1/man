@@ -170,7 +170,7 @@ if (!isset($_SESSION["user_id"])) {
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
-    <div class="modal fade" id="1-ajustes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="1-ajustes" tabindex="-1" role="dialog" aria-labelledby="Ajustes" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -180,18 +180,7 @@ if (!isset($_SESSION["user_id"])) {
                     </button>
                 </div>
                 <div class="h5 modal-body">
-                    <p>Telegram</p>
-                    <?php
-                    if ($user_info["telegram"] == "") {
-                        echo "<p>Desconectado.</p><br>
-                        <button onclick='updateapi()' class='btn btn-success'>Conectar</button>";
-                    } else {
-                        echo "<p>ChatID: " . $user_info["telegram"] . "</p>
-                        <form action='' method='POST'>
-                        <button class='btn btn-danger' type='submit' name='logtelegram' value='1'>Desconectar</button>
-                        </form>";
-                    }
-                    ?>
+                    <p>Horario</p>
                     <p id="holder-api">
 
                     </p>
