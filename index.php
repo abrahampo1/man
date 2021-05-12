@@ -227,7 +227,7 @@ echo'<div class="modal fade" id="aula1-settings" tabindex="-1" role="dialog" ari
                     echo '</div>';
                 }
 
-            echo'<form method="POST"><input type="hidden" name="aula_id" value="'.$aula_info["id"].'"><input type="hidden" name="horario-value" id="horario-'.$aula_info["id"].'" value=""><button class="btn btn-info">Guardar</button></form></div>
+            echo'<form method="POST"><input type="hidden" name="aula_id" value="'.$aula_info["id"].'"><input type="hidden" name="horario-value" id="horario-'.$aula_info["id"].'" value="'.$aula_info["horario"].'"><button class="btn btn-info">Guardar</button></form></div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
                 <input type="hidden" name="cambioclave" id="">
