@@ -202,14 +202,12 @@ echo'<div class="modal fade" id="aula1-settings" tabindex="-1" role="dialog" ari
                 for ($d = 0; $d < count($dias); $d++) {
                     echo '<div style="display: none" id="' . $dias[$d] . '-section">';
                     for ($i = 0; $i < count($horario); $i++) {
-                        echo $horario[$i] . ' <input onchange="update_check()" value="" id="' . $dias[$d] . '-' . $horario[$i] . '" type="checkbox"><br>';
+                        echo $horario[$i] . ' <input onchange="update_check('.$aula_info["id"].')" value="" id="' . $dias[$d] . '-' . $horario[$i] . '" type="checkbox"><br>';
                     }
                     echo '</div>';
                 }
 
-            echo'<form method="POST"><input type="hidden" id="horario" value=""><button class="btn btn-info">Guardar</button></form></div>
-
-
+            echo'<form method="POST"><input type="hidden" name="aula_id" value="'.$aula_info["id"].'"><input type="hidden" id="horario-'.$aula_info["id"].'" value=""><button class="btn btn-info">Guardar</button></form></div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
                 <input type="hidden" name="cambioclave" id="">
@@ -235,8 +233,8 @@ echo'<div class="modal fade" id="aula1-settings" tabindex="-1" role="dialog" ari
         dia = dias.options[dias.selectedIndex].value;
         document.getElementById(dia + '-section').style.display = "block";
     }
-    function update_check() {
-        document.getElementById("horario").value = "";
+    function update_check(aula) {
+        document.getElementById("horario-"+aula).value = "";
         for(var i = 0; i < semana.length; i++){
             for(var d = 0; d < horario.length; d++){
                 if(document.getElementById(semana[i] + "-" + horario[d]).checked){
