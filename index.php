@@ -145,7 +145,7 @@ if(isset($_POST["horario-value"])){
                                     
                                 </div>
                             </div>
-                            <a class="dropdown-item" data-toggle="modal" data-target="#aula1-settings" href="#">
+                            <a class="dropdown-item" data-toggle="modal" data-target="#aula'.$fila["id"].'-settings" href="#">
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                 </a>
                         </div></a>
@@ -196,7 +196,7 @@ while($aula_info = mysqli_fetch_assoc($do)){
 $hora = 1;
 $horario_raw = "";
 $aula_horario = explode(';', $aula_info["horario"]);
-echo'<div class="modal fade" id="aula1-settings" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+echo'<div class="modal fade" id="aula'.$aula_info["id"].'-settings" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
