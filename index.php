@@ -21,6 +21,7 @@ if(isset($_POST["horario-value"])){
     $sql = "UPDATE `aulas` SET `horario` = '$horario_value' WHERE `aulas`.`id` = '$aula_value';";
     if(mysqli_query($link, $sql)){
         echo "GUARDADO!";
+        echo "<br>".$horario_value." en ".$aula_value;
     }else{
         echo mysqli_error($link);
         exit;
