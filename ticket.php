@@ -65,8 +65,11 @@ if ($info_aparato["ip_buena"] != '') {
 if ($ip == '') {
     $ip = 'SIN ASIGNAR';
 }
-?>
 
+$horario = array('8:00', '8:50', '9:40', '10:30', '10:55', '11:45', '12:35', '13:25', '15:30', '16:20', '17:10', '18:00', '18:30', '19:20', '20:10', '21:00');
+$dias = array('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo');
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -127,15 +130,29 @@ if ($ip == '') {
                                 </div>
                                 <div class="card-body">
                                     <div class="text-center">
-                                        <img class="img-fluid px-1 px-sm-4 mt-2 mb-4" style="width: 10rem;" <?
-                                                                                                            if ($info_ticket["tipo_error"] = "288" && $info_ticket["descripcion"] == "ilitri paga el programa") {
-                                                                                                                echo ('src="https://assets.change.org/photos/0/cx/am/hBCXaMRcxdBgKdy-800x450-noPad.jpg?1512577144"');
-                                                                                                            } else {
-                                                                                                                echo ('src="img/mantenimiento.svg"');
-                                                                                                            }
-                                                                                                            ?> alt="">
+                                        <img class="img-fluid px-1 px-sm-4 mt-2 mb-4" style="width: 10rem;" src="https://assets.change.org/photos/0/cx/am/hBCXaMRcxdBgKdy-800x450-noPad.jpg?1512577144" alt="">
                                     </div>
-                                    <p style="text-align: center;">El Profesor@ <? echo $info_ticket['usuario'] ?>, ha descrito que <? echo $info_ticket['descripcion'] ?><br><br>Información del equipo:<br>Ubicacion: <? echo $info_aparato['ubicacion'] ?><br>Identificador: <? echo $info_aparato['nombre'] ?><br>IP: <? echo $ip ?><br>CPU: <? echo $info_aparato['cpu'] ?><br>RAM: <? echo $info_aparato['ram'] ?><br>DISCO DURO: <? echo $info_aparato['disco'] ?></p>
+                                    <?php
+                                    $sql = "SELECT * FROM aulas WHERE id = " . $info_aparato["ubicacion"];
+                                    $do = mysqli_query($link, $sql);
+                                    $aula = mysqli_fetch_assoc($do);
+                                    ?>
+                                    <p style="text-align: center;">El Profesor@ <?php echo $info_ticket['usuario'] ?>, ha descrito que <?php echo $info_ticket['descripcion'] ?><br><br>Información del equipo:<br>Ubicacion: <?php echo $aula["nombre"] ?><br>Identificador: <?php echo $info_aparato['nombre'] ?><br>IP: <?php echo $ip ?><br>CPU: <?php echo $info_aparato['cpu'] ?><br>RAM: <?php echo $info_aparato['ram'] ?><br>DISCO DURO: <?php echo $info_aparato['disco'] ?></p>
+                                    <p>
+                                    <h1>Horarios Recomendados:</h1><br>
+                                    <?php
+                                    $horas = explode(';', $aula["horario"]);
+                                    $hora = 1;
+                                    for ($d = 0; $d < count($dias)-2; $d++) {
+                                        for ($i = 0; $i < count($horario); $i++) {
+                                            if($horas[$hora]=="0"){
+                                                echo $dias[$d]." ".$horario[$i];
+                                            }
+                                            $hora++;
+                                        }
+                                    }
+                                    ?>
+                                    </p>
                                 </div>
                             </div>
                         </div>
