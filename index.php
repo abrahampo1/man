@@ -129,7 +129,7 @@ if (!isset($_SESSION["user_id"])) {
                                     </div>
                                     a class="dropdown-item" data-toggle="modal" data-target="#1-ajustes" href="#">
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Settings
+                    Ajustes
                 </a>
                                 </div>
                             </div>
