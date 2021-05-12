@@ -127,7 +127,7 @@ if (!isset($_SESSION["user_id"])) {
                                     <div class="col-auto">
                                         <i class="fas fa-chalkboard-teacher" fa-2x text-gray-300"></i>
                                     </div>
-                                    a class="dropdown-item" data-toggle="modal" data-target="#1-ajustes" href="#">
+                                    <a class="dropdown-item" data-toggle="modal" data-target="#1-ajustes" href="#">
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                     Ajustes
                 </a>
