@@ -127,7 +127,7 @@ if (!isset($_SESSION["user_id"])) {
                                     <div class="col-auto">
                                         <i class="fas fa-chalkboard-teacher" fa-2x text-gray-300"></i>
                                     </div>
-                                    <a class="dropdown-item" data-toggle="modal" data-target="#1-ajustes" href="#">
+                                    <a class="dropdown-item" data-toggle="modal" data-target="#1ajustes" href="#">
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                     Ajustes
                 </a>
@@ -147,30 +147,7 @@ if (!isset($_SESSION["user_id"])) {
             <!-- End of Footer -->
 
         </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
-    <div class="modal fade" id="1-ajustes" tabindex="-1" role="dialog" aria-labelledby="Ajustes" aria-hidden="true">
+        <div class="modal fade" id="1ajustes" tabindex="-1" role="dialog" aria-labelledby="Ajustes" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -194,6 +171,30 @@ if (!isset($_SESSION["user_id"])) {
             </div>
         </div>
     </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    
 </body>
 
 
