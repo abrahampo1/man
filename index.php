@@ -207,13 +207,13 @@ echo'<div class="modal fade" id="aula'.$aula_info["id"].'-settings" tabindex="-1
         </div>
         <div class="h5 modal-body">
             <p>Horario</p>
-            <select name="horario_matrix" id="dias" onchange="update()">';
+                <select name="horario_matrix" id="'.$aula_info["id"].'-dias" onchange="update('.$aula_info["id"].')">';
                     for ($i = 0; $i < count($dias); $i++) {
                         echo '<option value="' . $dias[$i] . '">' . $dias[$i] . '</option>';
                     }
                 echo'</select>';
                 for ($d = 0; $d < count($dias); $d++) {
-                    echo '<div style="display: none" id="' . $dias[$d] . '-section">';
+                    echo '<div style="display: none" id="' . $dias[$d] . '-'.$aula_info["id"].'-section">';
                     for ($i = 0; $i < count($horario); $i++) {
                         
                         echo $horario[$i] . ' <input';
@@ -242,17 +242,20 @@ echo'<div class="modal fade" id="aula'.$aula_info["id"].'-settings" tabindex="-1
 <script>
     var horario = ['8:00', '8:50', '9:40', '10:30', '10:55', '11:45', '12:35', '13:25', '15:30', '16:20', '17:10', '18:00', '18:30', '19:20', '20:10', '21:00'];
     var semana = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
-    var dias = document.getElementById("dias");
-    var dia = dias.options[dias.selectedIndex].value;
-    window.onload = function() {
+    
+    function load(id) {
+        var dias = document.getElementById(id + "-dias");
+        var dia = dias.options[dias.selectedIndex].value;
         document.getElementById(dia + '-section').style.display = "block";
     }
 
-    function update() {
-        document.getElementById(dia + '-section').style.display = "none";
+    function update(id) {
+        var dias = document.getElementById(id+ "-dias");
+        var dia = dias.options[dias.selectedIndex].value;
+        document.getElementById(dia + '-' + id + '-section').style.display = "none";
         dias = document.getElementById("dias");
         dia = dias.options[dias.selectedIndex].value;
-        document.getElementById(dia + '-section').style.display = "block";
+        document.getElementById(dia + '-' + id + '-section').style.display = "block";
     }
     function update_check(aula) {
         document.getElementById("horario-"+aula).value = "";
@@ -266,8 +269,5 @@ echo'<div class="modal fade" id="aula'.$aula_info["id"].'-settings" tabindex="-1
                 
             }
         }
-        dias = document.getElementById("dias");
-        dia = dias.options[dias.selectedIndex].value;
-        document.getElementById(dia + '-section').style.display = "block";
     }
 </script>
