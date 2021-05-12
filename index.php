@@ -253,7 +253,7 @@ echo'<div class="modal fade" id="aula'.$aula_info["id"].'-settings" tabindex="-1
         var dias = document.getElementById(id+ "-dias");
         var dia = dias.options[dias.selectedIndex].value;
         document.getElementById(dia + '-' + id + '-section').style.display = "none";
-        dias = document.getElementById(id+ "dias");
+        dias = document.getElementById(id+ "-dias");
         dia = dias.options[dias.selectedIndex].value;
         document.getElementById(dia + '-' + id + '-section').style.display = "block";
     }
