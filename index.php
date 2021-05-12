@@ -177,39 +177,37 @@ $dias = array('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Do
 
 
 </body>
-
-
-<div class="modal fade" id="aula1-settings" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ajustes Aula</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="h5 modal-body">
-                <p>Horario</p>
-                <select name="horario_matrix" id="dias" onchange="update()">
-                    <?php
+<?php
+$sql = "SELECT * FROM aulas";
+$do = mysqli_query($link, $sql);
+while($aula_info = mysqli_fetch_assoc($do)){
+$hora = 1;
+$horario_raw = "";
+echo'<div class="modal fade" id="aula1-settings" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ajustes Aula</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="h5 modal-body">
+            <p>Horario</p>
+            <select name="horario_matrix" id="dias" onchange="update()">';
                     for ($i = 0; $i < count($dias); $i++) {
                         echo '<option value="' . $dias[$i] . '">' . $dias[$i] . '</option>';
                     }
-                    ?>
-                </select>
-
-                <?php
+                echo'</select>';
                 for ($d = 0; $d < count($dias); $d++) {
                     echo '<div style="display: none" id="' . $dias[$d] . '-section">';
                     for ($i = 0; $i < count($horario); $i++) {
-                        echo $horario[$i] . ' <input value="" name="' . $dias[$d] . '-' . $horario[$i] . '" type="checkbox"><br>';
+                        echo $horario[$i] . ' <input onchange="update_check()" value="" id="' . $dias[$d] . '-' . $horario[$i] . '" type="checkbox"><br>';
                     }
                     echo '</div>';
                 }
 
-                ?>
-
-            </div>
+            echo'<input type="hidden" id="horario" value=""></div>
 
 
             <div class="modal-footer">
@@ -218,11 +216,13 @@ $dias = array('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Do
             </div>
         </div>
     </div>
-</div>
-
+</div>';}
+?>
 </html>
 
 <script>
+    var horario = ['8:00', '8:50', '9:40', '10:30', '10:55', '11:45', '12:35', '13:25', '15:30', '16:20', '17:10', '18:00', '18:30', '19:20', '20:10', '21:00'];
+    var semana = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
     var dias = document.getElementById("dias");
     var dia = dias.options[dias.selectedIndex].value;
     window.onload = function() {
@@ -231,6 +231,23 @@ $dias = array('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Do
 
     function update() {
         document.getElementById(dia + '-section').style.display = "none";
+        dias = document.getElementById("dias");
+        dia = dias.options[dias.selectedIndex].value;
+        document.getElementById(dia + '-section').style.display = "block";
+    }
+    function update_check() {
+        document.getElementById("horario").value = "";
+        for(var i = 0; i < count(semana); i++){
+            for(var d = 0; d < count(horario); d++){
+                if(document.getElementById(semana[i] + horario[d]).selected){
+                    document.getElementById("horario").value += ";1";
+                    alert(semana[i] + horario[d] + " OK");
+                }else{
+                    document.getElementById("horario").value += ";0";
+                }
+                
+            }
+        }
         dias = document.getElementById("dias");
         dia = dias.options[dias.selectedIndex].value;
         document.getElementById(dia + '-section').style.display = "block";
