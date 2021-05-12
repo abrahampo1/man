@@ -207,7 +207,7 @@ echo'<div class="modal fade" id="aula1-settings" tabindex="-1" role="dialog" ari
                     echo '</div>';
                 }
 
-            echo'<input type="hidden" id="horario" value=""></div>
+            echo'<form method="POST"><input type="hidden" id="horario" value=""><button class="btn btn-info">Guardar</button></form></div>
 
 
             <div class="modal-footer">
@@ -241,7 +241,6 @@ echo'<div class="modal fade" id="aula1-settings" tabindex="-1" role="dialog" ari
             for(var d = 0; d < horario.length; d++){
                 if(document.getElementById(semana[i] + "-" + horario[d]).checked){
                     document.getElementById("horario").value += ";1";
-                    alert(semana[i] + horario[d] + " OK");
                 }else{
                     document.getElementById("horario").value += ";0";
                 }
