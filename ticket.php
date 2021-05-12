@@ -130,7 +130,7 @@ $dias = array('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Do
                                 </div>
                                 <div class="card-body">
                                     <div class="text-center">
-                                        <img class="img-fluid px-1 px-sm-4 mt-2 mb-4" style="width: 10rem;" src="https://assets.change.org/photos/0/cx/am/hBCXaMRcxdBgKdy-800x450-noPad.jpg?1512577144" alt="">
+                                        <img class="img-fluid px-1 px-sm-4 mt-2 mb-4" style="width: 10rem;" src="img/mantenimiento.svg" alt="">
                                     </div>
                                     <?php
                                     $sql = "SELECT * FROM aulas WHERE id = " . $info_aparato["ubicacion"];
