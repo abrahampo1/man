@@ -18,7 +18,7 @@ $dias = array('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Do
 if(isset($_POST["horario-value"])){
     $horario_value = $_POST["horario-value"];
     $aula_value = $_POST["aula_id"];
-    $sql = "UPDATE `aulas` SET `horario` = '$horario_value' WHERE `aulas`.`id` = $aula_value;";
+    $sql = "UPDATE `aulas` SET `horario` = '$horario_value' WHERE `aulas`.`id` = '$aula_value';";
     if(mysqli_query($link, $sql)){}else{
         echo mysqli_error($link);
         exit;
