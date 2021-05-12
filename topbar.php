@@ -218,9 +218,6 @@ if (isset($_POST["logtelegram"])) {
                         </form>";
                     }
                     ?>
-                    <p id="holder-api">
-
-                    </p>
                 </div>
 
 
