@@ -3,7 +3,7 @@ $user_id = $_SESSION["user_id"];
 $sql = "SELECT * FROM tecnicos WHERE id = $user_id";
 $search = mysqli_query($link, $sql);
 $user_info = mysqli_fetch_assoc($search);
-if(isset($_POST["logtelegram"])){
+if (isset($_POST["logtelegram"])) {
     $sql = "UPDATE `tecnicos` SET `telegram` = '' WHERE `tecnicos`.`id` = '$user_id';";
     $do = mysqli_query($link, $sql);
     header("location: /");
@@ -161,6 +161,26 @@ if(isset($_POST["logtelegram"])){
         </li>
 
     </ul>
+    <div class="modal fade" id="1ajustes" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajustes</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="h5 modal-body">
+                    <p>Horario</p>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="1ajustes">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="ajustes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -196,26 +216,7 @@ if(isset($_POST["logtelegram"])){
             </div>
         </div>
     </div>
-    <div class="modal fade" id="1ajustes" tabindex="-1" role="dialog" >
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" >Ajustes</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="h5 modal-body">
-                    <p>Horario</p>
-                </div>
-
-
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="1ajustes">Cancelar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <script>
         var holderapi = document.getElementById("holder-api");
         var updateapi = function() {
