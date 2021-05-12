@@ -143,10 +143,14 @@ $dias = array('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Do
                                     <?php
                                     $horas = explode(';', $aula["horario"]);
                                     $hora = 1;
-                                    for ($d = 0; $d < count($dias)-2; $d++) {
+                                    $dia_de_la_semana = date("N", time());
+                                    if ($dia_de_la_semana > 5) {
+                                        $dia_de_la_semana = 1;
+                                    }
+                                    for ($d = $dia_de_la_semana; $d < $dia_de_la_semana + 2; $d++) {
                                         for ($i = 0; $i < count($horario); $i++) {
-                                            if($horas[$hora]=="0"){
-                                                echo $dias[$d]." ".$horario[$i]."<hr>";
+                                            if ($horas[$hora] == "0") {
+                                                echo $dias[$d] . " " . $horario[$i] . "<hr>";
                                             }
                                             $hora++;
                                         }

@@ -186,9 +186,13 @@ if ($do = mysqli_query($link, $sql)) {
                 $sql = "SELECT * FROM aulas WHERE id = ".$aula_id;
                 $do = mysqli_query($link, $sql);
                 $aula_info = mysqli_fetch_assoc($do);
-                $texto = "Horario recomendado en: ".$aula_info["nombre"]."\n";
+                $texto = urlencode("Horario recomendado en: ".$aula_info["nombre"]."\n");
                 $horas = explode(';', $aula_info["horario"]);
-                for ($d = 0; $d < count($dias) - 2; $d++) {
+                $dia_de_la_semana = date("N",time());
+                if($dia_de_la_semana > 5){
+                    $dia_de_la_semana = 1;
+                }
+                for ($d = $dia_de_la_semana; $d < $dia_de_la_semana+2; $d++) {
                     for ($i = 0; $i < count($horario); $i++) {
                         if ($horas[$hora_num] == "0") {
                             $texto .= urlencode($dias[$d] . " " . $horario[$i] . "\n");
