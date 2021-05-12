@@ -133,11 +133,11 @@ $dias = array('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Do
                                     
                                 </div>
                             </div>
-                        </div></a>
-                        <a class="dropdown-item" data-toggle="modal" data-target="#aula1-settings" href="#">
+                            <a class="dropdown-item" data-toggle="modal" data-target="#aula1-settings" href="#">
                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Ajustes
                 </a>
+                        </div></a>
+                        
                         </div>';
                             }
                         }
