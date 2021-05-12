@@ -246,7 +246,7 @@ echo'<div class="modal fade" id="aula'.$aula_info["id"].'-settings" tabindex="-1
     function load(id) {
         var dias = document.getElementById(id + "-dias");
         var dia = dias.options[dias.selectedIndex].value;
-        document.getElementById(dia + '-section').style.display = "block";
+        document.getElementById(dia + '-' + id + '-section').style.display = "block";
     }
 
     function update(id) {
