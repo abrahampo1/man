@@ -189,12 +189,9 @@ if ($do = mysqli_query($link, $sql)) {
                 $texto = urlencode("Horario recomendado en: " . $aula_info["nombre"] . "\n");
                 $horas = explode(';', $aula_info["horario"]);
                 $dia_de_la_semana = date("N", time());
-                if ($dia_de_la_semana > 5) {
-                    $dia_de_la_semana = 1;
-                }
                 for ($d = 0; $d < count($dias); $d++) {
                     for ($i = 0; $i < count($horario); $i++) {
-                        if ($horas[$hora] == "0" && $d >= $dia_de_la_semana && $d < 5) {
+                        if ($horas[$hora_num] == "0" && $d >= $dia_de_la_semana && $d < 5) {
                             $texto .= urlencode($dias[$d] . " " . $horario[$i] . "\n");
                         }
                         $hora_num++;
