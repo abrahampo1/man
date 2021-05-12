@@ -18,6 +18,8 @@ $nombre_telegram = $update["message"]["chat"]["first_name"];
 $apellido_telegram = $update["message"]["chat"]["last_name"];
 $hora = time();
 $texto = "";
+$horario = array('8:00', '8:50', '9:40', '10:30', '10:55', '11:45', '12:35', '13:25', '15:30', '16:20', '17:10', '18:00', '18:30', '19:20', '20:10', '21:00');
+$dias = array('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo');
 
 function generateRandomString($length = 20)
 {
@@ -168,6 +170,7 @@ if ($do = mysqli_query($link, $sql)) {
             if ($do->num_rows > 0) {
                 $id_equipo = mysqli_fetch_assoc($do);
                 $id_equipo = $id_equipo["id"];
+                $aula_id = $id_equipo["ubicacion"];
             } else {
                 $texto = "🚨 NO SE HA ENCONTRADO ESE EQUIPO EN LA BASE DE DATOS, VUELVE A INTENTARLO O REPORTA EL FALLO DIRECTAMENTE AL DEPARTAMENTO 🚨";
                 file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
@@ -177,6 +180,22 @@ if ($do = mysqli_query($link, $sql)) {
             $sql = "INSERT INTO `ticket` (`id`, `aparato`, `usuario`, `tipo_error`, `descripcion`, `tecnico`, `fecha`, `estado`) VALUES (NULL, '$id_equipo', '$nombre_telegram $apellido_telegram', 'Problema', '$descripcion', '1', '$ahora', 'pendiente');";
             if (mysqli_query($link, $sql)) {
                 $texto = "🚨 Se ha reportado una incidencia para el equipo: $equipo. '$descripcion'. 🚨";
+                file_get_contents($path . "/sendmessage?chat_id=" . $grupo . "&text=" . $texto);
+                
+                $hora_num = 1;
+                $sql = "SELECT * FROM aulas WHERE id = ".$aula_id;
+                $do = mysqli_query($link, $sql);
+                $aula_info = mysqli_fetch_assoc($do);
+                $texto = "Horario recomendado en: ".$aula_info["nombre"]."\n";
+                $horas = explode(';', $aula_info["horario"]);
+                for ($d = 0; $d < count($dias) - 2; $d++) {
+                    for ($i = 0; $i < count($horario); $i++) {
+                        if ($horas[$hora_num] == "0") {
+                            $texto += $dias[$d] . " " . $horario[$i] . "\n";
+                        }
+                        $hora_num++;
+                    }
+                }
                 file_get_contents($path . "/sendmessage?chat_id=" . $grupo . "&text=" . $texto);
                 $texto = "🚨 Incidencia reportada correctamente, algún tecnico se dirigirá al lugar... 🚨";
                 file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
@@ -338,20 +357,20 @@ if ($do = mysqli_query($link, $sql)) {
     if ($mensaje["respuesta"] == "¿Cual es tu clave mágica?") {
         $sql = "SELECT * FROM tecnicos WHERE BINARY api = '$message'";
         $do = mysqli_query($link, $sql);
-        if($do->num_rows > 0){
+        if ($do->num_rows > 0) {
             $user = mysqli_fetch_assoc($do);
-            $texto = "Vale ".$user["nombre"].", eres tú, voy a verificarte...";
+            $texto = "Vale " . $user["nombre"] . ", eres tú, voy a verificarte...";
             file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
             $tecnico = $user["id"];
             $sql = "UPDATE `tecnicos` SET `telegram` = '$chatId' WHERE `tecnicos`.`id` = '$tecnico';";
-            if(mysqli_query($link, $sql)){
+            if (mysqli_query($link, $sql)) {
                 $texto = "✅  ¡Verificado! Gracias por usar mi programa. - Abraham ✅ ";
                 file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
                 $sql = "UPDATE `tecnicos` SET `api` = '' WHERE `tecnicos`.`id` = '$tecnico';";
                 mysqli_query($link, $sql);
                 fin($chatId);
             }
-        }else{
+        } else {
             $texto = "Esta clave no es muy magica que digamos...";
             file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
             fin($chatId);
