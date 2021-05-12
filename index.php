@@ -239,7 +239,7 @@ echo'<div class="modal fade" id="aula1-settings" tabindex="-1" role="dialog" ari
         document.getElementById("horario").value = "";
         for(var i = 0; i < semana.length; i++){
             for(var d = 0; d < horario.length; d++){
-                if(document.getElementById(semana[i] + horario[d]).selected){
+                if(document.getElementById(semana[i] + "-" + horario[d]).selected){
                     document.getElementById("horario").value += ";1";
                     alert(semana[i] + horario[d] + " OK");
                 }else{
