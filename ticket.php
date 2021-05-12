@@ -149,7 +149,7 @@ $dias = array('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Do
                                     }
                                     for ($d = 0; $d < count($dias); $d++) {
                                         for ($i = 0; $i < count($horario); $i++) {
-                                            if ($horas[$hora] == "0" && $d >= $dia_de_la_semana && $dia_de_la_semana < 6) {
+                                            if ($horas[$hora] == "0" && $d >= $dia_de_la_semana && $d < 6) {
                                                 echo $dias[$d] . " " . $horario[$i] . "<hr>";
                                             }
                                             $hora++;
