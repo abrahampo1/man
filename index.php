@@ -251,9 +251,9 @@ echo'<div class="modal fade" id="aula1-settings" tabindex="-1" role="dialog" ari
         for(var i = 0; i < semana.length; i++){
             for(var d = 0; d < horario.length; d++){
                 if(document.getElementById(semana[i] + "-" + horario[d]).checked){
-                    document.getElementById("horario").value += ";1";
+                    document.getElementById("horario-"+aula).value += ";1";
                 }else{
-                    document.getElementById("horario").value += ";0";
+                    document.getElementById("horario-"+aula).value += ";0";
                 }
                 
             }
