@@ -139,7 +139,7 @@ $dias = array('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Do
                                     ?>
                                     <p style="text-align: center;">El Profesor@ <?php echo $info_ticket['usuario'] ?>, ha descrito que <?php echo $info_ticket['descripcion'] ?><br><br>Información del equipo:<br>Ubicacion: <?php echo $aula["nombre"] ?><br>Identificador: <?php echo $info_aparato['nombre'] ?><br>IP: <?php echo $ip ?><br>CPU: <?php echo $info_aparato['cpu'] ?><br>RAM: <?php echo $info_aparato['ram'] ?><br>DISCO DURO: <?php echo $info_aparato['disco'] ?></p>
                                     <p>
-                                    <h1>Horarios Recomendados:</h1><br>
+                                    <h1>Horarios Recomendados (Tienes 50mins por cada hora):</h1><br>
                                     <?php
                                     $horas = explode(';', $aula["horario"]);
                                     $hora = 1;
