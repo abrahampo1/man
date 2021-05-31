@@ -19,7 +19,7 @@
                     $sql = "SELECT * FROM aulas WHERE nombre LIKE '%$aula%'";
                     $do = mysqli_query($link, $sql);
                     if ($do->num_rows == 0) {
-                        echo "Vaya, no existe ese aula.";
+                        echo "¡Vaya! Ese aula no se encuentra en mi sistema.";
                         exit;
                     }
                     $aula_info = mysqli_fetch_assoc($do);
