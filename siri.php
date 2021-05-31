@@ -63,6 +63,7 @@
                         echo "pdf;";
                         while ($row = mysqli_fetch_assoc($do)) {
                             echo $row["ip"];
+                            echo "<br>";
                             echo $row["nombre"];
                             echo "<hr>";
                         }
