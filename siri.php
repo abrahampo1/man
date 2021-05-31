@@ -27,6 +27,7 @@
                     $aula_id = $aula_info["id"];
                     $sql = "SELECT * FROM ordenadores WHERE ubicacion = '$aula_id'";
                     $do = mysqli_query($link, $sql);
+                    $ordenadores = 0;
                     if ($do->num_rows > 0) {
                         while ($row = mysqli_fetch_assoc($do)) {
                             $aparato = $row["id"];
