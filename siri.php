@@ -16,7 +16,7 @@
                 if (strpos(strtolower($orden), "apaga el ") !== false || strpos(strtolower($orden), "apaga la ") !== false) {
                     $aula = str_replace("apaga el ", "", strtolower($orden));
                     $aula = str_replace("apaga la ", "", strtolower($aula));
-                    $orden_sin_apagar = str_replace("apaga ", "", $orden);
+                    $orden_sin_apagar = str_replace("apaga ", "", strtolower($orden));
                     echo "De acuerdo, voy a intentar apagar " . $orden_sin_apagar . ". ";
                     $sql = "SELECT * FROM aulas WHERE nombre LIKE '%$aula%'";
                     $do = mysqli_query($link, $sql);
@@ -37,7 +37,7 @@
                                 $ordenadores++;
                             }
                         }
-                        echo "He apagado " . $ordenadores . " equipos. Se apagaran en 1 minuto.";
+                        echo "He apagado " . $ordenadores . " equipos. Se apagarán en 1 minuto.";
                     } else {
                         echo "¡Vaya! Ese aula está vacía.";
                         exit;
