@@ -47,7 +47,7 @@
                     $aula = str_replace("muéstrame él ", "", strtolower($orden));
                     $aula = str_replace("muéstrame la ", "", strtolower($aula));
                     echo $aula;
-                    $sql = "SELECT * FROM aulas WHERE nombre LIKE '%$aula%'";
+                    $sql = "SELECT * FROM aulas WHERE nombre LIKE '%$aula%' or identificador LIKE '%$aula%'";
                     $do = mysqli_query($link, $sql);
                     if ($do->num_rows == 0) {
                         echo "text;¡Vaya! Ese aula no se encuentra en mi sistema.";
