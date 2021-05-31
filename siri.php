@@ -17,7 +17,7 @@
                     $aula = str_replace("apaga el ", "", strtolower($orden));
                     $aula = str_replace("apaga la ", "", strtolower($aula));
                     $orden_sin_apagar = str_replace("apaga ", "", strtolower($orden));
-                    echo "De acuerdo, voy a intentar apagar " . $orden_sin_apagar . ". ";
+                    echo "text;De acuerdo, voy a intentar apagar " . $orden_sin_apagar . ". ";
                     $sql = "SELECT * FROM aulas WHERE nombre LIKE '%$aula%'";
                     $do = mysqli_query($link, $sql);
                     if ($do->num_rows == 0) {
@@ -40,6 +40,34 @@
                         echo "He apagado " . $ordenadores . " equipos. Se apagarán en 1 minuto.";
                     } else {
                         echo "¡Vaya! Ese aula está vacía.";
+                        exit;
+                    }
+                }
+                if (strpos(strtolower($orden), "muestrame el ") !== false || strpos(strtolower($orden), "muestrame la ") !== false) {
+                    $aula = str_replace("muestrame el ", "", strtolower($orden));
+                    $aula = str_replace("muestrame la ", "", strtolower($aula));
+                    $orden_sin_apagar = str_replace("muestrame ", "", strtolower($orden));
+                    
+                    $sql = "SELECT * FROM aulas WHERE nombre LIKE '%$aula%'";
+                    $do = mysqli_query($link, $sql);
+                    if ($do->num_rows == 0) {
+                        echo "text;¡Vaya! Ese aula no se encuentra en mi sistema.";
+                        exit;
+                    }
+                    $aula_info = mysqli_fetch_assoc($do);
+                    $aula_id = $aula_info["id"];
+                    $sql = "SELECT * FROM ordenadores WHERE ubicacion = '$aula_id'";
+                    $do = mysqli_query($link, $sql);
+                    $ordenadores = 0;
+                    if ($do->num_rows > 0) {
+                        echo "pdf;";
+                        while ($row = mysqli_fetch_assoc($do)) {
+                            echo $row["ip"];
+                            echo $row["nombre"];
+                            echo "<hr>";
+                        }
+                    } else {
+                        echo "text;¡Vaya! Ese aula está vacía.";
                         exit;
                     }
                 }
