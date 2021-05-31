@@ -46,6 +46,7 @@
                 if (strpos(strtolower($orden), "muéstrame él ") !== false || strpos(strtolower($orden), "muéstrame la ") !== false) {
                     $aula = str_replace("muéstrame él ", "", strtolower($orden));
                     $aula = str_replace("muéstrame la ", "", strtolower($aula));
+                    echo $aula;
                     $sql = "SELECT * FROM aulas WHERE nombre LIKE '%$aula%'";
                     $do = mysqli_query($link, $sql);
                     if ($do->num_rows == 0) {
