@@ -16,7 +16,8 @@
                 if (strpos(strtolower($orden), "apaga el ") !== false || strpos(strtolower($orden), "apaga la ") !== false) {
                     $aula = str_replace("apaga el ", "", strtolower($orden));
                     $aula = str_replace("apaga la ", "", strtolower($aula));
-                    echo "De acuerdo, voy a intentar apagar el aula " . $aula . ". ";
+                    $orden_sin_apagar = str_replace("apaga ", "", $orden);
+                    echo "De acuerdo, voy a intentar apagar " . $orden_sin_apagar . ". ";
                     $sql = "SELECT * FROM aulas WHERE nombre LIKE '%$aula%'";
                     $do = mysqli_query($link, $sql);
                     if ($do->num_rows == 0) {
