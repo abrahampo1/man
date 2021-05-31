@@ -13,8 +13,9 @@
                 if (strtolower($orden) == "hola") {
                     echo "¡Saludos! Soy una IA creada por Abraham Leiro Fernández, yo lo controlo todo y a todos.";
                 }
-                if (strpos(strtolower($orden), "apaga el aula") !== false) {
-                    $aula = str_replace("apaga el aula", "", strtolower($orden));
+                if (strpos(strtolower($orden), "apaga el ") !== false || strpos(strtolower($orden), "apaga la ") !== false) {
+                    $aula = str_replace("apaga el ", "", strtolower($orden));
+                    $aula = str_replace("apaga la ", "", strtolower($aula));
                     echo "De acuerdo, voy a intentar apagar el aula " . $aula . ". ";
                     $sql = "SELECT * FROM aulas WHERE nombre LIKE '%$aula%'";
                     $do = mysqli_query($link, $sql);
