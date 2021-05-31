@@ -43,7 +43,7 @@
                         exit;
                     }
                 }
-                if (strpos(strtolower($orden), "muestrame el ") !== false || strpos(strtolower($orden), "muestrame la ") !== false) {
+                if (strpos(strtolower($orden), "múestrame el ") !== false || strpos(strtolower($orden), "múestrame la ") !== false) {
                     $aula = str_replace("muestrame el ", "", strtolower($orden));
                     $aula = str_replace("muestrame la ", "", strtolower($aula));
                     $orden_sin_apagar = str_replace("muestrame ", "", strtolower($orden));
