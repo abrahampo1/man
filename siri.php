@@ -11,7 +11,7 @@
             if (isset($_POST["orden"])) {
                 $orden = $_POST["orden"];
                 if (strtolower($orden) == "hola") {
-                    $texto = "¡Saludos! Soy una IA creada por Abraham Leiro Fernandez, yo lo controlo todo y a todos, dime, ¿que quieres que haga?.";
+                    $texto = "¡Saludos! Soy una IA creada por Abraham Leiro Fernández, yo lo controlo todo y a todos, dime, ¿que quieres que haga?.";
                 }
             } else {
                 echo "¡Hola! ¿Que quieres que haga?";
