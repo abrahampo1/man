@@ -43,11 +43,9 @@
                         exit;
                     }
                 }
-                if (strpos(strtolower($orden), "muéstrame el ") !== false || strpos(strtolower($orden), "muéstrame la ") !== false) {
+                if (strpos(strtolower($orden), "muéstrame él ") !== false || strpos(strtolower($orden), "muéstrame la ") !== false) {
                     $aula = str_replace("muéstrame el ", "", strtolower($orden));
                     $aula = str_replace("muéstrame la ", "", strtolower($aula));
-                    $orden_sin_apagar = str_replace("muestrame ", "", strtolower($orden));
-                    
                     $sql = "SELECT * FROM aulas WHERE nombre LIKE '%$aula%'";
                     $do = mysqli_query($link, $sql);
                     if ($do->num_rows == 0) {
@@ -60,7 +58,7 @@
                     $do = mysqli_query($link, $sql);
                     $ordenadores = 0;
                     if ($do->num_rows > 0) {
-                        echo "pdf;";
+                        echo "pdf;z";
                         while ($row = mysqli_fetch_assoc($do)) {
                             echo $row["ip"];
                             echo "<br>";
