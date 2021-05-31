@@ -11,8 +11,7 @@
             if (isset($_POST["orden"])) {
                 $orden = $_POST["orden"];
                 if (strtolower($orden) == "hola") {
-                    $texto = "¡Hola $nombre_telegram! Soy una IA creada por Abraham Leiro Fernandez, yo lo controlo todo y a todos, dime, ¿que quieres que haga?.";
-                    file_get_contents($path . "/sendmessage?chat_id=" . $chatId . "&text=" . $texto);
+                    $texto = "¡Saludos! Soy una IA creada por Abraham Leiro Fernandez, yo lo controlo todo y a todos, dime, ¿que quieres que haga?.";
                 }
             } else {
                 echo "¡Hola! ¿Que quieres que haga?";
