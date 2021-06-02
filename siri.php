@@ -25,8 +25,7 @@
                 }
                 foreach($volumen as $v) {
                     if (strpos(strtolower($orden),$v) !== false){
-                        $key = array_search(strtolower($orden), $volumen);
-                        $volume = str_replace($key,"", $orden);
+                        $volume = str_replace($v,"", $orden);
                         echo "text;voy a ajustar el volumen a ".$volume;
                         exit;
                     }
