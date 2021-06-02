@@ -6,3 +6,4 @@ $payaso = array(
 $siguiente = array("pasa la canción", "siguiente canción", "pon la siguiente canción");
 $sonando = array("qué está sonando", "qué suena", "cual es la canción", "qué canción está sonando");
 $volumen = array("ajusta el volumen al", "volumen al", "sube el volumen a ", "pon el volumen a la ", "cambia el volumen a");
+$hack = array("hakea las televisiones");

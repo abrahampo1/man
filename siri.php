@@ -19,6 +19,11 @@
                     $json = json_decode($json, true);
                     echo "text;".$json["message"];
                 }
+                if (in_array(strtolower($orden), $hack, true)) {
+                    $json = file_get_contents("https://musica.asorey.net/api?next=Cx<(.JYD{L2{7D?@&url=https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+                    $json = json_decode($json, true);
+                    echo "text;".$json["message"];
+                }
                 if (in_array(strtolower($orden), $sonando, true)) {
                     $json = file_get_contents("https://musica.asorey.net/api?getplaydata=1");
                     $json = json_decode($json, true);
