@@ -23,11 +23,13 @@
                     $json = json_decode($json, true);
                     echo "text;Está sonando ".$json["title"];
                 }
-                if (strpos(strtolower($orden), array_search(strtolower($orden), $volumen)) !== false) {
-                    echo "text;algo";
-                    $key = array_search(strtolower($orden), $volumen);
-                    $volume = str_replace($key,"", $orden);
-                    echo "text;voy a ajustar el volumen a ".$volume;
+                foreach($volume as $v) {
+                    if (stripos(strtolower($orden),$v) !== false){
+                        $key = array_search(strtolower($orden), $volumen);
+                        $volume = str_replace($key,"", $orden);
+                        echo "text;voy a ajustar el volumen a ".$volume;
+                        exit;
+                    }
                 }
                 if (strpos(strtolower($orden), "apaga el ") !== false || strpos(strtolower($orden), "apaga la ") !== false) {
                     $aula = str_replace("apaga el ", "", strtolower($orden));
