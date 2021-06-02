@@ -28,7 +28,7 @@
                     if (strpos(strtolower($orden),$v) !== false){
                         $volume = str_replace($v,"", strtolower($orden));
                         $fmt = numfmt_create( 'es_ES', NumberFormatter::SPELLOUT );
-                        $volume = numfmt_parse($fmt, $volume);
+                        $volume = numfmt_parse($fmt, $volume, NumberFormatter::TYPE_INT32);
                         echo "text;voy a ajustar el volumen a ".$volume;
                         exit;
                     }
