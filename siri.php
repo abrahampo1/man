@@ -23,6 +23,11 @@
                     $json = json_decode($json, true);
                     echo "text;Está sonando ".$json["title"];
                 }
+                if (in_array(strtolower($orden), $volumen)) {
+                    $key = array_search($orden, $volumen);
+                    $volume = str_replace($key,"", $orden);
+                    echo "voy a ajustar el volumen a ".$volume;
+                }
                 if (strpos(strtolower($orden), "apaga el ") !== false || strpos(strtolower($orden), "apaga la ") !== false) {
                     $aula = str_replace("apaga el ", "", strtolower($orden));
                     $aula = str_replace("apaga la ", "", strtolower($aula));
