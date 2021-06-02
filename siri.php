@@ -19,9 +19,9 @@
                     echo "text;".$json["message"];
                 }
                 if (strtolower($orden) == "que está sonando") {
-                    $json = file_get_contents("https://musica.asorey.net/api?next=Cx<(.JYD{L2{7D?@");
+                    $json = file_get_contents("https://musica.asorey.net/api?getplaydata=1");
                     $json = json_decode($json, true);
-                    echo "text;".$json["message"];
+                    echo "text;Está sonando ".$json["title"];
                 }
                 if (strpos(strtolower($orden), "apaga el ") !== false || strpos(strtolower($orden), "apaga la ") !== false) {
                     $aula = str_replace("apaga el ", "", strtolower($orden));
