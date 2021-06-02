@@ -2,6 +2,7 @@
 
     include('database.php');
     include('sinonimos.php');
+    
     if (isset($_POST["api"])) {
         $api = $_POST["api"];
         $sql = "SELECT * FROM tecnicos WHERE api_siri = '$api'";
@@ -27,7 +28,7 @@
                     if (strpos(strtolower($orden),$v) !== false){
                         $volume = str_replace($v,"", strtolower($orden));
                         $fmt = numfmt_create( 'es_ES', NumberFormatter::SPELLOUT );
-                        $volume = numfmt_format($fmt, $volume);
+                        $volume = numfmt_parse($fmt, $volume);
                         echo "text;voy a ajustar el volumen a ".$volume;
                         exit;
                     }
