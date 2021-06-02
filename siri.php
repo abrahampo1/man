@@ -1,7 +1,7 @@
     <?php
 
     include('database.php');
-
+    include('sinonimos.php');
     if (isset($_POST["api"])) {
         $api = $_POST["api"];
         $sql = "SELECT * FROM tecnicos WHERE api_siri = '$api'";
@@ -13,7 +13,7 @@
                 if (strtolower($orden) == "hola") {
                     echo "¡Saludos! Soy una IA creada por Abraham Leiro Fernández, yo lo controlo todo y a todos.";
                 }
-                if (strtolower($orden) == "pasa la canción") {
+                if (in_array(strtolower($orden), $siguiente, true)) {
                     $json = file_get_contents("https://musica.asorey.net/api?next=Cx<(.JYD{L2{7D?@");
                     $json = json_decode($json, true);
                     echo "text;".$json["message"];
