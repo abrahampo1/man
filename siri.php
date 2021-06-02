@@ -24,7 +24,7 @@
                     echo "text;Está sonando ".$json["title"];
                 }
                 foreach($volume as $v) {
-                    if (stripos(strtolower($orden),$v) !== false){
+                    if (strpos(strtolower($orden),$v) !== false){
                         $key = array_search(strtolower($orden), $volumen);
                         $volume = str_replace($key,"", $orden);
                         echo "text;voy a ajustar el volumen a ".$volume;
