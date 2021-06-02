@@ -30,7 +30,7 @@
                         echo "text;";
                         $str_volume = (string)$volume;
                         $numero = $str_volume[strlen($str_volume)-1];
-                        echo $payaso[$str_volume];
+                        echo $payaso["$str_volume"];
                         if(isset($payaso[$numero])){
                             echo $payaso[$numero].". ";
                         }else if(isset($payaso[$str_volume])){
