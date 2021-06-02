@@ -18,7 +18,7 @@
                     $json = json_decode($json, true);
                     echo "text;".$json["message"];
                 }
-                if (strtolower($orden) == "que está sonando") {
+                if (strtolower($orden) == "qué está sonando") {
                     $json = file_get_contents("https://musica.asorey.net/api?getplaydata=1");
                     $json = json_decode($json, true);
                     echo "text;Está sonando ".$json["title"];
