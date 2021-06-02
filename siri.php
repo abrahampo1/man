@@ -27,7 +27,13 @@
                 foreach($volumen as $v) {
                     if (strpos(strtolower($orden),$v) !== false){
                         $volume = str_replace($v,"", strtolower($orden));
-                        echo "text;¡De acuerdo! He ajustado el volumen al ".$volume."%";
+                        $str_volume = (string)$volume;
+                        echo "text;";
+                        $numero = $str_volume[strlen($str_volume)-1];
+                        if(isset($payaso[$numero])){
+                            echo $payaso[$numero].". ";
+                        }
+                        echo "¡De acuerdo! He ajustado el volumen al ".$volume."%";
                         $volume = $volume / 100;
                         $json = file_get_contents("https://musica.asorey.net/api?volume=Cx<(.JYD{L2{7D?@&value=$volume");
                         exit;
