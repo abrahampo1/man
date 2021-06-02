@@ -32,8 +32,8 @@
                         $numero = $str_volume[strlen($str_volume)-1];
                         if(isset($payaso[$numero])){
                             echo $payaso[$numero].". ";
-                        }else if(isset($payaso[(string)$volume])){
-                            echo $payaso[(string)$volume].". ";
+                        }else if(isset($payaso[$str_volume])){
+                            echo $payaso[$str_volume].". ";
                             
                         }
                         echo "¡De acuerdo! He ajustado el volumen al ".$volume."%";
