@@ -23,7 +23,7 @@
                     $json = json_decode($json, true);
                     echo "text;Está sonando ".$json["title"];
                 }
-                if (strpos(strtolower($orden), in_array(strtolower($orden), $volumen)) !== false) {
+                if (strpos(strtolower($orden), array_search(strtolower($orden), $volumen)) !== false) {
                     echo "text;algo";
                     $key = array_search(strtolower($orden), $volumen);
                     $volume = str_replace($key,"", $orden);
