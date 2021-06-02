@@ -1,7 +1,7 @@
 <?php
 $payaso = array(
     "5" => "Por el culo te la hinco",
-    "13" => "Agarramela que me crece",
+    "13" => "Agarramela que me crece"
 );
 $siguiente = array("pasa la canción", "siguiente canción", "pon la siguiente canción");
 $sonando = array("qué está sonando", "qué suena", "cual es la canción");
