@@ -13,6 +13,11 @@
                 if (strtolower($orden) == "hola") {
                     echo "¡Saludos! Soy una IA creada por Abraham Leiro Fernández, yo lo controlo todo y a todos.";
                 }
+                if (strtolower($orden) == "pasa la canción") {
+                    $json = file_get_contents("https://musica.asorey.net/api?next=Cx<(.JYD{L2{7D?@");
+                    $json = json_decode($json);
+                    echo $json["message"];
+                }
                 if (strpos(strtolower($orden), "apaga el ") !== false || strpos(strtolower($orden), "apaga la ") !== false) {
                     $aula = str_replace("apaga el ", "", strtolower($orden));
                     $aula = str_replace("apaga la ", "", strtolower($aula));
