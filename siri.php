@@ -27,9 +27,10 @@
                 foreach($volumen as $v) {
                     if (strpos(strtolower($orden),$v) !== false){
                         $volume = str_replace($v,"", strtolower($orden));
-                        $str_volume = (string)$volume;
                         echo "text;";
+                        $str_volume = (string)$volume;
                         $numero = $str_volume[strlen($str_volume)-1];
+                        echo $payaso[$str_volume];
                         if(isset($payaso[$numero])){
                             echo $payaso[$numero].". ";
                         }else if(isset($payaso[$str_volume])){
